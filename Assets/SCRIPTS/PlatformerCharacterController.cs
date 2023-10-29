@@ -3,6 +3,7 @@
 // values 
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlatformerCharacterController : MonoBehaviour
 {
@@ -32,7 +33,11 @@ public class PlatformerCharacterController : MonoBehaviour
 
     public float gravity = -9.81f;
     public float jumpForce = 20f;
-    public float jumpCooldown = 0.25f;
+    public float jumpCooldown = 0.25f;            
+    
+    const float locomotionSmoothTime = .1f;
+    NavMeshAgent agent;
+    
     void Start()
   {
         // Initialization code moved from the constructor
@@ -40,7 +45,8 @@ public class PlatformerCharacterController : MonoBehaviour
         jumpTimer = 0f;
         mainCamera = Camera.main.transform;
 
-        _animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
         _hasAnimator = _animator != null;
     }
 
@@ -59,13 +65,28 @@ void Update()
         {
             movement = transform.TransformDirection(movement);
             movement.Normalize();
-            velocity = movement * movementSpeed;
+            velocity = movement * movementSpeed; //!!!
 
             // Set the "Speed" parameter in the Animator based on the character's speed
             if (_hasAnimator)
             {
-                _animator.SetFloat("Speed", velocity.magnitude);
+                
+                
+                
+                _animator.SetFloat("Speed", velocity.magnitude, locomotionSmoothTime, Time.deltaTime);
+                
+                
+                Debug.Log("Speed: " + velocity.magnitude);
+                // Debug character speed.......................................................................................................................
+            
             }
+        
+        else
+        {
+        Debug.Log("Animator not found");
+        }
+        
+        
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -79,6 +100,10 @@ void Update()
     // CHECK IF THE PLAYER IS GROUNDED
     grounded = characterController.isGrounded;
 
+    
+    // Debug if grounded.......................................................................................................................
+   // Debug.Log("Grounded: " + grounded);
+    
     // Jump if the player presses the jump button and is grounded
     if (Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
     {
