@@ -1,20 +1,16 @@
+//Character player script
+
+// values 
+
 using UnityEngine;
 
 public class PlatformerCharacterController : MonoBehaviour
 {
-    // Adjustable character speed settings
-    public float movementSpeed = 5f;
-
-    // Locked rotation settings
+     public float movementSpeed = 5f;
     public bool lockedRotation = true;
     public float lockedRotationY = 0f;
+    // ... Other variables ...
 
-    // Jump settings
-    public float jumpForce = 20f;
-    public float gravity = -9.81f;
-    public float jumpCooldown = 0.25f;
-
-    // Private variables
     private CharacterController characterController;
     private Vector3 velocity;
     private bool grounded;
@@ -24,14 +20,28 @@ public class PlatformerCharacterController : MonoBehaviour
     public float cameraFollowSpeed = 5.0f;
     public Vector3 cameraOffset = new Vector3(0, 2, -3);
 
+    private int _animIDSpeed;
+    private int _animIDGrounded;
+    private int _animIDJump;
+    private int _animIDFreeFall;
+    private int _animIDMotionSpeed;
 
+    private Animator _animator;
+    private const float _threshold = 0.01f;
+    private bool _hasAnimator;
+
+    public float gravity = -9.81f;
+    public float jumpForce = 20f;
+    public float jumpCooldown = 0.25f;
     void Start()
-    {
+  {
+        // Initialization code moved from the constructor
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
         mainCamera = Camera.main.transform;
-   
-   
+
+        _animator = GetComponent<Animator>();
+        _hasAnimator = _animator != null;
     }
 
 
@@ -45,18 +55,28 @@ void Update()
     Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 
     // Apply movement only if not in the jump cooldown
-    if (grounded && jumpTimer <= 0f)
-    {
-        // Apply movement if there's input
-        movement = transform.TransformDirection(movement); // Transform movement to local space
-        movement.Normalize();
-        velocity = movement * movementSpeed;
-    }
+ if (grounded && jumpTimer <= 0f)
+        {
+            movement = transform.TransformDirection(movement);
+            movement.Normalize();
+            velocity = movement * movementSpeed;
 
+            // Set the "Speed" parameter in the Animator based on the character's speed
+            if (_hasAnimator)
+            {
+                _animator.SetFloat("Speed", velocity.magnitude);
+            }
+        }
+
+        velocity.y += gravity * Time.deltaTime;
+        grounded = characterController.isGrounded;
+    
+    
+    
     // Apply gravity to the player
     velocity.y += gravity * Time.deltaTime;
 
-    // Check if the player is grounded
+    // CHECK IF THE PLAYER IS GROUNDED
     grounded = characterController.isGrounded;
 
     // Jump if the player presses the jump button and is grounded
@@ -81,6 +101,9 @@ void Update()
     // Move the player
     characterController.Move(velocity * Time.deltaTime);
 
+    
+    
+    
     // Update the player's rotation
     UpdateRotation();
 
