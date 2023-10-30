@@ -5,8 +5,8 @@ public class PlatformerCharacterController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
-    public float walkAnimationSpeedMultiplier = 1.0f;  // Adjust this value
-    public float runAnimationSpeedMultiplier = 1.5f;   // Adjust this value
+    public float walkAnimationSpeedMultiplier = 1.0f;
+    public float runAnimationSpeedMultiplier = 1.5f;
     public bool lockedRotation = true;
     public float lockedRotationY = 0f;
 
@@ -30,6 +30,9 @@ public class PlatformerCharacterController : MonoBehaviour
     const float threshold = 0.01f;
     NavMeshAgent agent;
     private bool isRunning = false;
+
+    // Add the jump animation parameter
+    private bool isJumping = false;
 
     void Start()
     {
@@ -59,19 +62,29 @@ public class PlatformerCharacterController : MonoBehaviour
             movement.Normalize();
             velocity = movement * currentSpeed;
 
+            // Set the "Speed" parameter in the Animator
             if (hasAnimator)
             {
                 animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
+                isJumping = false; // Reset the jump parameter
             }
         }
 
         velocity.y += gravity * Time.deltaTime;
         grounded = characterController.isGrounded;
 
-        if (Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
+        // Handle jumping animation
+        if (!isJumping && Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
         {
             velocity.y = jumpForce;
             jumpTimer = jumpCooldown;
+            isJumping = true;
+        }
+
+        // Set the "Jump" parameter in the Animator
+        if (hasAnimator)
+        {
+            animator.SetBool("Jump", isJumping);
         }
 
         if (velocity.y > jumpForce)
