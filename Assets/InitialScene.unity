@@ -773,7 +773,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c09bf66c1fab3f4b885d1787db584c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.5
+  walkSpeed: 1
+  runSpeed: 3
+  walkAnimationSpeedMultiplier: 1
+  runAnimationSpeedMultiplier: 0.5
   lockedRotation: 0
   lockedRotationY: 0
   cameraFollowSpeed: 20
@@ -841,7 +844,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

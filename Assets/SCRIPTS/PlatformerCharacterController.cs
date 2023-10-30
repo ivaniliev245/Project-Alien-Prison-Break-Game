@@ -1,16 +1,14 @@
-//Character player script
-
-// values 
-
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PlatformerCharacterController : MonoBehaviour
 {
-     public float movementSpeed = 5f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
+    public float walkAnimationSpeedMultiplier = 1.0f;  // Adjust this value
+    public float runAnimationSpeedMultiplier = 1.5f;   // Adjust this value
     public bool lockedRotation = true;
     public float lockedRotationY = 0f;
-    // ... Other variables ...
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -21,135 +19,90 @@ public class PlatformerCharacterController : MonoBehaviour
     public float cameraFollowSpeed = 5.0f;
     public Vector3 cameraOffset = new Vector3(0, 2, -3);
 
-    private int _animIDSpeed;
-    private int _animIDGrounded;
-    private int _animIDJump;
-    private int _animIDFreeFall;
-    private int _animIDMotionSpeed;
-
-    private Animator _animator;
-    private const float _threshold = 0.01f;
-    private bool _hasAnimator;
+    private Animator animator;
+    private const float locomotionSmoothTime = 0.1f;
+    private bool hasAnimator;
 
     public float gravity = -9.81f;
     public float jumpForce = 20f;
-    public float jumpCooldown = 0.25f;            
-    
-    const float locomotionSmoothTime = .1f;
+    public float jumpCooldown = 0.25f;
+
+    const float threshold = 0.01f;
     NavMeshAgent agent;
-    
+    private bool isRunning = false;
+
     void Start()
-  {
-        // Initialization code moved from the constructor
+    {
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
         mainCamera = Camera.main.transform;
 
         agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponentInChildren<Animator>();
-        _hasAnimator = _animator != null;
+        animator = GetComponentInChildren<Animator>();
+        hasAnimator = animator != null;
     }
 
+    void Update()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        bool runInput = Input.GetKey(KeyCode.LeftShift);
 
-void Update()
-{
-    // Calculate the player's movement input
-    float horizontalInput = Input.GetAxis("Horizontal");
-    float verticalInput = Input.GetAxis("Vertical");
+        float currentSpeed = runInput ? runSpeed : walkSpeed;
+        float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
 
-    // Move the player based on their input
-    Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 
-    // Apply movement only if not in the jump cooldown
- if (grounded && jumpTimer <= 0f)
+        if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
             movement.Normalize();
-            velocity = movement * movementSpeed; //!!!
+            velocity = movement * currentSpeed;
 
-            // Set the "Speed" parameter in the Animator based on the character's speed
-            if (_hasAnimator)
+            if (hasAnimator)
             {
-                
-                
-                
-                _animator.SetFloat("Speed", velocity.magnitude, locomotionSmoothTime, Time.deltaTime);
-                
-                
-                Debug.Log("Speed: " + velocity.magnitude);
-                // Debug character speed.......................................................................................................................
-            
+                animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
             }
-        
-        else
-        {
-        Debug.Log("Animator not found");
-        }
-        
-        
         }
 
         velocity.y += gravity * Time.deltaTime;
         grounded = characterController.isGrounded;
-    
-    
-    
-    // Apply gravity to the player
-    velocity.y += gravity * Time.deltaTime;
 
-    // CHECK IF THE PLAYER IS GROUNDED
-    grounded = characterController.isGrounded;
+        if (Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
+        {
+            velocity.y = jumpForce;
+            jumpTimer = jumpCooldown;
+        }
 
-    
-    // Debug if grounded.......................................................................................................................
-   // Debug.Log("Grounded: " + grounded);
-    
-    // Jump if the player presses the jump button and is grounded
-    if (Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
-    {
-        velocity.y = jumpForce;
-        jumpTimer = jumpCooldown;
+        if (velocity.y > jumpForce)
+        {
+            velocity.y = jumpForce;
+        }
+
+        if (jumpTimer > 0f)
+        {
+            jumpTimer -= Time.deltaTime;
+        }
+
+        characterController.Move(velocity * Time.deltaTime);
+
+        UpdateRotation();
+
+        if (mainCamera != null)
+        {
+            Vector3 cameraTargetPosition = transform.position + cameraOffset;
+            mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
+        }
     }
-
-    // Limit the player's jump height
-    if (velocity.y > jumpForce)
-    {
-        velocity.y = jumpForce;
-    }
-
-    // Decrease jump cooldown timer
-    if (jumpTimer > 0f)
-    {
-        jumpTimer -= Time.deltaTime;
-    }
-
-    // Move the player
-    characterController.Move(velocity * Time.deltaTime);
-
-    
-    
-    
-    // Update the player's rotation
-    UpdateRotation();
-
-    if (mainCamera != null)
-    {
-        Vector3 cameraTargetPosition = transform.position + cameraOffset;
-        mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
-    }
-}
-
 
     void UpdateRotation()
     {
         if (lockedRotation)
         {
-            // Lock the player's rotation to the y-axis
             transform.rotation = Quaternion.Euler(0f, lockedRotationY, 0f);
         }
         else
         {
-            // Allow the player to rotate freely
             transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X"), 0f));
         }
     }
