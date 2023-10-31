@@ -29,7 +29,7 @@ public class PlatformerCharacterController : MonoBehaviour
 
     const float threshold = 0.01f;
     NavMeshAgent agent;
-    private bool isRunning = false;
+    //private bool isRunning = false;
 
     // Add the jump animation parameter
     private bool isJumping = false;
