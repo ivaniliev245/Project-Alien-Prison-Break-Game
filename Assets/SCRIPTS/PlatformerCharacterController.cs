@@ -9,6 +9,7 @@ public class PlatformerCharacterController : MonoBehaviour
     public float runAnimationSpeedMultiplier = 1.5f;
     public bool lockedRotation = true;
     public float lockedRotationY = 0f;
+    public float rotationSpeed = 4;
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -18,22 +19,37 @@ public class PlatformerCharacterController : MonoBehaviour
     private Transform mainCamera;
     public float cameraFollowSpeed = 5.0f;
     public Vector3 cameraOffset = new Vector3(0, 2, -3);
-
+    // animation values 
     private Animator animator;
     private const float locomotionSmoothTime = 0.1f;
     private bool hasAnimator;
 
+    
+     public Transform childObject; // Reference to the child object to rotate
+     // Adjustable rotation speed
+    
+    
+
+    
     public float gravity = -9.81f;
     public float jumpForce = 20f;
     public float jumpCooldown = 0.25f;
 
-    const float threshold = 0.01f;
-    NavMeshAgent agent;
+    private const float threshold = 0.01f;
+    private NavMeshAgent agent;
     //private bool isRunning = false;
 
     // Add the jump animation parameter
     private bool isJumping = false;
-
+  
+  
+     // Update Rotation
+  public float followAxis = 0.0f;
+   
+   
+   
+   
+   
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -108,15 +124,46 @@ public class PlatformerCharacterController : MonoBehaviour
         }
     }
 
-    void UpdateRotation()
+void UpdateRotation()
+{
+    if (!lockedRotation)
     {
-        if (lockedRotation)
+        // Get the input for horizontal (A and D keys) and vertical (W and S keys) movement
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Calculate the angle in radians based on the input
+        float targetAngle = Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg;
+
+        // If there is no input, don't update the rotation
+        if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
         {
-            transform.rotation = Quaternion.Euler(0f, lockedRotationY, 0f);
-        }
-        else
-        {
-            transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X"), 0f));
+            // Convert it to Euler angles
+            Vector3 newEulerAngles = new Vector3(0, targetAngle, 0);
+
+            // Apply the adjustable follow axis
+            newEulerAngles.y += followAxis;
+
+            // Create the new rotation quaternion for the child object
+            Quaternion newRotation = Quaternion.Euler(newEulerAngles);
+
+            // Rotate the child object
+            childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
         }
     }
 }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
