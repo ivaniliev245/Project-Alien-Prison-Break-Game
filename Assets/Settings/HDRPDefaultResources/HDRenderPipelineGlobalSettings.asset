@@ -121,7 +121,8 @@ MonoBehaviour:
     m_ObsoleteSerializedBakingSets: []
     serializedBounds: []
     serializedHasVolumes: []
-    bakingSets: []
+    bakingSets:
+    - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
     m_LightingScenario: Default
   m_Version: 8
   m_ShaderVariantLogLevel: 0
