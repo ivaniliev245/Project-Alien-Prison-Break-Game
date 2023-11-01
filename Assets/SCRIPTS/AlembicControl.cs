@@ -10,10 +10,11 @@ public class AlembicControl : MonoBehaviour
     public bool invertAnimation = false;
 
     
-    void Awake()
+    void Start()
     {
         // Mark the AlembicStreamPlayer object as DontDestroyOnLoad so that it is not destroyed when the scene changes
-        DontDestroyOnLoad(alembicPlayer);}
+       // DontDestroyOnLoad(alembicPlayer);
+       }
     
     
     
