@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cc897cf8675041a751163b51f97dd, type: 3}
   m_Name: HDRenderPipelineGlobalSettings
   m_EditorClassIdentifier: 
-  m_DefaultVolumeProfile: {fileID: 11400000, guid: 14b392ee213d25a48b1feddbd9f5a9be,
+  m_DefaultVolumeProfile: {fileID: 11400000, guid: 20946ef955b3aae4a97a3d811abfe998,
     type: 2}
   m_LookDevVolumeProfile: {fileID: 11400000, guid: 4594f4a3fb14247e192bcca6dc23c8ed,
     type: 2}
@@ -119,10 +119,14 @@ MonoBehaviour:
   autoRegisterDiffusionProfiles: 0
   apvScenesData:
     m_ObsoleteSerializedBakingSets: []
-    serializedBounds: []
+    serializedBounds:
+    - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
+      bounds:
+        m_Center: {x: -40.5, y: 40.5, z: 283.5}
+        m_Extent: {x: 526.5, y: 121.5, z: 526.5}
     serializedHasVolumes:
     - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
-      hasProbeVolumes: 0
+      hasProbeVolumes: 1
     bakingSets:
     - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
     m_LightingScenario: Default
