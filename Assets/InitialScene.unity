@@ -722,7 +722,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: e7e33a19fc4f45f4ca4c74da17007ede, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   deepLearningSuperSamplingSharpening: 0
   fsrOverrideSharpness: 0
   fsrSharpness: 0.92
-  exposureTarget: {fileID: 0}
+  exposureTarget: {fileID: 4955316749994703783}
   materialMipBias: 0
   m_RenderingPathCustomFrameSettings:
     bitDatas:
@@ -1972,7 +1972,7 @@ MonoBehaviour:
   gravity: -44.2
   jumpForce: 10
   jumpCooldown: 0.25
-  followAxis: 0
+  followAxis: 5.55
 --- !u!143 &1410958616
 CharacterController:
   m_ObjectHideFlags: 0
