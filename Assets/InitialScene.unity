@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.026294617, g: 0.010155239, b: 0.0042455667, a: 1}
+  m_IndirectSpecularColor: {r: 0.026294744, g: 0.01015488, b: 0.0042451606, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2577,14 +2577,14 @@ MonoBehaviour:
   runAnimationSpeedMultiplier: 0.5
   lockedRotation: 0
   lockedRotationY: 0
-  rotationSpeed: 8
+  rotationSpeed: 20
   cameraFollowSpeed: 20
   cameraOffset: {x: 1, y: 0.06, z: -3.15}
   childObject: {fileID: 1940062464}
   gravity: -44.2
   jumpForce: 10
   jumpCooldown: 0.25
-  followAxis: 5.55
+  followAxis: -10
 --- !u!143 &1410958616
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2633,7 +2633,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1306894164}
-  -{fileID: 1940062464}
+  - {fileID: 1940062464}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &1410958621
@@ -3636,7 +3636,6 @@ Transform:
   - {fileID: 5635835309798281621}
   m_Father: {fileID: 1410958620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!4 &1952535281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42ecd5a0cdaf85c469e91b3731366568,
