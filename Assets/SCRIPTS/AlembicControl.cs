@@ -8,10 +8,16 @@ public class AlembicControl : MonoBehaviour
     public float maxDistance = 10f;
     public float timeScale = 1f;
     public bool invertAnimation = false;
+    public bool alarmtrigger = false;
+    AudioSource alarm;
+    private int i=0;
 
+    
     
     void Start()
     {
+        alarm = GetComponent<AudioSource>();
+        
         // Mark the AlembicStreamPlayer object as DontDestroyOnLoad so that it is not destroyed when the scene changes
        // DontDestroyOnLoad(alembicPlayer);
        }
@@ -22,6 +28,7 @@ public class AlembicControl : MonoBehaviour
     
     void Update()
     {
+        
         // Check if the application is playing (in runtime mode)
         
         if (alembicPlayer == null)
@@ -42,9 +49,12 @@ public class AlembicControl : MonoBehaviour
         float normalizedTime = Mathf.InverseLerp(0f, maxDistance, distance);
         normalizedTime = Mathf.Clamp01(normalizedTime);
 
+        
+
         // Invert the animation if the boolean is set to true
         if (invertAnimation)
             normalizedTime = 1 - normalizedTime;
+
 
         // Set the time value of the Alembic animation based on the normalized time
         float timeValue = normalizedTime * alembicPlayer.Duration;
@@ -52,5 +62,35 @@ public class AlembicControl : MonoBehaviour
 
         // Adjust the playback speed using timeScale
         alembicPlayer.VertexMotionScale = timeScale;
+
+        
+            
+        //ALARM
+        if (normalizedTime < 0.2)
+        {  
+             alarmtrigger = true;
+             i++;
+        }
+        else
+        {  
+             alarmtrigger = false;
+             i=0;
+        }
+
+        if (alarmtrigger && i == 1 )
+        { 
+           alarm.Play();
+           //Debug.Log("Alarm Triggered");
+        }
+
+         if (!alarmtrigger)
+        { 
+           alarm.Stop();
+           //Debug.Log("Alarm Stopped");
+        }
+
+ 
+
+        
     }
 }
