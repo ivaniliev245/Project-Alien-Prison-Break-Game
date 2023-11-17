@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: bf8e53ae2ea5f6f4ea0f77249a1a6fc5
+guid: 3bc531b8a5576a846a9797b7d4faba5c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceStationParts1
+    second: {fileID: 2100000, guid: 9f90ba4572fb5b5469c28dc5ac2cc501, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceStationParts2
+    second: {fileID: 2100000, guid: fa3680554211da04eac3abc1ff0167ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpaceStationParts3
+    second: {fileID: 2100000, guid: 2845d40bb34b2304686ba6a3f6f9cd63, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
