@@ -1,34 +1,9 @@
 fileFormatVersion: 2
-guid: ab0d45112bf75984dae288f185148a71
+guid: 054eeff7ea711b044992c94af7764696
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Alfombra
-    second: {fileID: 2100000, guid: 3f9d4c49cc432114f8594093e086a7ca, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Estatua
-    second: {fileID: 2100000, guid: f609687a7ea1b864f869813f8a7a8a84, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: 9783c87c9c1d0b54d9489d8c408e1e4c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.002
-    second: {fileID: 2100000, guid: 73ca0c41b6de7464c929518fc5efec1b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.004
-    second: {fileID: 2100000, guid: 076c5d8e9e4a7754da2ff65279fb037a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
