@@ -192,6 +192,7 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
+    - _gradient_of_wind_noise_scale: 3.4
     m_Colors:
     - _BaseColor: {r: 0.3254902, g: 0.4431373, b: 0.20392159, a: 1}
     - _Color: {r: 0.32549015, g: 0.44313726, b: 0.20392156, a: 1}
@@ -201,6 +202,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TramplePos: {r: 3.86, g: 0, b: 1, a: 0}
+    - _TramplePosition: {r: -1.24, g: 0.75, b: 0.06, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1312823345288413089
 MonoBehaviour:
