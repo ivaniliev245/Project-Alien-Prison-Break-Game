@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4551620701616652948}
-  - component: {fileID: 8535742081038378927}
   m_Layer: 0
   m_Name: enemyGoblin
   m_TagString: Untagged
@@ -33,21 +32,6 @@ Transform:
   - {fileID: 979586244854165295}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8535742081038378927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5881953960396773722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876fbc0102f68a74a8173bc827e5d124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 979586244854165295}
-  moveSpeed: 2
-  rotationSpeed: 2
 --- !u!1001 &725793134224165060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -157,12 +141,12 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.26394117
   m_Height: 1.5137782
   m_Direction: 1
-  m_Center: {x: -0.030262113, y: 0.71491313, z: 0.26632094}
+  m_Center: {x: 0, y: 0.69, z: 0}
 --- !u!54 &7609458039758960530
 Rigidbody:
   m_ObjectHideFlags: 0
