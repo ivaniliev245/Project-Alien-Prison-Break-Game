@@ -9,6 +9,7 @@ public class MovingPlatform : MonoBehaviour
     private int currentWaypointIndex = 0;
     private Vector3 startPosition;
     private Vector3 nextPosition;
+    public float delayTime = 2f;
 
     void Start()
     {
