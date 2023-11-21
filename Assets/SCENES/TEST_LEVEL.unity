@@ -331,6 +331,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3212204, y: 1.2905426, z: 0.7209716}
   m_Center: {x: -0.10818863, y: -0.43862236, z: -0.04647422}
+--- !u!54 &671797095
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671797088}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &740467012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -392,17 +419,17 @@ PrefabInstance:
     - target: {fileID: 3303591062769901014, guid: 83c52546bbd96b542991c767337dcb3b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.76
+      value: -45.04
       objectReference: {fileID: 0}
     - target: {fileID: 3303591062769901014, guid: 83c52546bbd96b542991c767337dcb3b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.36
+      value: 6.77
       objectReference: {fileID: 0}
     - target: {fileID: 3303591062769901014, guid: 83c52546bbd96b542991c767337dcb3b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.75
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 3303591062769901014, guid: 83c52546bbd96b542991c767337dcb3b,
         type: 3}
@@ -457,6 +484,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 671797094}
+    - targetCorrespondingSourceObject: {fileID: 137979371874663736, guid: 83c52546bbd96b542991c767337dcb3b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671797095}
   m_SourcePrefab: {fileID: 100100000, guid: 83c52546bbd96b542991c767337dcb3b, type: 3}
 --- !u!1001 &895198607
 PrefabInstance:
@@ -844,8 +875,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 12.004975, z: 1}
+  m_Center: {x: 0, y: -5.5024877, z: 0}
 --- !u!23 &1537838849
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1732,7 +1763,7 @@ PrefabInstance:
     - target: {fileID: 6791962810004285617, guid: 627a4bb990e90e348bff4273a4b2f1c7,
         type: 3}
       propertyPath: m_Name
-      value: Platform
+      value: Moving Platform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
