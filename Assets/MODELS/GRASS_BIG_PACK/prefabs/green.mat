@@ -111,6 +111,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _3D_2D: 1
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaCutoffEnable: 0
@@ -200,7 +201,7 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TramplePos: {r: 3.86, g: 0, b: 1, a: 0}
-    - _TramplePosition: {r: -0.25, g: 0.75, b: -0.62, a: 0}
+    - _TramplePosition: {r: -1.58, g: 2.36, b: 3.31, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1312823345288413089
 MonoBehaviour:
