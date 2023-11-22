@@ -21,7 +21,10 @@ public class Alien_AI_Controller : MonoBehaviour
     bool playerInSightRange, playerInAttackRange;
 
     //Health
-    public float health;
+    public float maxhealth;
+    private float currentHealth;
+
+    [SerializeField] private Healthbar healthbar;
 
     void Update()
     {
@@ -41,6 +44,9 @@ public class Alien_AI_Controller : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         goblin = GetComponent<NavMeshAgent>();
 
+        currentHealth = maxhealth;
+        healthbar = GetComponentInChildren<Healthbar>();
+        healthbar.UpdateHealthbar(currentHealth, maxhealth);
     }
     private void Patrolling()
     {
@@ -106,8 +112,9 @@ public class Alien_AI_Controller : MonoBehaviour
 
     private void TakeDamage(int Damage)
     {
-        health -= Damage;
-        if (health < 0) { Invoke(nameof(GameObject), .5f); }
+        currentHealth -= Damage;
+        healthbar.UpdateHealthbar(currentHealth, maxhealth);
+        if (currentHealth< 0) { Invoke(nameof(GameObject), .5f); }
     }
 
     private void DestroyEnemy()
