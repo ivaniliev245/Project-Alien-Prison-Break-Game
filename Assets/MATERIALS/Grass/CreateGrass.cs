@@ -21,7 +21,7 @@ public class CreateGrass : MonoBehaviour
                 Vector3 position = new Vector3(x / 4.0f + 
                                 Random.Range (-0.25f, 0.25f), 0, z/4.0f + Random.Range (-0.25f, 0.25f));
               GameObject grass = Instantiate (grassPrefab, position, Quaternion.identity);
-              grass.transform.localScale = new Vector3(1, Random.Range(0.8f, 1.2f), 1);
+              grass.transform.localScale = new Vector3(1, Random.Range(0.1f, 0.2f), 1);
 
             }
 

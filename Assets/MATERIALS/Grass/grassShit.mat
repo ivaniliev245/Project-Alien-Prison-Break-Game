@@ -255,7 +255,7 @@ Material:
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
     - _TrampleSize: 9.81
-    - _TrampleStrenght: 1.77
+    - _TrampleStrenght: 0.45
     - _TransmissionEnable: 1
     - _TransmissionMask: 1
     - _TransparentBackfaceEnable: 0
@@ -291,7 +291,7 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _TramplePosition: {r: 2.35, g: 1.93, b: 4.92, a: 0}
+    - _TramplePosition: {r: 354, g: 721, b: 3308, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
