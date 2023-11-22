@@ -153,3 +153,4 @@ MonoBehaviour:
   maxDistance: 10
   timeScale: 1
   invertAnimation: 1
+  alarmtrigger: 0
