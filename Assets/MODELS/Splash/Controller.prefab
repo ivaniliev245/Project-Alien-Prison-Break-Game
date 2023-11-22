@@ -42,9 +42,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3303591062769901014}
   - component: {fileID: 5992109801683891517}
+  - component: {fileID: 1190490177912874985}
   - component: {fileID: 8227842591731142811}
   - component: {fileID: 4038859220487186440}
-  - component: {fileID: 1190490177912874985}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Player
@@ -77,6 +77,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137979371874663736}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!143 &1190490177912874985
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137979371874663736}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.28
+  m_Radius: 0.34
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: -0.08, y: -0.36, z: 0}
 --- !u!114 &8227842591731142811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,9 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c09bf66c1fab3f4b885d1787db584c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  runSpeed: 6
-  walkAnimationSpeedMultiplier: 0.35
+  walkSpeed: 1
+  runSpeed: 3
+  walkAnimationSpeedMultiplier: 0.45
   runAnimationSpeedMultiplier: 0.25
   lockedRotation: 0
   lockedRotationY: 0
@@ -125,32 +151,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!143 &1190490177912874985
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137979371874663736}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.28
-  m_Radius: 0.34
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: -0.08, y: -0.36, z: 0}
 --- !u!1 &218710299866438581
 GameObject:
   m_ObjectHideFlags: 0
