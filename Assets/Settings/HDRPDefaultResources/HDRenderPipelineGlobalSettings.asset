@@ -132,7 +132,7 @@ MonoBehaviour:
     - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
       hasProbeVolumes: 1
     - sceneGUID: 39613a1a2e937684f8db867b7babbb45
-      hasProbeVolumes: 1
+      hasProbeVolumes: 0
     bakingSets:
     - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
     - {fileID: 11400000, guid: 8511143fda34f0f47b4978cf727a66ba, type: 2}
