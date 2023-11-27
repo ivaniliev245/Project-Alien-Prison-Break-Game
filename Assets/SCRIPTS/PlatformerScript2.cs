@@ -41,6 +41,7 @@ public class PlatformerScript2 : MonoBehaviour
 
     // Add the jump animation parameter
     private bool isJumping = false;
+    private bool isCrouching = false;
   
   
      // Update Rotation
@@ -73,15 +74,33 @@ public class PlatformerScript2 : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 // Restrict movement along the Z-axis
 movement.z = 0f; // Add this line
+        
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+                 if (!isCrouching)
+            {
+                // Set the trigger parameter in the animator to start the animation
+                //playerAnimator.SetTrigger("PlayAnimation");
+                animator.SetBool("Crouch", true);
+                isCrouching = true;
+            }
+ 
+            
+        }
+        if (Input.GetKeyUp(KeyCode.C))
+        {
+            animator.SetBool("Crouch", false);
+            isCrouching = false;
+        }
 
-if (grounded && jumpTimer <= 0f)
-{
-    movement = transform.TransformDirection(movement);
-    movement.Normalize();
-    velocity = movement * currentSpeed;
+        if (grounded && jumpTimer <= 0f)
+        {
+            movement = transform.TransformDirection(movement);
+            movement.Normalize();
+            velocity = movement * currentSpeed;
 
     // Remaining code...
-}
+        }
 
 
         if (grounded && jumpTimer <= 0f)
@@ -124,6 +143,7 @@ if (grounded && jumpTimer <= 0f)
         {
             jumpTimer -= Time.deltaTime;
         }
+
 
         characterController.Move(velocity * Time.deltaTime);
 
