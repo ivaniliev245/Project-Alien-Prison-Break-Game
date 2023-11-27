@@ -31,6 +31,7 @@ Material:
   m_ValidKeywords:
   - _DISABLE_DECALS
   - _DISABLE_SSR_TRANSPARENT
+  - _ENABLE_FOG_ON_TRANSPARENT
   - _REFRACTION_SPHERE
   - _SURFACE_TYPE_TRANSPARENT
   - _TRANSPARENT_WRITES_MOTION_VEC
@@ -39,7 +40,7 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2990
+  m_CustomRenderQueue: 2992
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
@@ -190,7 +191,7 @@ Material:
     - _EmissiveIntensity: 68.7
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
-    - _EnableFogOnTransparent: 0
+    - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _ExcludeFromTUAndAA: 0
@@ -260,7 +261,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 1
     - _TransparentDepthPrepassEnable: 1
-    - _TransparentSortPriority: -10
+    - _TransparentSortPriority: -8
     - _TransparentWritingMotionVec: 1
     - _TransparentZWrite: 1
     - _UVBase: 0
