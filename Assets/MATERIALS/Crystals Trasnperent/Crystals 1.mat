@@ -23,7 +23,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crystals
+  m_Name: Crystals 1
   m_Shader: {fileID: -6465566751694194690, guid: 52add2223514cca4595ee864f3845caf,
     type: 3}
   m_Parent: {fileID: 0}
@@ -194,7 +194,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _ExcludeFromTUAndAA: 0
-    - _GlowPower: 639.5
+    - _GlowPower: 0.61
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -204,7 +204,7 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _IOR: 0.53
+    - _IOR: 1.68
     - _InvTilingScale: 1
     - _Ior: 1.563
     - _IridescenceMask: 0.303
@@ -274,7 +274,7 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 1
-    - _glowmultiplie: 50
+    - _glowmultiplie: 20
     - _smoothnes: 0.899
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
@@ -282,7 +282,7 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _EdgeColor: {r: 1, g: 0.067196205, b: 0, a: 0}
+    - _EdgeColor: {r: 1, g: 0.57594657, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 68.7}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
