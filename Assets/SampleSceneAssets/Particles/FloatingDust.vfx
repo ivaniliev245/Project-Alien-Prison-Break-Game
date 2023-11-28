@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_OutputSlots: []
   m_Disabled: 0
   m_ActivationSlot: {fileID: 8926484042661615247}
-  mode: 0
+  mode: 1
   axes: 4
   faceRay: 1
 --- !u!114 &8926484042661614605
@@ -2770,7 +2770,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"10c49fcd9c64421db7c0133e61e55f97","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"e8f538c119b363e4eadafd64ec9a697c","type":3}}'
     m_Space: -1
   m_Property:
     name: baseColorMap
@@ -2794,7 +2794,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 433, y: 481}
+  m_UIPosition: {x: 553, y: 323}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
