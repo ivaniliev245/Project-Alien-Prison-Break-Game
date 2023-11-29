@@ -15,6 +15,7 @@ public class Alien_AI_Controller : MonoBehaviour
     //Attackspeed  
     public float timeBetweenAttacks;
     bool alreadyAttacked;
+    public int attackDamage;
 
     //States
     public float sightRange, attackRange;
@@ -24,7 +25,9 @@ public class Alien_AI_Controller : MonoBehaviour
     public float maxhealth;
     private float currentHealth;
 
+    public GameObject projectile;
     [SerializeField] private Healthbar healthbar;
+
 
     void Update()
     {
@@ -32,10 +35,9 @@ public class Alien_AI_Controller : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-
+        if (!playerInSightRange && !playerInAttackRange) { Patrolling(); }
+        if (playerInSightRange && !playerInAttackRange) { ChasePlayer(); }
         if (playerInSightRange && playerInAttackRange) { AttackPlayer(); }
-        else if (playerInSightRange && !playerInAttackRange) { ChasePlayer(); }
-        else { Patrolling(); }
         
     }
 
@@ -51,9 +53,10 @@ public class Alien_AI_Controller : MonoBehaviour
     private void Patrolling()
     {
         if (!walkPointSet) { SearchWalkPoint(); }
-        else
+        if(walkPointSet)
         {
             goblin.SetDestination(walkPoint);
+            //Call Walking Animation 
         }
 
         Vector3 disctanceToWalkPoint = transform.position - walkPoint;
@@ -95,8 +98,10 @@ public class Alien_AI_Controller : MonoBehaviour
         transform.LookAt(player);
         if (!alreadyAttacked) {
             //Attack Code here
+            Rigidbody rb =  Instantiate(projectile,transform.position,Quaternion.identity).GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
 
-
+            //Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsPlayer);
 
 
 
@@ -110,15 +115,18 @@ public class Alien_AI_Controller : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    private void TakeDamage(int Damage)
+    public void TakeDamage(int Damage)
     {
         currentHealth -= Damage;
         healthbar.UpdateHealthbar(currentHealth, maxhealth);
-        if (currentHealth< 0) { Invoke(nameof(GameObject), .5f); }
+
+        //play enemy damage animation
+        if (currentHealth<= 0) { Invoke(nameof(DestroyEnemy), .5f); }
     }
 
     private void DestroyEnemy()
     {
+        //play enemy death animation
         Destroy(gameObject);
     }
 

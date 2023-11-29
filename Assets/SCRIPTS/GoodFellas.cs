@@ -49,7 +49,7 @@ public class GoodFellas : MonoBehaviour
         }
         else
         {
-        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * 3f);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * 4f);
         }
     }
 }
