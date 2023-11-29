@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class Healthbar : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private Transform cam;
     private Camera camRef;
 
     public void Start()
@@ -20,5 +22,6 @@ public class Healthbar : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.LookRotation(transform.position - camRef.transform.position);
+
     }
 }
