@@ -25,11 +25,8 @@ public class PlatformerCharacterController : MonoBehaviour
     private bool hasAnimator;
 
     
-     public Transform childObject; // Reference to the child object to rotate
-     // Adjustable rotation speed
-    
-    
-
+    public Transform childObject; // Reference to the child object to rotate
+    // Adjustable rotation speed
     
     public float gravity = -9.81f;
     public float jumpForce = 20f;
@@ -45,8 +42,11 @@ public class PlatformerCharacterController : MonoBehaviour
   
      // Update Rotation
   public float followAxis = 0.0f;
-   
-   
+    // crouching
+    private bool isCrouching = false;
+    public float crouchHeight = 1.0f;
+    public Vector3 crouchingColliderSize ;
+    public Vector3 walingColliderDefault ;
    
    
    
@@ -84,6 +84,12 @@ public class PlatformerCharacterController : MonoBehaviour
                 animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
                 isJumping = false; // Reset the jump parameter
             }
+       
+            if (Input.GetKeyDown(KeyCode.C)) // Change to your desired crouch input key
+              {
+              ToggleCrouch();
+              }
+ 
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -153,6 +159,24 @@ void UpdateRotation()
     }
 }
 
+   
+   void ToggleCrouch()
+{
+    isCrouching = !isCrouching;
+
+    if (isCrouching)
+    {
+        // Crouching: Adjust character controller's height and center
+        characterController.height = crouchHeight; // Set crouch height
+        characterController.center = new Vector3(0f, crouchHeight / 2f, 0f); // Adjust center accordingly
+    }
+    else
+    {
+        // Standing: Reset character controller's height and center
+        characterController.height = 1/* Set your default standing height here */;
+        characterController.center =  walingColliderDefault/* Set your default center here */;
+    }
+} 
     }
 
 
