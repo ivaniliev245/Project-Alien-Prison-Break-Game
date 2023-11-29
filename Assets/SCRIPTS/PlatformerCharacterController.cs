@@ -10,6 +10,11 @@ public class PlatformerCharacterController : MonoBehaviour
     public bool lockedRotation = true;
     public float lockedRotationY = 0f;
     public float rotationSpeed = 4;
+    
+    //Health
+    public float maxHealth = 100;
+    private float currentHealth;
+    [SerializeField] private Healthbar healthbar;
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -55,6 +60,7 @@ public class PlatformerCharacterController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
         mainCamera = Camera.main.transform;
+        currentHealth = maxHealth;
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
@@ -124,36 +130,48 @@ public class PlatformerCharacterController : MonoBehaviour
         }
     }
 
-void UpdateRotation()
-{
-    if (!lockedRotation)
+    void UpdateRotation()
     {
-        // Get the input for horizontal (A and D keys) and vertical (W and S keys) movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // Calculate the angle in radians based on the input
-        float targetAngle = Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg;
-
-        // If there is no input, don't update the rotation
-        if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
+        if (!lockedRotation)
         {
-            // Convert it to Euler angles
-            Vector3 newEulerAngles = new Vector3(0, targetAngle, 0);
+            // Get the input for horizontal (A and D keys) and vertical (W and S keys) movement
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
-            // Apply the adjustable follow axis
-            newEulerAngles.y += followAxis;
+            // Calculate the angle in radians based on the input
+            float targetAngle = Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg;
 
-            // Create the new rotation quaternion for the child object
-            Quaternion newRotation = Quaternion.Euler(newEulerAngles);
+            // If there is no input, don't update the rotation
+            if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
+            {
+                // Convert it to Euler angles
+                Vector3 newEulerAngles = new Vector3(0, targetAngle, 0);
 
-            // Rotate the child object
-            childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
+                // Apply the adjustable follow axis
+                newEulerAngles.y += followAxis;
+
+                // Create the new rotation quaternion for the child object
+                Quaternion newRotation = Quaternion.Euler(newEulerAngles);
+
+                // Rotate the child object
+                childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
+            }
         }
     }
-}
+    public void TakeDamage(int Damage) { 
+        currentHealth -= Damage;
+        healthbar.UpdateHealthbar(currentHealth, maxHealth);
+        //play Damage Animation
 
+        if (currentHealth < 0) { Invoke(nameof(DestroyPlayer), .5f); }
     }
+
+    private void DestroyPlayer()
+    {
+        //play Death Animation
+        Destroy(gameObject);
+    }
+}
 
 
 
