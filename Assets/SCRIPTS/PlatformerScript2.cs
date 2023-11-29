@@ -12,6 +12,13 @@ public class PlatformerScript2 : MonoBehaviour
     public float rotationSpeed = 4;
 
     private CharacterController characterController;
+    private float newHeight = 0.3f; // For Crouching
+    private float oldHeight;
+    private float newCenterY = -0.72f;// For Crouching
+    private float newLifeHeight = 0.3f;// For Crouching
+    private Vector3 originalLifePosition;// For Crouching
+    private Vector3 newLifePosition;// For Crouching
+    private Vector3 oldCenter;// For Crouching
     private Vector3 velocity;
     private bool grounded;
     private float jumpTimer;
@@ -25,7 +32,8 @@ public class PlatformerScript2 : MonoBehaviour
     private bool hasAnimator;
 
     
-     public Transform childObject; // Reference to the child object to rotate
+    public Transform childObject;
+    public GameObject Life;// Reference to the child object to rotate
      // Adjustable rotation speed
     
     
@@ -41,18 +49,20 @@ public class PlatformerScript2 : MonoBehaviour
 
     // Add the jump animation parameter
     private bool isJumping = false;
+    private bool DJumping = false;
     private bool isCrouching = false;
+    private float crouchD = -1.1f;
   
   
-     // Update Rotation
-  public float followAxis = 0.0f;
+    // Update Rotation
+    public float followAxis = 0.0f;
    
    
    
    
    
     void Start()
-    {
+    {   Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
         mainCamera = Camera.main.transform;
@@ -60,6 +70,7 @@ public class PlatformerScript2 : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         hasAnimator = animator != null;
+        originalLifePosition = Life.transform.position;                 
     }
 
     void Update()
@@ -72,25 +83,39 @@ public class PlatformerScript2 : MonoBehaviour
         float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
 
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-// Restrict movement along the Z-axis
-movement.z = 0f; // Add this line
+        // Restrict movement along the Z-axis
+        movement.z = 0f; // Add this line
         
         if (Input.GetKeyDown(KeyCode.C))
         {
                  if (!isCrouching)
-            {
+            {   
                 // Set the trigger parameter in the animator to start the animation
                 //playerAnimator.SetTrigger("PlayAnimation");
                 animator.SetBool("Crouch", true);
                 isCrouching = true;
-            }
- 
+                //Life.SetActive(false);
+
+                
+                oldHeight = characterController.height;
+                // Life.transform.position = new Vector3(transform.position.x, transform.position.y + crouchD, transform.position.z);
+                oldCenter = characterController.center;
+
+                characterController.height = newHeight;
+                Vector3 newCenter = characterController.center;
+                newCenter.y = newCenterY;
+                characterController.center = newCenter;
+            } 
             
         }
         if (Input.GetKeyUp(KeyCode.C))
         {
             animator.SetBool("Crouch", false);
             isCrouching = false;
+            characterController.center = oldCenter;
+            characterController.height = oldHeight;
+           //  UpdateLife();        
+
         }
 
         if (grounded && jumpTimer <= 0f)
@@ -126,7 +151,17 @@ movement.z = 0f; // Add this line
             velocity.y = jumpForce;
             jumpTimer = jumpCooldown;
             isJumping = true;
+            DJumping=true;
         }
+        
+        if (isJumping && Input.GetButtonDown("Jump") && DJumping && jumpTimer <= 0f)
+        {
+            velocity.y = jumpForce;
+            jumpTimer = jumpCooldown;
+            isJumping = true;
+            DJumping = false;
+        }
+
 
         // Set the "Jump" parameter in the Animator
         if (hasAnimator)
@@ -154,6 +189,18 @@ movement.z = 0f; // Add this line
             Vector3 cameraTargetPosition = transform.position + cameraOffset;
             mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
         }
+    }
+ 
+ private void UpdateLife()
+    {
+            
+
+            float movementSpeed = 20.0f;
+            float step = movementSpeed * Time.deltaTime;
+            Vector3 newPosition  = new Vector3(transform.position.x, originalLifePosition.y, transform.position.z);
+            Life.transform.position = Vector3.Lerp(Life.transform.position, newPosition, step);
+           
+            //Life.SetActive(true);
     }
 
 void UpdateRotation()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlaneTrigger : MonoBehaviour
 {
     public Transform respawnLocation; // Assign the respawn location in the Unity Inspector
+   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +17,7 @@ public class PlaneTrigger : MonoBehaviour
 
     private void RespawnPlayer(GameObject player)
     {
-        player.transform.position = respawnLocation.position;
+        player.transform.position = respawnLocation.position;       
         // You might want to add more logic here like resetting player stats, etc.
     }
 }
