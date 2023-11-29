@@ -103,6 +103,9 @@ MonoBehaviour:
   jumpForce: 10
   jumpCooldown: 0.25
   followAxis: -10
+  crouchHeight: 1
+  crouchingColliderSize: {x: 0, y: 0, z: 0}
+  walingColliderDefault: {x: 0, y: 0, z: 0}
 --- !u!195 &4038859220487186440
 NavMeshAgent:
   m_ObjectHideFlags: 0
