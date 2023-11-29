@@ -4536,7 +4536,7 @@ Transform:
   m_GameObject: {fileID: 680440360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.9, y: 3.59, z: -0.02}
+  m_LocalPosition: {x: 46.66, y: 3.6, z: -0.02}
   m_LocalScale: {x: 1.5242083, y: 2.9637406, z: 4.533657}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6263,7 +6263,7 @@ MonoBehaviour:
   - {fileID: 985454423}
   - {fileID: 1735411031}
   speed: 2
-  objectToMove: {fileID: 420555943}
+  objectToMove: {fileID: 0}
   delayTime: 2
 --- !u!4 &929305624 stripped
 Transform:
@@ -6580,7 +6580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &1012092772
 Rigidbody:
@@ -6897,7 +6897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &1023810403
 Rigidbody:
@@ -8258,7 +8258,7 @@ MonoBehaviour:
   - {fileID: 1408413864}
   - {fileID: 1483113255}
   speed: 2
-  objectToMove: {fileID: 420555943}
+  objectToMove: {fileID: 0}
   delayTime: 2
 --- !u!1001 &1233101718
 PrefabInstance:
@@ -9081,7 +9081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &1336563362
 Rigidbody:
@@ -10098,7 +10098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &1530730835
 Rigidbody:
@@ -10868,7 +10868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &1620905962
 Rigidbody:
@@ -13915,7 +13915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &2032689480
 Rigidbody:
@@ -14014,7 +14014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 420555943}
+  objectX: {fileID: 0}
   moveDistance: 0.02
 --- !u!54 &2041363343
 Rigidbody:
