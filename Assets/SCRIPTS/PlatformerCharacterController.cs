@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlatformerCharacterController : MonoBehaviour
+public class PlatformerCharaterController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
@@ -10,8 +10,16 @@ public class PlatformerCharacterController : MonoBehaviour
     public bool lockedRotation = true;
     public float lockedRotationY = 0f;
     public float rotationSpeed = 4;
+    public float restrictZmovment = 1;
 
     private CharacterController characterController;
+    private float newHeight = 0.3f; // For Crouching
+    private float oldHeight;
+    private float newCenterY = -0.72f;// For Crouching
+    private float newLifeHeight = 0.3f;// For Crouching
+    private Vector3 originalLifePosition;// For Crouching
+    private Vector3 newLifePosition;// For Crouching
+    private Vector3 oldCenter;// For Crouching
     private Vector3 velocity;
     private bool grounded;
     private float jumpTimer;
@@ -25,8 +33,12 @@ public class PlatformerCharacterController : MonoBehaviour
     private bool hasAnimator;
 
     
-    public Transform childObject; // Reference to the child object to rotate
-    // Adjustable rotation speed
+    public Transform childObject;
+    public GameObject Life;// Reference to the child object to rotate
+     // Adjustable rotation speed
+    
+    
+
     
     public float gravity = -9.81f;
     public float jumpForce = 20f;
@@ -38,20 +50,20 @@ public class PlatformerCharacterController : MonoBehaviour
 
     // Add the jump animation parameter
     private bool isJumping = false;
-  
-  
-     // Update Rotation
-  public float followAxis = 0.0f;
-    // crouching
+    private bool DJumping = false;
     private bool isCrouching = false;
-    public float crouchHeight = 1.0f;
-    public Vector3 crouchingColliderSize ;
-    public Vector3 walingColliderDefault ;
+    private float crouchD = -1.1f;
+  
+  
+    // Update Rotation
+    public float followAxis = 0.0f;
+   
    
    
    
     void Start()
     {
+        Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
         mainCamera = Camera.main.transform;
@@ -59,6 +71,7 @@ public class PlatformerCharacterController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         hasAnimator = animator != null;
+        originalLifePosition = Life.transform.position;
     }
 
     void Update()
@@ -68,10 +81,14 @@ public class PlatformerCharacterController : MonoBehaviour
         bool runInput = Input.GetKey(KeyCode.LeftShift);
 
         float currentSpeed = runInput ? runSpeed : walkSpeed;
-        float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
+        float currentAnimationSpeedMultiplier = runInput ? 
+                    runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
 
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+        Vector3 movement = new Vector3(horizontalInput,0f ,verticalInput);
 
+        // Restrict movement along the Z-axis
+        //movement.z = restrictZmovment; // Add this line
+        
         if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
@@ -88,8 +105,15 @@ public class PlatformerCharacterController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C)) // Change to your desired crouch input key
               {
               ToggleCrouch();
+              Debug.Log("Splash is crouching");
               }
- 
+
+            if (Input.GetKeyUp(KeyCode.C))
+            {
+            ToggleCrouchUp();     
+              Debug.Log("Splash is not crouching");
+            } 
+        
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -130,6 +154,18 @@ public class PlatformerCharacterController : MonoBehaviour
         }
     }
 
+ private void UpdateLife()
+    {
+            
+
+            float movementSpeed = 20.0f;
+            float step = movementSpeed * Time.deltaTime;
+            Vector3 newPosition  = new Vector3(transform.position.x, originalLifePosition.y, transform.position.z);
+            Life.transform.position = Vector3.Lerp(Life.transform.position, newPosition, step);
+           
+            //Life.SetActive(true);
+     }
+
 void UpdateRotation()
 {
     if (!lockedRotation)
@@ -161,22 +197,43 @@ void UpdateRotation()
 
    
    void ToggleCrouch()
-{
-    isCrouching = !isCrouching;
+    {
 
-    if (isCrouching)
+          if (!isCrouching)
+            {   
+                // Set the trigger parameter in the animator to start the animation
+                animator.SetBool("Crouch", true);
+                isCrouching = true;
+                //Life.SetActive(false);
+
+                
+                oldHeight = characterController.height;
+                // Life.transform.position = new Vector3(transform.position.x, transform.position.y + crouchD, transform.position.z);
+                oldCenter = characterController.center;
+
+                characterController.height = newHeight;
+                Vector3 newCenter = characterController.center;
+                newCenter.y = newCenterY;
+                characterController.center = newCenter;
+            } 
+
+        } 
+   
+    void ToggleCrouchUp()
     {
-        // Crouching: Adjust character controller's height and center
-        characterController.height = crouchHeight; // Set crouch height
-        characterController.center = new Vector3(0f, crouchHeight / 2f, 0f); // Adjust center accordingly
-    }
-    else
-    {
-        // Standing: Reset character controller's height and center
-        characterController.height = 1/* Set your default standing height here */;
-        characterController.center =  walingColliderDefault/* Set your default center here */;
-    }
-} 
+
+          if (!isCrouching)
+            {   
+            animator.SetBool("Crouch", false);
+            isCrouching = false;
+            characterController.center = oldCenter;
+            characterController.height = oldHeight;
+           //  UpdateLife();   
+            } 
+
+        } 
+   
+   
     }
 
 
