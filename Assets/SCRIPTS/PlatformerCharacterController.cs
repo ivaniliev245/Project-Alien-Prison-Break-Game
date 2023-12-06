@@ -13,9 +13,9 @@ public class PlatformerCharaterController : MonoBehaviour
     public float restrictZmovment = 1;
 
     private CharacterController characterController;
-    private float newHeight = 0.3f; // For Crouching
+    public float newHeight = 0.3f; // For Crouching
     private float oldHeight;
-    private float newCenterY = -0.72f;// For Crouching
+    public float newCenterY = -0.72f;// For Crouching
     private float newLifeHeight = 0.3f;// For Crouching
     private Vector3 originalLifePosition;// For Crouching
     private Vector3 newLifePosition;// For Crouching
