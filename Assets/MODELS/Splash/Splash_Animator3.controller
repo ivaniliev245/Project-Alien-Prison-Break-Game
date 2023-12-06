@@ -146,26 +146,26 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4923654282836913648}
-    m_Position: {x: -80, y: 420, z: 0}
+    m_Position: {x: 140, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7619157181912873970}
-    m_Position: {x: 320, y: 480, z: 0}
+    m_Position: {x: 360, y: 350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9019514258369991022}
-    m_Position: {x: 490, y: 240, z: 0}
+    m_Position: {x: 300, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -882821070830538536}
-    m_Position: {x: 140, y: 240, z: 0}
+    m_Position: {x: 100, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -67753800382801351}
-    m_Position: {x: 590, y: 90, z: 0}
+    m_Position: {x: 590, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 10, y: -140, z: 0}
-  m_EntryPosition: {x: 360, y: -80, z: 0}
+  m_EntryPosition: {x: 300, y: -80, z: 0}
   m_ExitPosition: {x: 1040, y: -20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7323528872297963996}
@@ -291,7 +291,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 4528730151596229740, guid: b462bc0cc4e97d34aa00b4961255aa94,
+  m_Motion: {fileID: 5805127158331366216, guid: b462bc0cc4e97d34aa00b4961255aa94,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -304,7 +304,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Splash_Animator2
+  m_Name: Splash_Animator3
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Speed

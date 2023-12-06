@@ -112,6 +112,7 @@ public class PlatformerCharaterController : MonoBehaviour
             {
             ToggleCrouchUp();     
               Debug.Log("Splash is not crouching");
+            animator.SetBool("Crouch", false);
             } 
         
         }
@@ -203,6 +204,7 @@ void UpdateRotation()
             {   
                 // Set the trigger parameter in the animator to start the animation
                 animator.SetBool("Crouch", true);
+              
                 isCrouching = true;
                 //Life.SetActive(false);
 
@@ -219,19 +221,18 @@ void UpdateRotation()
 
         } 
    
-    void ToggleCrouchUp()
-    {
+void ToggleCrouchUp()
+{
+    if (isCrouching)
+    {   
+        animator.SetBool("Crouch", false);
+        isCrouching = false;
+        characterController.center = oldCenter;
+        characterController.height = oldHeight;
+        // UpdateLife();   
+    } 
+}
 
-          if (!isCrouching)
-            {   
-            animator.SetBool("Crouch", false);
-            isCrouching = false;
-            characterController.center = oldCenter;
-            characterController.height = oldHeight;
-           //  UpdateLife();   
-            } 
-
-        } 
    
    
     }
