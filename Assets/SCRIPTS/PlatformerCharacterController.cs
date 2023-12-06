@@ -37,9 +37,6 @@ public class PlatformerCharaterController : MonoBehaviour
     public GameObject Life;// Reference to the child object to rotate
      // Adjustable rotation speed
     
-    
-
-    
     public float gravity = -9.81f;
     public float jumpForce = 20f;
     public float jumpCooldown = 0.25f;
@@ -53,7 +50,10 @@ public class PlatformerCharaterController : MonoBehaviour
     private bool DJumping = false;
     private bool isCrouching = false;
     private float crouchD = -1.1f;
-  
+   
+   
+    // handle crouching 
+    private const string crouchNoWalkParam = "crouchNoWalk";  
   
     // Update Rotation
     public float followAxis = 0.0f;
@@ -74,6 +74,9 @@ public class PlatformerCharaterController : MonoBehaviour
         originalLifePosition = Life.transform.position;
     }
 
+
+//UPDATE
+
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -81,40 +84,44 @@ public class PlatformerCharaterController : MonoBehaviour
         bool runInput = Input.GetKey(KeyCode.LeftShift);
 
         float currentSpeed = runInput ? runSpeed : walkSpeed;
-        float currentAnimationSpeedMultiplier = runInput ? 
-                    runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
+        float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
 
-        Vector3 movement = new Vector3(horizontalInput,0f ,verticalInput);
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 
-        // Restrict movement along the Z-axis
-        //movement.z = restrictZmovment; // Add this line
-        
+        bool isMoving = movement.magnitude > 0.1f; // Check if the character is moving
+        bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
+        bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
+
         if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
             movement.Normalize();
             velocity = movement * currentSpeed;
 
-            // Set the "Speed" parameter in the Animator
             if (hasAnimator)
             {
-                animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
-                isJumping = false; // Reset the jump parameter
+                if (grounded) // Only update speed if grounded
+                {
+                    animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
+                    isJumping = false;
+                }
+                
+                animator.SetBool("crouchNoWalk", isCrouchingNoWalk);
+                animator.SetBool("Crouch", isCrouchingWithMove);
             }
-       
-            if (Input.GetKeyDown(KeyCode.C)) // Change to your desired crouch input key
-              {
-              ToggleCrouch();
-              Debug.Log("Splash is crouching");
-              }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                ToggleCrouch();
+                Debug.Log("Splash is crouching");
+            }
 
             if (Input.GetKeyUp(KeyCode.C))
             {
-            ToggleCrouchUp();     
-              Debug.Log("Splash is not crouching");
-            animator.SetBool("Crouch", false);
-            } 
-        
+                ToggleCrouchUp();
+                Debug.Log("Splash is not crouching");
+                animator.SetBool("Crouch", false);
+            }
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -128,7 +135,6 @@ public class PlatformerCharaterController : MonoBehaviour
             isJumping = true;
         }
 
-        // Set the "Jump" parameter in the Animator
         if (hasAnimator)
         {
             animator.SetBool("Jump", isJumping);
@@ -154,6 +160,11 @@ public class PlatformerCharaterController : MonoBehaviour
             mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
         }
     }
+
+    //... (rest of the code remains unchanged)
+
+
+    
 
  private void UpdateLife()
     {
