@@ -48,10 +48,13 @@ public class PlatformerCharaterController : MonoBehaviour
     // Add the jump animation parameter
     private bool isJumping = false;
     private bool DJumping = false;
+    //crouch parameter
     private bool isCrouching = false;
     private float crouchD = -1.1f;
-   
-   
+    //attack parameters
+    private bool isAttacking = false;
+    private string[] attackAnimations = { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
+    
     // handle crouching 
     private const string crouchNoWalkParam = "crouchNoWalk";  
   
@@ -122,6 +125,16 @@ public class PlatformerCharaterController : MonoBehaviour
                 Debug.Log("Splash is not crouching");
                 animator.SetBool("Crouch", false);
             }
+            if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
+            {
+                StartAttack(); // Call method to initiate attack
+            }
+
+            if (Input.GetMouseButtonUp(0)) // 0 represents left mouse button, change as needed
+            {
+                StopAttack(); // Call method to stop attack
+            }
+        
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -232,8 +245,8 @@ void UpdateRotation()
 
         } 
    
-void ToggleCrouchUp()
-{
+   void ToggleCrouchUp()
+     {
     if (isCrouching)
     {   
         animator.SetBool("Crouch", false);
@@ -242,21 +255,30 @@ void ToggleCrouchUp()
         characterController.height = oldHeight;
         // UpdateLife();   
     } 
-}
-
-   
-   
     }
 
+void StartAttack()
+{
+    isAttacking = true;
+    
+    // Get a random attack animation name from the array
+    string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
+
+    // Trigger the randomly selected attack animation immediately without completing the idle animation cycle
+    if (hasAnimator)
+    {
+        animator.CrossFade(randomAttack, 0); // 0 indicates the transition should be instant
+    }
+}
+
+void StopAttack()
+{
+    isAttacking = false;
+    // Reset attack-related flags or animations here
+    // For example:
+    // If you don't need to stop a specific attack animation by name, this might not be necessary
+}
 
 
 
-
-
-
-
-
-
-
-
-
+}
