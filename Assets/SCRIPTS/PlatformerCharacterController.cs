@@ -82,6 +82,9 @@ public class PlatformerCharaterController : MonoBehaviour
 
     void Update()
     {
+        
+       
+        
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool runInput = Input.GetKey(KeyCode.LeftShift);
@@ -95,6 +98,28 @@ public class PlatformerCharaterController : MonoBehaviour
         bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
         bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
 
+        
+       bool isWalkingAttack = isMoving && isAttacking;
+
+    if (isWalkingAttack)
+    {
+        // Set the parameter in the animator to trigger the walking attack animation
+        if (hasAnimator)
+        {
+            animator.SetBool("AttackWhileWalking", true);
+        }
+    }
+    else
+    {
+        // Reset the parameter in the animator if not performing a walking attack
+        if (hasAnimator)
+        {
+            animator.SetBool("AttackWhileWalking", false);
+        }
+    }
+
+        
+        
         if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
@@ -260,7 +285,7 @@ void UpdateRotation()
 void StartAttack()
 {
     isAttacking = true;
-    
+
     // Get a random attack animation name from the array
     string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
 
@@ -271,14 +296,21 @@ void StartAttack()
     }
 }
 
+
 void StopAttack()
 {
     isAttacking = false;
     // Reset attack-related flags or animations here
     // For example:
     // If you don't need to stop a specific attack animation by name, this might not be necessary
+
+    // Reset the parameter in the animator when the attack stops
+    if (hasAnimator)
+    {
+        animator.SetBool("AttackWhileWalking", false);
+    }
 }
 
 
-
 }
+
