@@ -13,7 +13,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     removeConstantScaleCurves: 0
     motionNodeName: 
     animationImportErrors: 
@@ -22,7 +22,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -486,7 +486,304 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Splash_rig(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: Splash_rig(Clone)
+      position: {x: 7.2754463e-12, y: -0.000000059604645, z: -0.000000007450581}
+      rotation: {x: -0.60216683, y: 2.1782966e-17, z: -2.1782964e-17, w: 0.7983703}
+      scale: {x: 14.204143, y: 14.204139, z: 14.204139}
+    - name: Spline_01
+      parentName: Armature
+      position: {x: 1.4639141e-10, y: 0.0041200025, z: 0.021811614}
+      rotation: {x: 0.6577863, y: 0.000000089716686, z: 0.000000078734296, w: 0.75320464}
+      scale: {x: 1.0000001, y: 0.9999996, z: 0.99999976}
+    - name: Spline_02
+      parentName: Spline_01
+      position: {x: -5.820766e-11, y: 0.009546024, z: 8.949428e-11}
+      rotation: {x: -0.05857443, y: 0.0000000014362553, z: -0.000000014576164, w: 0.998283}
+      scale: {x: 0.9999998, y: 1.0000001, z: 0.99999976}
+    - name: Spline_03
+      parentName: Spline_02
+      position: {x: -4.0745362e-11, y: 0.0105787795, z: -4.0723533e-10}
+      rotation: {x: -0.10451181, y: -0.000000240321, z: -7.0516926e-11, w: 0.9945237}
+      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+    - name: Tentacle_middle_01
+      parentName: Spline_03
+      position: {x: -0.00004636126, y: 0.017158896, z: -0.0018144225}
+      rotation: {x: 0.019312596, y: -0.00032208127, z: -0.0021249838, w: 0.9998112}
+      scale: {x: 0.9999998, y: 0.9999993, z: 0.9999999}
+    - name: Tentacle_middle_01.001
+      parentName: Tentacle_middle_01
+      position: {x: -1.3038516e-10, y: 0.004009088, z: 3.1664968e-10}
+      rotation: {x: 0.00000023841855, y: -1.7462297e-10, z: 4.0154186e-10, w: 1}
+      scale: {x: 0.99999964, y: 0.9999999, z: 1.0000001}
+    - name: Tentacle_middle_02
+      parentName: Tentacle_middle_01.001
+      position: {x: 1.862645e-10, y: 0.0040090987, z: -0.0000000014679972}
+      rotation: {x: 0.2592722, y: 0.0016651526, z: -0.006624733, w: 0.96578014}
+      scale: {x: 0.9999999, y: 1.0000002, z: 0.99999946}
+    - name: Tentacle_middle_02.001
+      parentName: Tentacle_middle_02
+      position: {x: 1.11758706e-10, y: 0.0037276277, z: -0.0000000057346186}
+      rotation: {x: -0.0000002682209, y: 0.0000000055879354, z: -0.0000000021827873,
+        w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1.0000002}
+    - name: Tentacle_middle_03
+      parentName: Tentacle_middle_02.001
+      position: {x: 2.7939676e-10, y: 0.003727641, z: 6.7288053e-10}
+      rotation: {x: 0.31112498, y: 0.004902427, z: 0.0055146874, w: 0.9503404}
+      scale: {x: 1.0000001, y: 0.99999934, z: 0.9999999}
+    - name: Tentacle_middle_03.001
+      parentName: Tentacle_middle_03
+      position: {x: 9.313225e-11, y: 0.004982711, z: 0.0000000036067103}
+      rotation: {x: -0.000000029802315, y: -0.000000005122273, z: 3.4924588e-10, w: 1}
+      scale: {x: 0.9999996, y: 0.99999964, z: 1.0000001}
+    - name: Arm1_01.L
+      parentName: Spline_03
+      position: {x: -0.0061018174, y: 0.015604217, z: -0.0010291396}
+      rotation: {x: -0.2617943, y: 0.95883113, z: 0.094904125, w: -0.055676393}
+      scale: {x: 1.0000005, y: 0.99999964, z: 1.0000004}
+    - name: Arm1_02.L
+      parentName: Arm1_01.L
+      position: {x: -0.0000000035762786, y: 0.002760073, z: 6.367918e-10}
+      rotation: {x: -0.04728721, y: 0.004608694, z: -0.06790615, w: 0.9965598}
+      scale: {x: 0.99999946, y: 1.0000004, z: 0.99999964}
+    - name: Arm1_03.L
+      parentName: Arm1_02.L
+      position: {x: -0.0000000017881393, y: 0.002650871, z: 2.840534e-10}
+      rotation: {x: -0.0207117, y: 0.010944069, z: -0.0769766, w: 0.99675775}
+      scale: {x: 1.0000001, y: 0.9999998, z: 1}
+    - name: Arm1_01.R
+      parentName: Spline_03
+      position: {x: 0.006101816, y: 0.015604219, z: -0.0010291435}
+      rotation: {x: 0.26179406, y: 0.9588312, z: 0.094904155, w: 0.055676162}
+      scale: {x: 1.0000006, y: 0.99999917, z: 1.0000006}
+    - name: Arm1_02.R
+      parentName: Arm1_01.R
+      position: {x: 0.000000002980232, y: 0.0027600664, z: 5.2154064e-10}
+      rotation: {x: -0.047286984, y: -0.0046088058, z: 0.06790643, w: 0.9965598}
+      scale: {x: 0.99999964, y: 1.0000004, z: 1.0000001}
+    - name: Arm1_03.R
+      parentName: Arm1_02.R
+      position: {x: 0.0000000017881393, y: 0.0026508528, z: -0.0000000035762786}
+      rotation: {x: -0.020711858, y: -0.010944074, z: 0.07697654, w: 0.99675775}
+      scale: {x: 1.0000006, y: 0.99999994, z: 1.0000004}
+    - name: Small_Arm_01_Right
+      parentName: Spline_03
+      position: {x: 0.013069328, y: 0.009187962, z: -0.0002568731}
+      rotation: {x: 0.07178066, y: 0.05230114, z: -0.5635812, w: 0.8212724}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
+    - name: Small_Arm_02_Right
+      parentName: Small_Arm_01_Right
+      position: {x: 0.000000007525086, y: 0.0032598954, z: 0.0000000020861626}
+      rotation: {x: 0.013049195, y: 0.000018071381, z: -0.026086217, w: 0.99957454}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000005}
+    - name: Arm3_01.L
+      parentName: Spline_02
+      position: {x: -0.014396112, y: 0.00032514305, z: -0.0027597337}
+      rotation: {x: 0.97971654, y: -0.17352982, z: -0.001981846, w: -0.10019553}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Arm3_Elbow.L
+      parentName: Arm3_01.L
+      position: {x: -6.3329936e-10, y: 0.006342231, z: -9.313225e-11}
+      rotation: {x: -0.05892579, y: -0.0031347843, z: -0.041525304, w: 0.99739337}
+      scale: {x: 0.9999998, y: 1.0000008, z: 1.0000012}
+    - name: Arm3_Hand.L
+      parentName: Arm3_Elbow.L
+      position: {x: -4.2840836e-10, y: 0.0046825553, z: -5.9604643e-10}
+      rotation: {x: -0.021931183, y: 0.012497272, z: 0.005990576, w: 0.9996635}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1}
+    - name: Arm3_01.R
+      parentName: Spline_02
+      position: {x: 0.0143614225, y: 0.00031498034, z: -0.0029508204}
+      rotation: {x: 0.9797165, y: 0.17352971, z: 0.0019816754, w: -0.10019541}
+      scale: {x: 0.99999964, y: 1.0000004, z: 1.0000005}
+    - name: Arm3_02.R
+      parentName: Arm3_01.R
+      position: {x: -1.11758706e-10, y: 0.0063422285, z: -4.4237822e-10}
+      rotation: {x: -0.058925726, y: 0.0031347573, z: 0.041525234, w: 0.99739337}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1.0000007}
+    - name: Arm3_Hand.R
+      parentName: Arm3_02.R
+      position: {x: -0, y: 0.004682556, z: 2.9802322e-10}
+      rotation: {x: -0.02193122, y: -0.012497286, z: -0.005990473, w: 0.9996635}
+      scale: {x: 0.9999999, y: 0.99999946, z: 0.9999999}
+    - name: Arm2.L
+      parentName: Spline_02
+      position: {x: -0.014908835, y: 0.014968157, z: -0.0029311636}
+      rotation: {x: 0.73055065, y: -0.67222774, z: 0.0301583, w: -0.11617312}
+      scale: {x: 1.0000011, y: 1.000001, z: 1.0000006}
+    - name: Arm2.L.001
+      parentName: Arm2.L
+      position: {x: -0.0000000057742, y: 0.0038618855, z: 0.000000001490116}
+      rotation: {x: -0.06649901, y: 0.00000064820046, z: 0.03134808, w: 0.9972939}
+      scale: {x: 0.99999994, y: 0.9999998, z: 0.9999997}
+    - name: Arm2_Elbow.L
+      parentName: Arm2.L.001
+      position: {x: -0.000000002235174, y: 0.0038618904, z: 0.000000002235174}
+      rotation: {x: -0.044916946, y: -0.0075923307, z: -0.022027038, w: 0.99871904}
+      scale: {x: 1.0000006, y: 1, z: 1.0000006}
+    - name: Arm2_Elbow.L.001
+      parentName: Arm2_Elbow.L
+      position: {x: 0.0000000029892544, y: 0.0043129725, z: 8.9406965e-10}
+      rotation: {x: 0.00000012665987, y: -0.00000052992254, z: 0.00000070105307, w: 1}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
+    - name: Arm2_Hand.L
+      parentName: Arm2_Elbow.L.001
+      position: {x: -0.000000005662441, y: 0.004312976, z: 0.000000001490116}
+      rotation: {x: -0.0073780078, y: -0.0034700097, z: -0.02474589, w: 0.99966055}
+      scale: {x: 0.9999999, y: 1.0000007, z: 1}
+    - name: Arm2_Hand.L.001
+      parentName: Arm2_Hand.L
+      position: {x: 0.0000000047683715, y: 0.004590942, z: 0.0000000032782554}
+      rotation: {x: -0, y: -0, z: 2.964952e-10, w: 1}
+      scale: {x: 0.99999994, y: 1.0000005, z: 1.0000005}
+    - name: Arm2.R
+      parentName: Spline_02
+      position: {x: 0.014908839, y: 0.01496815, z: -0.002931159}
+      rotation: {x: 0.73055065, y: 0.67222774, z: -0.03015818, w: -0.116172954}
+      scale: {x: 1.0000004, y: 1.000001, z: 1.0000007}
+    - name: Arm2.R.001
+      parentName: Arm2.R
+      position: {x: -0.0000000166893, y: 0.003861884, z: -1.11758706e-10}
+      rotation: {x: -0.066498525, y: -0.0000005476176, z: -0.031347986, w: 0.99729395}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000001}
+    - name: Arm2_Elbow.R
+      parentName: Arm2.R.001
+      position: {x: -0.0000000040233132, y: 0.0038618883, z: -1.4901161e-10}
+      rotation: {x: -0.044916913, y: 0.007592253, z: 0.02202636, w: 0.99871904}
+      scale: {x: 0.9999996, y: 1.0000006, z: 1.0000006}
+    - name: Arm2_Elbow.R.001
+      parentName: Arm2_Elbow.R
+      position: {x: -0.0000000031292438, y: 0.0043129683, z: -0.000000001490116}
+      rotation: {x: 0.00000008195639, y: 0.0000004991889, z: -0.0000007029157, w: 1}
+      scale: {x: 1.0000001, y: 0.99999964, z: 1}
+    - name: Arm2_Hand.R
+      parentName: Arm2_Elbow.R.001
+      position: {x: 0.0000000020116566, y: 0.004312973, z: -0.0000000011920929}
+      rotation: {x: -0.0073778583, y: 0.003469987, z: 0.024745988, w: 0.99966055}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000005}
+    - name: Arm2_Hand.R.001
+      parentName: Arm2_Hand.R
+      position: {x: 0.0000000032782554, y: 0.004590942, z: -2.9802322e-10}
+      rotation: {x: -0.000000054016695, y: 0.00000007031484, z: 0.0000000032523524,
+        w: 1}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000006}
+    - name: Small_Arm_01_Left
+      parentName: Spline_02
+      position: {x: -0.015733758, y: 0.007965358, z: -0.0029950547}
+      rotation: {x: 0.09495303, y: -0.0916847, z: 0.9555124, w: 0.2637688}
+      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000004}
+    - name: Small_Arm_02_Left
+      parentName: Small_Arm_01_Left
+      position: {x: 0.0000000017881393, y: 0.002496318, z: -2.9802322e-10}
+      rotation: {x: 0.030712746, y: -0.0012044813, z: 0.015447674, w: 0.9994082}
+      scale: {x: 0.9999999, y: 1.0000001, z: 0.9999998}
+    - name: Foot_03.L
+      parentName: Spline_01
+      position: {x: -0.006170985, y: -0.00060269353, z: -0.0013175979}
+      rotation: {x: 0.9998001, y: -0.000000023321345, z: 0.00000083913136, w: 0.019997865}
+      scale: {x: 0.9999998, y: 1.0000005, z: 1.0000017}
+    - name: Foot_02.L
+      parentName: Foot_03.L
+      position: {x: 7.264316e-10, y: 0.0076035685, z: 6.9208905e-10}
+      rotation: {x: 0.02910459, y: -0.000000003248211, z: 0.0000000037324845, w: 0.99957645}
+      scale: {x: 1, y: 1.0000011, z: 1.0000007}
+    - name: Foot_03.R
+      parentName: Spline_01
+      position: {x: 0.0061709867, y: -0.0006026848, z: -0.0013175944}
+      rotation: {x: 0.9998001, y: -0.00000005254248, z: -0.0000005927108, w: 0.019997925}
+      scale: {x: 1, y: 1.0000006, z: 1.000002}
+    - name: Foot_02.R
+      parentName: Foot_03.R
+      position: {x: -6.426126e-10, y: 0.007603571, z: -8.9406965e-10}
+      rotation: {x: 0.02910465, y: -0.0000000058687024, z: -0.000000084642814, w: 0.99957645}
+      scale: {x: 1, y: 1.0000001, z: 0.9999994}
+    - name: Small_Arm3_IK_left
+      parentName: Armature
+      position: {x: -0.017418364, y: 0.010879018, z: 0.03437071}
+      rotation: {x: 0.2628234, y: -0.8470868, z: 0.024528563, w: 0.46126586}
+      scale: {x: 1.0000004, y: 1, z: 0.99999994}
+    - name: Foot_Target.L
+      parentName: Armature
+      position: {x: -0.006170986, y: -0.000073025076, z: 0.015769012}
+      rotation: {x: 0.994219, y: 0.0000001407983, z: 0.0000013037272, w: 0.10737148}
+      scale: {x: 1, y: 0.9999998, z: 1.0000044}
+    - name: Foot_IK.L
+      parentName: Armature
+      position: {x: -0.0076802024, y: 0.0044864523, z: 0.002169641}
+      rotation: {x: -0.107372165, y: 0.0000007111208, z: -0.00000007679856, w: 0.99421895}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Foot_01.L
+      parentName: Foot_IK.L
+      position: {x: -0.0000000070430057, y: 0.000000037029384, z: -0.00000009651929}
+      rotation: {x: 0.9949159, y: -0.000000012006231, z: 0.0000015418484, w: -0.10070985}
+      scale: {x: 1, y: 1.0000002, z: 1.0000046}
+    - name: Arm3_IK.L
+      parentName: Armature
+      position: {x: -0.02177558, y: 0.008691927, z: 0.014614727}
+      rotation: {x: 0.98461187, y: 0.014890622, z: 0.1378802, w: 0.106334}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000039}
+    - name: Arm3_IK.R
+      parentName: Armature
+      position: {x: 0.019680874, y: 0.015378084, z: 0.013153527}
+      rotation: {x: 0.98461187, y: -0.014890622, z: -0.1378802, w: 0.106334}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000039}
+    - name: Arm2_IK.L
+      parentName: Armature
+      position: {x: -0.032929197, y: 0.020574333, z: 0.04272599}
+      rotation: {x: -0.08725666, y: 0.57936966, z: -0.06256955, w: 0.80796164}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+    - name: Arm1_IK.L
+      parentName: Armature
+      position: {x: -0.012028081, y: 0.018695334, z: 0.06033952}
+      rotation: {x: -0.03132081, y: 0.95097923, z: -0.10270247, w: 0.29001677}
+      scale: {x: 1.0000008, y: 1.0000004, z: 1.0000005}
+    - name: Arm1_IK.R
+      parentName: Armature
+      position: {x: 0.012028081, y: 0.016613336, z: 0.060889762}
+      rotation: {x: 0.03132081, y: 0.95097923, z: -0.10270247, w: -0.29001677}
+      scale: {x: 1.0000008, y: 1.0000004, z: 1.0000005}
+    - name: Tentacle_middle_IK
+      parentName: Armature
+      position: {x: 0.00017398923, y: 0.0068682716, z: 0.062588535}
+      rotation: {x: 0.6218882, y: 0.0010453708, z: 0.0008301619, w: 0.7831049}
+      scale: {x: 0.99999994, y: 0.9999998, z: 0.99999994}
+    - name: Foot_Target.R
+      parentName: Armature
+      position: {x: 0.006170986, y: -0.000073025076, z: 0.015769012}
+      rotation: {x: 0.994219, y: -0.0000001407983, z: -0.0000013037272, w: 0.10737148}
+      scale: {x: 1, y: 0.9999998, z: 1.0000044}
+    - name: Foot_IK.R
+      parentName: Armature
+      position: {x: 0.007460365, y: 0.0007253185, z: 0.002947263}
+      rotation: {x: -0.107372165, y: -0.0000007111206, z: 0.00000007679847, w: 0.99421895}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: Foot_01.R
+      parentName: Foot_IK.R
+      position: {x: 0.000000011463141, y: 0.000000030100345, z: -0.00000015249395}
+      rotation: {x: 0.9949159, y: 0.000000012006314, z: -0.0000015418482, w: -0.10070985}
+      scale: {x: 1, y: 1.0000001, z: 1.0000048}
+    - name: Arm2_IK.R
+      parentName: Armature
+      position: {x: 0.03566829, y: 0.008718143, z: 0.04310051}
+      rotation: {x: -0.08725666, y: -0.57936966, z: 0.06256955, w: 0.80796164}
+      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+    - name: Small_Arm_4_right
+      parentName: Armature
+      position: {x: 0.018999534, y: 0.0065970514, z: 0.05115385}
+      rotation: {x: -0.1221697, y: -0.009429645, z: 0.09771765, w: 0.9876421}
+      scale: {x: 1, y: 0.99999994, z: 1.0000001}
+    - name: geo_splash
+      parentName: Splash_rig(Clone)
+      position: {x: 7.2759563e-12, y: -0.000000022351733, z: -0.0000000018626451}
+      rotation: {x: -0.68440837, y: 4.3030174e-17, z: -3.367464e-17, w: 0.729099}
+      scale: {x: 1.476915, y: 1.4769146, z: 1.4769146}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -495,9 +792,9 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: geo_splash
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
