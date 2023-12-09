@@ -1087,6 +1087,8 @@ MonoBehaviour:
   lockedRotationY: 0
   rotationSpeed: 20
   restrictZmovment: 0
+  newHeight: 0.3
+  newCenterY: -0.72
   cameraFollowSpeed: 20
   cameraOffset: {x: 1.5, y: 0.4, z: -5}
   childObject: {fileID: 2938368333614530261}
