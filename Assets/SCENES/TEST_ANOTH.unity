@@ -5931,7 +5931,7 @@ MonoBehaviour:
   - {fileID: 985454423}
   - {fileID: 1735411031}
   speed: 2
-  objectToMove: {fileID: 0}
+  objectToMove: {fileID: 1851245237}
   delayTime: 2
 --- !u!4 &929305624 stripped
 Transform:
@@ -6258,7 +6258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 0}
+  objectX: {fileID: 1851245237}
   moveDistance: 0.02
 --- !u!54 &1012092772
 Rigidbody:
@@ -6575,7 +6575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 0}
+  objectX: {fileID: 1851245237}
   moveDistance: 0.02
 --- !u!54 &1023810403
 Rigidbody:
@@ -8056,7 +8056,7 @@ MonoBehaviour:
   - {fileID: 1408413864}
   - {fileID: 1483113255}
   speed: 2
-  objectToMove: {fileID: 0}
+  objectToMove: {fileID: 1851245237}
   delayTime: 2
 --- !u!1001 &1233101718
 PrefabInstance:
@@ -8919,7 +8919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 0}
+  objectX: {fileID: 1851245237}
   moveDistance: 0.02
 --- !u!54 &1336563362
 Rigidbody:
@@ -10095,7 +10095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 0}
+  objectX: {fileID: 1851245237}
   moveDistance: 0.02
 --- !u!54 &1530730835
 Rigidbody:
@@ -12439,6 +12439,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0971d3cbd9cb8fa419b8525dba6f4fc2, type: 3}
+--- !u!1 &1851245237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4209164367020977865, guid: f7d88ed11747f834080b0cfa3b293563,
+    type: 3}
+  m_PrefabInstance: {fileID: 3410124924360741915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1854353871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7723482554147344704, guid: 0971d3cbd9cb8fa419b8525dba6f4fc2,
@@ -14223,7 +14229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 0}
+  objectX: {fileID: 1851245237}
   moveDistance: 0.02
 --- !u!54 &2032689480
 Rigidbody:
@@ -14322,7 +14328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dd458c7038392478b58a549654368d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectX: {fileID: 0}
+  objectX: {fileID: 1851245237}
   moveDistance: 0.02
 --- !u!54 &2041363343
 Rigidbody:
