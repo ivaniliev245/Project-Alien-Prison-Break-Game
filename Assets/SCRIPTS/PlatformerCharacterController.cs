@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class PlatformerCharaterController : MonoBehaviour
 {
@@ -23,6 +24,14 @@ public class PlatformerCharaterController : MonoBehaviour
     private Vector3 velocity;
     private bool grounded;
     private float jumpTimer;
+    public float coyoteTime;
+    public float jumpInputTimeBuffer;
+
+    //float timers
+    private float lastOnGroundTime;
+    private float lastPressedJumpTime;
+    
+    private bool isJumpFalling;
 
     private Transform mainCamera;
     public float cameraFollowSpeed = 5.0f;
@@ -39,7 +48,6 @@ public class PlatformerCharaterController : MonoBehaviour
     
     public float gravity = -9.81f;
     public float jumpForce = 20f;
-    public float jumpCooldown = 0.25f;
 
     private const float threshold = 0.01f;
     private NavMeshAgent agent;
@@ -47,6 +55,7 @@ public class PlatformerCharaterController : MonoBehaviour
 
     // Add the jump animation parameter
     private bool isJumping = false;
+    private bool IsSliding; //check for wall sliding
     private bool DJumping = false;
     //crouch parameter
     private bool isCrouching = false;
@@ -77,14 +86,9 @@ public class PlatformerCharaterController : MonoBehaviour
         originalLifePosition = Life.transform.position;
     }
 
-
-//UPDATE
-
     void Update()
     {
-        
-       
-        
+        lastOnGroundTime -= Time.deltaTime; 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool runInput = Input.GetKey(KeyCode.LeftShift);
@@ -97,7 +101,6 @@ public class PlatformerCharaterController : MonoBehaviour
         bool isMoving = movement.magnitude > 0.1f; // Check if the character is moving
         bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
         bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
-
         
        bool isWalkingAttack = isMoving && isAttacking;
 
@@ -118,8 +121,6 @@ public class PlatformerCharaterController : MonoBehaviour
         }
     }
 
-        
-        
         if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
@@ -163,13 +164,17 @@ public class PlatformerCharaterController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-        grounded = characterController.isGrounded;
+
+        if (characterController.isGrounded)
+        {
+            lastOnGroundTime = coyoteTime;
+        }
+        Debug.Log(lastOnGroundTime);
 
         // Handle jumping animation
-        if (!isJumping && Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
+        if (!isJumping && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
         {
             velocity.y = jumpForce;
-            jumpTimer = jumpCooldown;
             isJumping = true;
         }
 
@@ -183,11 +188,6 @@ public class PlatformerCharaterController : MonoBehaviour
             velocity.y = jumpForce;
         }
 
-        if (jumpTimer > 0f)
-        {
-            jumpTimer -= Time.deltaTime;
-        }
-
         characterController.Move(velocity * Time.deltaTime);
 
         UpdateRotation();
@@ -199,22 +199,15 @@ public class PlatformerCharaterController : MonoBehaviour
         }
     }
 
-    //... (rest of the code remains unchanged)
-
-
-    
-
  private void UpdateLife()
     {
-            
-
             float movementSpeed = 20.0f;
             float step = movementSpeed * Time.deltaTime;
             Vector3 newPosition  = new Vector3(transform.position.x, originalLifePosition.y, transform.position.z);
             Life.transform.position = Vector3.Lerp(Life.transform.position, newPosition, step);
            
             //Life.SetActive(true);
-     }
+ }
 
 void UpdateRotation()
 {
@@ -245,10 +238,8 @@ void UpdateRotation()
     }
 }
 
-   
    void ToggleCrouch()
     {
-
           if (!isCrouching)
             {   
                 // Set the trigger parameter in the animator to start the animation
@@ -256,7 +247,6 @@ void UpdateRotation()
               
                 isCrouching = true;
                 //Life.SetActive(false);
-
                 
                 oldHeight = characterController.height;
                 // Life.transform.position = new Vector3(transform.position.x, transform.position.y + crouchD, transform.position.z);
@@ -266,12 +256,12 @@ void UpdateRotation()
                 Vector3 newCenter = characterController.center;
                 newCenter.y = newCenterY;
                 characterController.center = newCenter;
-            } 
+          } 
 
-        } 
+   } 
    
    void ToggleCrouchUp()
-     {
+   {
     if (isCrouching)
     {   
         animator.SetBool("Crouch", false);
@@ -280,7 +270,7 @@ void UpdateRotation()
         characterController.height = oldHeight;
         // UpdateLife();   
     } 
-    }
+   }
 
 void StartAttack()
 {
@@ -296,7 +286,6 @@ void StartAttack()
     }
 }
 
-
 void StopAttack()
 {
     isAttacking = false;
@@ -310,7 +299,4 @@ void StopAttack()
         animator.SetBool("AttackWhileWalking", false);
     }
 }
-
-
 }
-

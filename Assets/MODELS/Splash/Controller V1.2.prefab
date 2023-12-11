@@ -903,6 +903,37 @@ Transform:
   - {fileID: 3196799253824795624}
   m_Father: {fileID: 6194811770657544206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3372274336183727034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4754819104893437940}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4754819104893437940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3372274336183727034}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.72, y: -0.37, z: -0.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1611006226490052135}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3499685661610979489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1074,7 @@ GameObject:
   - component: {fileID: 256474550988766201}
   - component: {fileID: 3100376170160026648}
   - component: {fileID: 9201539233425181476}
+  - component: {fileID: 6033404009544553583}
   m_Layer: 7
   m_Name: Controller V1.2
   m_TagString: Player
@@ -1065,6 +1097,7 @@ Transform:
   m_Children:
   - {fileID: 3770065563955046653}
   - {fileID: 2938368333614530261}
+  - {fileID: 4754819104893437940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5308877612693128042
@@ -1166,6 +1199,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3212204, y: 1.2905426, z: 0.7209716}
   m_Center: {x: -0.10818863, y: -0.43862236, z: -0.04647422}
+--- !u!114 &6033404009544553583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4209164367020977865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb1d4083760b1f48bd36794c508bc74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  attackPoint: {fileID: 4754819104893437940}
+  attackRange: 0.2
+  timeBetweenAttacks: 0.25
+  attackDamage: 40
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &4560384483819611750
 GameObject:
   m_ObjectHideFlags: 0
