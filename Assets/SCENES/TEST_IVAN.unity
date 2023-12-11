@@ -14810,8 +14810,23 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 3322e6c98132c5247982609939a6d39c, type: 2}
     - target: {fileID: 5308877612693128042, guid: f7d88ed11747f834080b0cfa3b293563,
         type: 3}
+      propertyPath: gravity
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308877612693128042, guid: f7d88ed11747f834080b0cfa3b293563,
+        type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308877612693128042, guid: f7d88ed11747f834080b0cfa3b293563,
+        type: 3}
       propertyPath: newCenterY
       value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5308877612693128042, guid: f7d88ed11747f834080b0cfa3b293563,
+        type: 3}
+      propertyPath: jumpDuration
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
