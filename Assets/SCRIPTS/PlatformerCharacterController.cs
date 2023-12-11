@@ -78,6 +78,7 @@ public class PlatformerCharaterController : MonoBehaviour
     {
         Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
+        jumpTimer = 0f;
         mainCamera = Camera.main.transform;
 
         agent = GetComponent<NavMeshAgent>();
@@ -88,9 +89,7 @@ public class PlatformerCharaterController : MonoBehaviour
 
     void Update()
     {
-        //checking when the last time was the character touched the ground
         lastOnGroundTime -= Time.deltaTime; 
-
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool runInput = Input.GetKey(KeyCode.LeftShift);
@@ -106,15 +105,7 @@ public class PlatformerCharaterController : MonoBehaviour
         
         bool isWalkingAttack = isMoving && isAttacking;
 
-        grounded = characterController.isGrounded;
-
-        //set a buffer window for jumping
-        if (grounded)
-        {
-            lastOnGroundTime = coyoteTime;
-        }
-
-        if (isWalkingAttack)
+    if (isWalkingAttack)
     {
         // Set the parameter in the animator to trigger the walking attack animation
         if (hasAnimator)
@@ -130,8 +121,7 @@ public class PlatformerCharaterController : MonoBehaviour
             animator.SetBool("AttackWhileWalking", false);
         }
     }
-
-        if (grounded && lastOnGroundTime>0)
+        if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
             movement.Normalize();
@@ -175,22 +165,16 @@ public class PlatformerCharaterController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
-
-        // Handle jumping animation
-        if (grounded && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
+        
+        
+        //character is grouned  -- removed from reap from you... to be depricated
+        grounded = characterController.isGrounded;
+        
+        if (characterController.isGrounded)
         {
-            velocity.y = jumpForce;
+            lastOnGroundTime = coyoteTime;
         }
-
-        if (hasAnimator)
-        {
-            animator.SetBool("Jump", !grounded);
-        }
-
-        if (velocity.y > jumpForce)
-        {
-            velocity.y = jumpForce;
-        }
+        Debug.Log(lastOnGroundTime);
 
         characterController.Move(velocity * Time.deltaTime);
 
