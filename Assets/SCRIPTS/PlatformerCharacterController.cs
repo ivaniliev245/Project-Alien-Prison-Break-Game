@@ -77,7 +77,6 @@ public class PlatformerCharaterController : MonoBehaviour
     {
         Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
-        jumpTimer = 0f;
         mainCamera = Camera.main.transform;
 
         agent = GetComponent<NavMeshAgent>();
@@ -88,7 +87,9 @@ public class PlatformerCharaterController : MonoBehaviour
 
     void Update()
     {
+        //checking when the last time was the character touched the ground
         lastOnGroundTime -= Time.deltaTime; 
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool runInput = Input.GetKey(KeyCode.LeftShift);
@@ -102,9 +103,17 @@ public class PlatformerCharaterController : MonoBehaviour
         bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
         bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
         
-       bool isWalkingAttack = isMoving && isAttacking;
+        bool isWalkingAttack = isMoving && isAttacking;
 
-    if (isWalkingAttack)
+        grounded = characterController.isGrounded;
+
+        //set a buffer window for jumping
+        if (grounded)
+        {
+            lastOnGroundTime = coyoteTime;
+        }
+
+        if (isWalkingAttack)
     {
         // Set the parameter in the animator to trigger the walking attack animation
         if (hasAnimator)
@@ -121,7 +130,7 @@ public class PlatformerCharaterController : MonoBehaviour
         }
     }
 
-        if (grounded && jumpTimer <= 0f)
+        if (grounded && lastOnGroundTime>0)
         {
             movement = transform.TransformDirection(movement);
             movement.Normalize();
@@ -132,7 +141,6 @@ public class PlatformerCharaterController : MonoBehaviour
                 if (grounded) // Only update speed if grounded
                 {
                     animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
-                    isJumping = false;
                 }
                 
                 animator.SetBool("crouchNoWalk", isCrouchingNoWalk);
@@ -165,22 +173,15 @@ public class PlatformerCharaterController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
 
-        if (characterController.isGrounded)
-        {
-            lastOnGroundTime = coyoteTime;
-        }
-        Debug.Log(lastOnGroundTime);
-
         // Handle jumping animation
-        if (!isJumping && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
+        if (grounded && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
         {
             velocity.y = jumpForce;
-            isJumping = true;
         }
 
         if (hasAnimator)
         {
-            animator.SetBool("Jump", isJumping);
+            animator.SetBool("Jump", !grounded);
         }
 
         if (velocity.y > jumpForce)
