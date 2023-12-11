@@ -287,7 +287,7 @@ void StopAttack()
     }
 }
 
-void HandleJump(){
+void HandleJump(){  // to be depricated
     // Check if the character is not already jumping, Jump button is pressed, and within coyoteTime
     if (!isJumping && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
     {
