@@ -16,7 +16,7 @@ public class PlatformerCharaterController : MonoBehaviour
     public float newHeight = 0.3f; // For Crouching
     private float oldHeight;
     public float newCenterY = -0.72f;// For Crouching
-    private float newLifeHeight = 0.3f;// For Crouching
+    //private float newLifeHeight = 0.3f;// For Crouching
     private Vector3 originalLifePosition;// For Crouching
     private Vector3 newLifePosition;// For Crouching
     private Vector3 oldCenter;// For Crouching
@@ -47,10 +47,10 @@ public class PlatformerCharaterController : MonoBehaviour
 
     // Add the jump animation parameter
     private bool isJumping = false;
-    private bool DJumping = false;
+    //private bool DJumping = false;
     //crouch parameter
     private bool isCrouching = false;
-    private float crouchD = -1.1f;
+    //private float crouchD = -1.1f;
     //attack parameters
     private bool isAttacking = false;
     private string[] attackAnimations = { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
@@ -191,12 +191,12 @@ public class PlatformerCharaterController : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
 
         UpdateRotation();
-
+    /*
         if (mainCamera != null)
         {
             Vector3 cameraTargetPosition = transform.position + cameraOffset;
             mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
-        }
+        }*/
     }
 
     //... (rest of the code remains unchanged)
