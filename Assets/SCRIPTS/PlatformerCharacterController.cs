@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Cinemachine;
 
 public class PlatformerCharaterController : MonoBehaviour
 {
+    //movement and rotation
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
     public float walkAnimationSpeedMultiplier = 1.0f;
@@ -17,7 +19,7 @@ public class PlatformerCharaterController : MonoBehaviour
     public float newHeight = 0.3f; // For Crouching
     private float oldHeight;
     public float newCenterY = -0.72f;// For Crouching
-    private float newLifeHeight = 0.3f;// For Crouching
+   // private float newLifeHeight = 0.3f;// For Crouching
     private Vector3 originalLifePosition;// For Crouching
     private Vector3 newLifePosition;// For Crouching
     private Vector3 oldCenter;// For Crouching
@@ -33,9 +35,12 @@ public class PlatformerCharaterController : MonoBehaviour
     
     private bool isJumpFalling;
 
-    private Transform mainCamera;
-    public float cameraFollowSpeed = 5.0f;
-    public Vector3 cameraOffset = new Vector3(0, 2, -3);
+    
+    //handle cinemachine camera
+    public CinemachineVirtualCamera virtualCamera;
+    // public float cameraFollowSpeed = 5.0f;
+    // public Vector3 cameraOffset = new Vector3(0, 2, -3);
+    
     // animation values 
     private Animator animator;
     private const float locomotionSmoothTime = 0.1f;
@@ -51,18 +56,20 @@ public class PlatformerCharaterController : MonoBehaviour
 
     private const float threshold = 0.01f;
     private NavMeshAgent agent;
-    //private bool isRunning = false;
+   
 
     // Add the jump animation parameter
     private bool isJumping = false;
     private bool IsSliding; //check for wall sliding
-    private bool DJumping = false;
+    //private bool DJumping = false;
+    
     //crouch parameter
     private bool isCrouching = false;
-    private float crouchD = -1.1f;
+    //private float crouchD = -1.1f;
     //attack parameters
     private bool isAttacking = false;
-    private string[] attackAnimations = { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
+    private string[] attackAnimations = 
+    { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
     
     // handle crouching 
     private const string crouchNoWalkParam = "crouchNoWalk";  
@@ -79,7 +86,7 @@ public class PlatformerCharaterController : MonoBehaviour
         Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
-        mainCamera = Camera.main.transform;
+    
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
@@ -182,11 +189,6 @@ public class PlatformerCharaterController : MonoBehaviour
         HandleJump();
         UpdateGroundedState();
        
-        if (mainCamera != null)
-        {
-            Vector3 cameraTargetPosition = transform.position + cameraOffset;
-            mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
-        }
     }
 
  private void UpdateLife()
@@ -365,10 +367,6 @@ void UpdateGroundedState()  // this is only for animator
         }
     }
 }
-
-
-
-
 
 
 }
