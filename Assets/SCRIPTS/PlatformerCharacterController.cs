@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Cinemachine;
 
 public class PlatformerCharaterController : MonoBehaviour
 {
+    //movement and rotation
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
     public float walkAnimationSpeedMultiplier = 1.0f;
@@ -17,7 +19,7 @@ public class PlatformerCharaterController : MonoBehaviour
     public float newHeight = 0.3f; // For Crouching
     private float oldHeight;
     public float newCenterY = -0.72f;// For Crouching
-    //private float newLifeHeight = 0.3f;// For Crouching
+   // private float newLifeHeight = 0.3f;// For Crouching
     private Vector3 originalLifePosition;// For Crouching
     private Vector3 newLifePosition;// For Crouching
     private Vector3 oldCenter;// For Crouching
@@ -33,9 +35,12 @@ public class PlatformerCharaterController : MonoBehaviour
     
     private bool isJumpFalling;
 
-    private Transform mainCamera;
-    public float cameraFollowSpeed = 5.0f;
-    public Vector3 cameraOffset = new Vector3(0, 2, -3);
+    
+    //handle cinemachine camera
+    public CinemachineVirtualCamera virtualCamera;
+    // public float cameraFollowSpeed = 5.0f;
+    // public Vector3 cameraOffset = new Vector3(0, 2, -3);
+    
     // animation values 
     private Animator animator;
     private const float locomotionSmoothTime = 0.1f;
@@ -51,18 +56,20 @@ public class PlatformerCharaterController : MonoBehaviour
 
     private const float threshold = 0.01f;
     private NavMeshAgent agent;
-    //private bool isRunning = false;
+   
 
     // Add the jump animation parameter
     private bool isJumping = false;
     private bool IsSliding; //check for wall sliding
-    private bool DJumping = false;
+    //private bool DJumping = false;
+    
     //crouch parameter
     private bool isCrouching = false;
     //private float crouchD = -1.1f;
     //attack parameters
     private bool isAttacking = false;
-    private string[] attackAnimations = { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
+    private string[] attackAnimations = 
+    { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
     
     // handle crouching 
     private const string crouchNoWalkParam = "crouchNoWalk";  
@@ -79,7 +86,7 @@ public class PlatformerCharaterController : MonoBehaviour
         Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
         jumpTimer = 0f;
-        mainCamera = Camera.main.transform;
+    
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
@@ -179,13 +186,8 @@ public class PlatformerCharaterController : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
 
         UpdateRotation();
-
-        HandleJump2();
-        if (mainCamera != null)
-        {
-            Vector3 cameraTargetPosition = transform.position + cameraOffset;
-            mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
-        }
+        HandleJump();
+        UpdateGroundedState();
     }
 
  private void UpdateLife()
@@ -287,29 +289,8 @@ void StopAttack()
     }
 }
 
-void HandleJump(){  // to be depricated
-    // Check if the character is not already jumping, Jump button is pressed, and within coyoteTime
-    if (!isJumping && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
-    {
-        velocity.y = jumpForce; // Set vertical velocity for jumping
-        isJumping = true; // Set jumping flag
-    }
 
-    if (hasAnimator)
-    {
-        animator.SetBool("Jump", isJumping); // Update the animator
-    }
-
-    // Ensure the character doesn't exceed the jump force
-    if (velocity.y > jumpForce)
-    {
-        velocity.y = jumpForce;
-    }
-
-}
-
-
-void HandleJump2()
+void HandleJump()
 {
     if (grounded && jumpTimer <= 0f)
     {
@@ -336,9 +317,12 @@ IEnumerator ApplyJumpForce()
 {
     float timeInAir = 0f;
     float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
-
     isJumping = true;
-
+    
+    if (hasAnimator)
+    {
+        animator.SetBool("Jump", true);
+    }
     while (timeInAir < jumpDuration) // Use adjustable jump duration
     {
         float jumpVelocity = initialJumpForce - (gravity * timeInAir);
@@ -350,6 +334,37 @@ IEnumerator ApplyJumpForce()
     }
 
     isJumping = false;
+    //important value for animator pls dont reomove
+    if (hasAnimator)
+    {
+        animator.SetBool("Jump", false);
+    }
+}
+
+
+void UpdateGroundedState()  // this is only for animator
+{
+    if (grounded && jumpTimer <= 0f)
+    {
+        // Check if the character is touching the ground
+        bool isCharacterGrounded = characterController.isGrounded;
+
+        // Set the 'Grounded' boolean parameter in the animator based on character's grounded state
+        if (hasAnimator)
+        {
+            animator.SetBool("Grounded", isCharacterGrounded);
+        }
+    }
+    else
+    {
+        // If not grounded or jump timer active, set the 'Grounded' parameter to false
+        //important value for animator pls dont remove
+        
+        if (hasAnimator)
+        {
+            animator.SetBool("Grounded", false);
+        }
+    }
 }
 
 
