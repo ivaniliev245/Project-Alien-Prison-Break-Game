@@ -26,7 +26,7 @@ public class Alien_AI_Controller : MonoBehaviour
     private float currentHealth;
 
     public GameObject projectile;
-    [SerializeField] private Healthbar healthbar;
+    [SerializeField] private HealthbarEnemy healthbar;
 
 
     void Update()
@@ -47,7 +47,7 @@ public class Alien_AI_Controller : MonoBehaviour
         goblin = GetComponent<NavMeshAgent>();
 
         currentHealth = maxhealth;
-        healthbar = GetComponentInChildren<Healthbar>();
+        healthbar = GetComponentInChildren<HealthbarEnemy>();
         healthbar.UpdateHealthbar(currentHealth, maxhealth);
     }
     private void Patrolling()
