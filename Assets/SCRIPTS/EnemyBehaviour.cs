@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Transform player;
     private bool isChasing = false;
-    //private bool isRoaming = true;
+    private bool isRoaming = true;
     public float detectionRange = 10.0f;
 
 
