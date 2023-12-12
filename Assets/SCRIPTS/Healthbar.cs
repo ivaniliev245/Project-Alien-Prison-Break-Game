@@ -6,8 +6,7 @@ public class Healthbar : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
     [SerializeField] private Vector3 offset;
-    [SerializeField] private Transform cam;
-    private Camera camRef;
+    public Camera camRef;
 
     public void Start()
     {
@@ -18,7 +17,7 @@ public class Healthbar : MonoBehaviour
     {
         healthbar.value = currentHealth / maxHealth;
     }
-    // Update is called once per frame
+
     void Update()
     {
         transform.rotation = Quaternion.LookRotation(transform.position - camRef.transform.position);

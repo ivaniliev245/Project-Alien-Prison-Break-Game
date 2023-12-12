@@ -25,10 +25,12 @@ public class EnemyBehaviour : MonoBehaviour
         if (distanceToPlayer <= detectionRange)
         {
             isChasing = true;
+            isRoaming = false;
         }
         else if (distanceToPlayer > detectionRange)
         {
             isChasing = false;
+            isRoaming = true;
         }
 
 

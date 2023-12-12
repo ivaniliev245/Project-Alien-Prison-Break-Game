@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public class PlatformerCharaterController : MonoBehaviour
 {
@@ -23,6 +24,14 @@ public class PlatformerCharaterController : MonoBehaviour
     private Vector3 velocity;
     private bool grounded;
     private float jumpTimer;
+    public float coyoteTime;
+    public float jumpInputTimeBuffer;
+
+    //float timers
+    private float lastOnGroundTime;
+    private float lastPressedJumpTime;
+    
+    private bool isJumpFalling;
 
     private Transform mainCamera;
     public float cameraFollowSpeed = 5.0f;
@@ -39,7 +48,6 @@ public class PlatformerCharaterController : MonoBehaviour
     
     public float gravity = -9.81f;
     public float jumpForce = 20f;
-    public float jumpCooldown = 0.25f;
 
     private const float threshold = 0.01f;
     private NavMeshAgent agent;
@@ -47,7 +55,8 @@ public class PlatformerCharaterController : MonoBehaviour
 
     // Add the jump animation parameter
     private bool isJumping = false;
-    //private bool DJumping = false;
+    private bool IsSliding; //check for wall sliding
+    private bool DJumping = false;
     //crouch parameter
     private bool isCrouching = false;
     //private float crouchD = -1.1f;
@@ -61,7 +70,8 @@ public class PlatformerCharaterController : MonoBehaviour
     // Update Rotation
     public float followAxis = 0.0f;
    
-   
+    //handle jump duration
+    public float jumpDuration = 0.5f;
    
    
     void Start()
@@ -77,14 +87,9 @@ public class PlatformerCharaterController : MonoBehaviour
         originalLifePosition = Life.transform.position;
     }
 
-
-//UPDATE
-
     void Update()
     {
-        
-       
-        
+        lastOnGroundTime -= Time.deltaTime; 
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool runInput = Input.GetKey(KeyCode.LeftShift);
@@ -97,9 +102,8 @@ public class PlatformerCharaterController : MonoBehaviour
         bool isMoving = movement.magnitude > 0.1f; // Check if the character is moving
         bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
         bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
-
         
-       bool isWalkingAttack = isMoving && isAttacking;
+        bool isWalkingAttack = isMoving && isAttacking;
 
     if (isWalkingAttack)
     {
@@ -117,9 +121,6 @@ public class PlatformerCharaterController : MonoBehaviour
             animator.SetBool("AttackWhileWalking", false);
         }
     }
-
-        
-        
         if (grounded && jumpTimer <= 0f)
         {
             movement = transform.TransformDirection(movement);
@@ -130,7 +131,8 @@ public class PlatformerCharaterController : MonoBehaviour
             {
                 if (grounded) // Only update speed if grounded
                 {
-                    animator.SetFloat("Speed", velocity.magnitude * currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
+                    animator.SetFloat("Speed", velocity.magnitude *
+                         currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
                     isJumping = false;
                 }
                 
@@ -163,58 +165,38 @@ public class PlatformerCharaterController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.deltaTime;
+        
+        
+        //character is grouned  -- removed from reap from you... to be depricated
         grounded = characterController.isGrounded;
-
-        // Handle jumping animation
-        if (!isJumping && Input.GetButtonDown("Jump") && grounded && jumpTimer <= 0f)
+        
+        if (characterController.isGrounded)
         {
-            velocity.y = jumpForce;
-            jumpTimer = jumpCooldown;
-            isJumping = true;
+            lastOnGroundTime = coyoteTime;
         }
-
-        if (hasAnimator)
-        {
-            animator.SetBool("Jump", isJumping);
-        }
-
-        if (velocity.y > jumpForce)
-        {
-            velocity.y = jumpForce;
-        }
-
-        if (jumpTimer > 0f)
-        {
-            jumpTimer -= Time.deltaTime;
-        }
+        Debug.Log(lastOnGroundTime);
 
         characterController.Move(velocity * Time.deltaTime);
 
         UpdateRotation();
-    /*
+
+        HandleJump2();
         if (mainCamera != null)
         {
             Vector3 cameraTargetPosition = transform.position + cameraOffset;
             mainCamera.position = Vector3.Lerp(mainCamera.position, cameraTargetPosition, Time.deltaTime * cameraFollowSpeed);
-        }*/
+        }
     }
-
-    //... (rest of the code remains unchanged)
-
-
-    
 
  private void UpdateLife()
     {
-            
-
             float movementSpeed = 20.0f;
             float step = movementSpeed * Time.deltaTime;
             Vector3 newPosition  = new Vector3(transform.position.x, originalLifePosition.y, transform.position.z);
             Life.transform.position = Vector3.Lerp(Life.transform.position, newPosition, step);
            
             //Life.SetActive(true);
-     }
+ }
 
 void UpdateRotation()
 {
@@ -245,10 +227,8 @@ void UpdateRotation()
     }
 }
 
-   
    void ToggleCrouch()
     {
-
           if (!isCrouching)
             {   
                 // Set the trigger parameter in the animator to start the animation
@@ -256,7 +236,6 @@ void UpdateRotation()
               
                 isCrouching = true;
                 //Life.SetActive(false);
-
                 
                 oldHeight = characterController.height;
                 // Life.transform.position = new Vector3(transform.position.x, transform.position.y + crouchD, transform.position.z);
@@ -266,12 +245,11 @@ void UpdateRotation()
                 Vector3 newCenter = characterController.center;
                 newCenter.y = newCenterY;
                 characterController.center = newCenter;
-            } 
-
-        } 
+          } 
+   } 
    
    void ToggleCrouchUp()
-     {
+   {
     if (isCrouching)
     {   
         animator.SetBool("Crouch", false);
@@ -280,8 +258,7 @@ void UpdateRotation()
         characterController.height = oldHeight;
         // UpdateLife();   
     } 
-    }
-
+   }
 void StartAttack()
 {
     isAttacking = true;
@@ -295,7 +272,6 @@ void StartAttack()
         animator.CrossFade(randomAttack, 0); // 0 indicates the transition should be instant
     }
 }
-
 
 void StopAttack()
 {
@@ -311,6 +287,70 @@ void StopAttack()
     }
 }
 
+void HandleJump(){  // to be depricated
+    // Check if the character is not already jumping, Jump button is pressed, and within coyoteTime
+    if (!isJumping && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
+    {
+        velocity.y = jumpForce; // Set vertical velocity for jumping
+        isJumping = true; // Set jumping flag
+    }
+
+    if (hasAnimator)
+    {
+        animator.SetBool("Jump", isJumping); // Update the animator
+    }
+
+    // Ensure the character doesn't exceed the jump force
+    if (velocity.y > jumpForce)
+    {
+        velocity.y = jumpForce;
+    }
 
 }
 
+
+void HandleJump2()
+{
+    if (grounded && jumpTimer <= 0f)
+    {
+        if (!isJumping && Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(ApplyJumpForce());
+        }
+    }
+
+    // Apply gravity to the character
+    velocity.y += gravity * Time.deltaTime;
+
+    // Ensure the character doesn't exceed the jump force
+    if (velocity.y > jumpForce)
+    {
+        velocity.y = jumpForce;
+    }
+
+    // Move the character using CharacterController
+    characterController.Move(velocity * Time.deltaTime);
+}
+
+IEnumerator ApplyJumpForce()
+{
+    float timeInAir = 0f;
+    float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
+
+    isJumping = true;
+
+    while (timeInAir < jumpDuration) // Use adjustable jump duration
+    {
+        float jumpVelocity = initialJumpForce - (gravity * timeInAir);
+        velocity.y = jumpVelocity;
+
+        timeInAir += Time.deltaTime;
+
+        yield return null;
+    }
+
+    isJumping = false;
+}
+
+
+}

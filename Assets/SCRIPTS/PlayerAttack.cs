@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public float timeBetweenAttacks;
     private bool alreadyAttacked = false;
 
-    public int attackDamage = 33;
+    public int attackDamage = 25;
 
     public LayerMask whatIsEnemy;
 
