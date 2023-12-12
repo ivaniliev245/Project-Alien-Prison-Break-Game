@@ -179,7 +179,8 @@ public class PlatformerCharaterController : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
 
         UpdateRotation();
-        HandleJump2();
+        HandleJump();
+        UpdateGroundedState();
        
         if (mainCamera != null)
         {
@@ -287,29 +288,8 @@ void StopAttack()
     }
 }
 
-void HandleJump(){  // to be depricated
-    // Check if the character is not already jumping, Jump button is pressed, and within coyoteTime
-    if (!isJumping && Input.GetButtonDown("Jump") && lastOnGroundTime > 0)
-    {
-        velocity.y = jumpForce; // Set vertical velocity for jumping
-        isJumping = true; // Set jumping flag
-    }
 
-    if (hasAnimator)
-    {
-        animator.SetBool("Jump", isJumping); // Update the animator
-    }
-
-    // Ensure the character doesn't exceed the jump force
-    if (velocity.y > jumpForce)
-    {
-        velocity.y = jumpForce;
-    }
-
-}
-
-
-void HandleJump2()
+void HandleJump()
 {
     if (grounded && jumpTimer <= 0f)
     {
@@ -336,9 +316,12 @@ IEnumerator ApplyJumpForce()
 {
     float timeInAir = 0f;
     float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
-
     isJumping = true;
-
+    
+    if (hasAnimator)
+    {
+        animator.SetBool("Jump", true);
+    }
     while (timeInAir < jumpDuration) // Use adjustable jump duration
     {
         float jumpVelocity = initialJumpForce - (gravity * timeInAir);
@@ -350,7 +333,42 @@ IEnumerator ApplyJumpForce()
     }
 
     isJumping = false;
+    //important value for animator pls dont reomove
+    if (hasAnimator)
+    {
+        animator.SetBool("Jump", false);
+    }
 }
+
+
+void UpdateGroundedState()  // this is only for animator
+{
+    if (grounded && jumpTimer <= 0f)
+    {
+        // Check if the character is touching the ground
+        bool isCharacterGrounded = characterController.isGrounded;
+
+        // Set the 'Grounded' boolean parameter in the animator based on character's grounded state
+        if (hasAnimator)
+        {
+            animator.SetBool("Grounded", isCharacterGrounded);
+        }
+    }
+    else
+    {
+        // If not grounded or jump timer active, set the 'Grounded' parameter to false
+        //important value for animator pls dont remove
+        
+        if (hasAnimator)
+        {
+            animator.SetBool("Grounded", false);
+        }
+    }
+}
+
+
+
+
 
 
 }
