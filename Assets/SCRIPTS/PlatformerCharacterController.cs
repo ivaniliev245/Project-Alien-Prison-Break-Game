@@ -170,6 +170,7 @@ public class PlatformerCharaterController : MonoBehaviour
                 StopAttack(); // Call method to stop attack
             }
         }
+
         //check if player pressed Jump button
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -177,6 +178,7 @@ public class PlatformerCharaterController : MonoBehaviour
         }
         if (CanJump() && lastPressedJumpTime > 0)
         {
+            
             grounded = characterController.isGrounded;
             Jump();
         }
