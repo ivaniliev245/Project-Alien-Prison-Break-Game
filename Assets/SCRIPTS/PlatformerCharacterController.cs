@@ -25,15 +25,12 @@ public class PlatformerCharaterController : MonoBehaviour
     private Vector3 oldCenter;// For Crouching
     private Vector3 velocity;
     private bool grounded;
-    private float jumpTimer;
-    public float coyoteTime;
-    public float jumpInputTimeBuffer;
+    public float coyoteTime = 0.15f;
+    public float jumpInputTimeBuffer = 0.1f;
 
     //float timers
-    private float lastOnGroundTime;
-    private float lastPressedJumpTime;
-    
-    private bool isJumpFalling;
+    private float lastOnGroundTime = 0f;
+    private float lastPressedJumpTime = 0f;
 
     
     //handle cinemachine camera
@@ -59,7 +56,6 @@ public class PlatformerCharaterController : MonoBehaviour
    
 
     // Add the jump animation parameter
-    private bool isJumping = false;
     private bool IsSliding; //check for wall sliding
     //private bool DJumping = false;
     
@@ -85,8 +81,6 @@ public class PlatformerCharaterController : MonoBehaviour
     {
         Cursor.visible = false;
         characterController = GetComponent<CharacterController>();
-        jumpTimer = 0f;
-    
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
@@ -96,7 +90,10 @@ public class PlatformerCharaterController : MonoBehaviour
 
     void Update()
     {
-        lastOnGroundTime -= Time.deltaTime; 
+        //checking when the last time was the character touched the ground
+        lastOnGroundTime -= Time.deltaTime;
+        lastPressedJumpTime -= Time.deltaTime;
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         bool runInput = Input.GetKey(KeyCode.LeftShift);
@@ -111,24 +108,31 @@ public class PlatformerCharaterController : MonoBehaviour
         bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
         
         bool isWalkingAttack = isMoving && isAttacking;
+        
+        grounded = characterController.isGrounded;
+        if (grounded)
+        {
+            lastOnGroundTime = coyoteTime;
+        }
 
-    if (isWalkingAttack)
-    {
-        // Set the parameter in the animator to trigger the walking attack animation
-        if (hasAnimator)
+
+        if (isWalkingAttack)
         {
-            animator.SetBool("AttackWhileWalking", true);
+            // Set the parameter in the animator to trigger the walking attack animation
+            if (hasAnimator)
+            {
+                animator.SetBool("AttackWhileWalking", true);
+            }
         }
-    }
-    else
-    {
-        // Reset the parameter in the animator if not performing a walking attack
-        if (hasAnimator)
+        else
         {
-            animator.SetBool("AttackWhileWalking", false);
+            // Reset the parameter in the animator if not performing a walking attack
+            if (hasAnimator)
+            {
+                animator.SetBool("AttackWhileWalking", false);
+            }
         }
-    }
-        if (grounded && jumpTimer <= 0f)
+        if (grounded && lastOnGroundTime > 0)
         {
             movement = transform.TransformDirection(movement);
             movement.Normalize();
@@ -140,9 +144,8 @@ public class PlatformerCharaterController : MonoBehaviour
                 {
                     animator.SetFloat("Speed", velocity.magnitude *
                          currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
-                    isJumping = false;
                 }
-                
+
                 animator.SetBool("crouchNoWalk", isCrouchingNoWalk);
                 animator.SetBool("Crouch", isCrouchingWithMove);
             }
@@ -150,13 +153,11 @@ public class PlatformerCharaterController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C))
             {
                 ToggleCrouch();
-                Debug.Log("Splash is crouching");
             }
 
             if (Input.GetKeyUp(KeyCode.C))
             {
                 ToggleCrouchUp();
-                Debug.Log("Splash is not crouching");
                 animator.SetBool("Crouch", false);
             }
             if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
@@ -168,25 +169,22 @@ public class PlatformerCharaterController : MonoBehaviour
             {
                 StopAttack(); // Call method to stop attack
             }
-        
         }
-
-        velocity.y += gravity * Time.deltaTime;
-        
-        
-        //character is grouned  -- removed from reap from you... to be depricated
-        grounded = characterController.isGrounded;
-        
-        if (characterController.isGrounded)
+        //check if player pressed Jump button
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            lastOnGroundTime = coyoteTime;
+            OnJumpInput();
         }
-        Debug.Log(lastOnGroundTime);
-
+        if (CanJump() && lastPressedJumpTime > 0)
+        {
+            grounded = characterController.isGrounded;
+            Jump();
+        }
+        
+        velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
-
+        
         UpdateRotation();
-        HandleJump();
         UpdateGroundedState();
     }
 
@@ -261,63 +259,59 @@ void UpdateRotation()
         // UpdateLife();   
     } 
    }
-void StartAttack()
-{
-    isAttacking = true;
-
-    // Get a random attack animation name from the array
-    string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
-
-    // Trigger the randomly selected attack animation immediately without completing the idle animation cycle
-    if (hasAnimator)
+    void StartAttack()
     {
-        animator.CrossFade(randomAttack, 0); // 0 indicates the transition should be instant
-    }
-}
+        isAttacking = true;
 
-void StopAttack()
-{
-    isAttacking = false;
-    // Reset attack-related flags or animations here
-    // For example:
-    // If you don't need to stop a specific attack animation by name, this might not be necessary
+        // Get a random attack animation name from the array
+        string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
 
-    // Reset the parameter in the animator when the attack stops
-    if (hasAnimator)
-    {
-        animator.SetBool("AttackWhileWalking", false);
-    }
-}
-
-
-void HandleJump()
-{
-    if (grounded && jumpTimer <= 0f)
-    {
-        if (!isJumping && Input.GetButtonDown("Jump"))
+        // Trigger the randomly selected attack animation immediately without completing the idle animation cycle
+        if (hasAnimator)
         {
-            StartCoroutine(ApplyJumpForce());
+            animator.CrossFade(randomAttack, 0); // 0 indicates the transition should be instant
         }
     }
 
-    // Apply gravity to the character
-    velocity.y += gravity * Time.deltaTime;
-
-    // Ensure the character doesn't exceed the jump force
-    if (velocity.y > jumpForce)
+    void StopAttack()
     {
-        velocity.y = jumpForce;
+        isAttacking = false;
+        // Reset attack-related flags or animations here
+        // For example:
+        // If you don't need to stop a specific attack animation by name, this might not be necessary
+
+        // Reset the parameter in the animator when the attack stops
+        if (hasAnimator)
+        {   
+            animator.SetBool("AttackWhileWalking", false);
+        }
     }
 
-    // Move the character using CharacterController
-    characterController.Move(velocity * Time.deltaTime);
-}
+    public void OnJumpInput()
+	{
+        lastPressedJumpTime = jumpInputTimeBuffer;
+    }
+    
+    public bool CanJump()
+    {
+        return lastOnGroundTime > 0 && grounded;
+    }
+
+
+    void Jump()
+    {
+        //ensure the player can't jump twice
+        lastPressedJumpTime = 0;
+        lastOnGroundTime = 0;
+
+        StartCoroutine(ApplyJumpForce());
+    }
 
 IEnumerator ApplyJumpForce()
 {
+
     float timeInAir = 0f;
     float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
-    isJumping = true;
     
     if (hasAnimator)
     {
@@ -328,12 +322,11 @@ IEnumerator ApplyJumpForce()
         float jumpVelocity = initialJumpForce - (gravity * timeInAir);
         velocity.y = jumpVelocity;
 
-        timeInAir += Time.deltaTime;
+            timeInAir += Time.deltaTime;
 
-        yield return null;
-    }
+            yield return null;
+        }
 
-    isJumping = false;
     //important value for animator pls dont reomove
     if (hasAnimator)
     {
@@ -342,30 +335,29 @@ IEnumerator ApplyJumpForce()
 }
 
 
-void UpdateGroundedState()  // this is only for animator
-{
-    if (grounded && jumpTimer <= 0f)
+    void UpdateGroundedState()  // this is only for animator
     {
-        // Check if the character is touching the ground
-        bool isCharacterGrounded = characterController.isGrounded;
-
-        // Set the 'Grounded' boolean parameter in the animator based on character's grounded state
-        if (hasAnimator)
+        grounded = characterController.isGrounded;
+        if (grounded && lastOnGroundTime > 0)
         {
-            animator.SetBool("Grounded", isCharacterGrounded);
+            // Check if the character is touching the ground
+            grounded = characterController.isGrounded;
+
+            // Set the 'Grounded' boolean parameter in the animator based on character's grounded state
+            if (hasAnimator)
+            {
+                animator.SetBool("Grounded", grounded);
+            }
+        }
+        else
+        {
+            // If not grounded or jump timer active, set the 'Grounded' parameter to false
+            //important value for animator pls dont remove
+
+            if (hasAnimator)
+            {
+                animator.SetBool("Grounded", false);
+            }
         }
     }
-    else
-    {
-        // If not grounded or jump timer active, set the 'Grounded' parameter to false
-        //important value for animator pls dont remove
-        
-        if (hasAnimator)
-        {
-            animator.SetBool("Grounded", false);
-        }
-    }
-}
-
-
 }
