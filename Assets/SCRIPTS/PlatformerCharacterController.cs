@@ -72,8 +72,12 @@ public class PlatformerCharaterController : MonoBehaviour
    
     //handle jump duration
     public float jumpDuration = 0.5f;
-   
-   
+
+    public float maxHealth;
+    private float currentHealth;
+    [SerializeField] private HealthbarPlayer healthbar;
+
+
     void Start()
     {
         Cursor.visible = false;
@@ -83,7 +87,8 @@ public class PlatformerCharaterController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         hasAnimator = animator != null;
         originalLifePosition = Life.transform.position;
-        
+
+        currentHealth = maxHealth;
     }
 
 void Update()
@@ -389,5 +394,19 @@ IEnumerator ApplyJumpForce()
             {
                 animator.SetBool("Grounded", false);
             }
-        }}
+        }
+    }
+
+    public void TakeDamage(int Damage)
+    {
+        Debug.Log("Took Damage");
+        currentHealth -= Damage;
+        healthbar.UpdateHealthbar(currentHealth, maxHealth);
+
+        //play enemy damage animation
+        if (currentHealth <= 0) {
+            //ToDo:
+            return;
+        }
+    }
 }
