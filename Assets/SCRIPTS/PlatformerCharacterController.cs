@@ -109,6 +109,16 @@ void Update()
     float currentVelocity = isMoving ? velocity.magnitude * currentAnimationSpeedMultiplier : idleSpeed; // Calculate speed based on movement or idle state
 
     
+    if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
+    {
+    StartAttack(); // Call method to initiate attack
+    }
+
+    if (Input.GetMouseButtonUp(0)) // 0 represents left mouse button, change as needed
+    {
+    StopAttack(); // Call method to stop attack
+    }
+    
     if (Input.GetKeyDown(KeyCode.C))
             {
                 ToggleCrouch();
@@ -121,16 +131,7 @@ void Update()
                 animator.SetBool("crouchNoWalk", false);
             
             }
-            if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
-            {
-                StartAttack(); // Call method to initiate attack
-            }
-
-            if (Input.GetMouseButtonUp(0)) // 0 represents left mouse button, change as needed
-            {
-                StopAttack(); // Call method to stop attack
-            }
-    
+           
         grounded = characterController.isGrounded;
     
     if (grounded)
@@ -253,7 +254,8 @@ void ToggleCrouch()
         isAttacking = true;
 
         // Get a random attack animation name from the array
-        string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
+        //string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
+        string randomAttack = "AttackL";
 
         // Trigger the randomly selected attack animation immediately without completing the idle animation cycle
         if (hasAnimator)
@@ -312,9 +314,6 @@ void ToggleCrouch()
     velocity.y += gravity * Time.deltaTime;
     characterController.Move(velocity * Time.deltaTime);
 }
-    
-    
-    
     
     
     public void Meditate()
