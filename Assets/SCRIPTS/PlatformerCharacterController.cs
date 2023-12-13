@@ -131,13 +131,8 @@ void Update()
                 StopAttack(); // Call method to stop attack
             }
     
+        grounded = characterController.isGrounded;
     
-    
-    
-    
-    
-    
-    grounded = characterController.isGrounded;
     if (grounded)
     {
         lastOnGroundTime = coyoteTime;
@@ -166,7 +161,6 @@ void Update()
         
         }
 
-      
 
     PerformJump();
     UpdateRotation();
@@ -359,7 +353,14 @@ IEnumerator ApplyJumpForce()
    void UpdateAnimatorSpeed(float speed)
 {
     float minSpeed = 0.001f; // Adjust as needed
-    speed = Mathf.Max(speed, minSpeed); // Ensure minimum speed threshold
+    float maxAnimatorSpeed = 1.5f; // Define the maximum speed value for the animator here
+
+    // Ensure minimum speed threshold
+    speed = Mathf.Max(speed, minSpeed);
+
+    // Ensure speed doesn't exceed the maximum speed value for the animator
+    speed = Mathf.Min(speed, maxAnimatorSpeed);
+
     if (hasAnimator)
     {
         animator.SetFloat("Speed", speed); // Set the speed parameter in the animator
