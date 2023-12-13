@@ -31,19 +31,15 @@ public class PlatformerCharaterController : MonoBehaviour
     //float timers
     private float lastOnGroundTime = 0f;
     private float lastPressedJumpTime = 0f;
-
-    
+  
     //handle cinemachine camera
     public CinemachineVirtualCamera virtualCamera;
-    // public float cameraFollowSpeed = 5.0f;
-    // public Vector3 cameraOffset = new Vector3(0, 2, -3);
     
     // animation values 
     private Animator animator;
     private const float locomotionSmoothTime = 0.1f;
     private bool hasAnimator;
 
-    
     public Transform childObject;
     public GameObject Life;// Reference to the child object to rotate
      // Adjustable rotation speed
@@ -57,12 +53,10 @@ public class PlatformerCharaterController : MonoBehaviour
 
     // Add the jump animation parameter
     private bool IsSliding; //check for wall sliding
-    //private bool DJumping = false;
-    
+   
     //crouch parameter
     private bool isCrouching = false;
-    //private float crouchD = -1.1f;
-    //attack parameters
+   
     private bool isAttacking = false;
     private string[] attackAnimations = 
     { "AttackR", "AttackL", "AttackL_v2", "AttackR_v2", "StrongAttack" };
@@ -174,20 +168,8 @@ public class PlatformerCharaterController : MonoBehaviour
         }
 
         //check if player pressed Jump button
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnJumpInput();
-        }
-        if (CanJump() && lastPressedJumpTime > 0)
-        {
-            
-            grounded = characterController.isGrounded;
-            Jump();
-        }
         
-        velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
-        
+        PerformJump();
         UpdateRotation();
         UpdateGroundedState();
     }
@@ -310,6 +292,28 @@ void UpdateRotation()
 
         StartCoroutine(ApplyJumpForce());
     }
+    
+    void PerformJump()
+{
+    if (Input.GetKeyDown(KeyCode.Space))
+    {
+        OnJumpInput();
+    }
+
+    if (CanJump() && lastPressedJumpTime > 0)
+    {
+        grounded = characterController.isGrounded;
+        Jump();
+    }
+
+    velocity.y += gravity * Time.deltaTime;
+    characterController.Move(velocity * Time.deltaTime);
+}
+    
+    
+    
+    
+    
     public void Meditate()
     {
         
