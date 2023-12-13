@@ -12,6 +12,15 @@ public class GoodFellas : MonoBehaviour
 
     private Transform currentTarget; // Current target to follow (player or enemy)
 
+
+    void Start()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.freezeRotation = true;
+        }
+    }
     void Update()
     {
         // Calculate distance between ObjectX and the player

@@ -9,7 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public Transform player;
     private bool isChasing = false;
-    private bool isRoaming = true;
+    private bool isRoaming = false;
     public float detectionRange = 10.0f;
 
     public float rotateSpeed = 3f;
@@ -24,6 +24,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             rb.freezeRotation = true;
         }
+        isRoaming = true;
     }
 
     void Update()
