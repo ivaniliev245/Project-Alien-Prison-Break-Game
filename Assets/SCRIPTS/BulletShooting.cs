@@ -51,10 +51,12 @@ public class BulletShooting : MonoBehaviour
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
+        
         for (int i = 0; i < enemies.Length; i++)
         {
+            Debug.Log("I explode");
             //Get component of enemy and call Take Damage
-            enemies[i].GetComponent<Alien_AI_Controller>().TakeDamage(explosionDamage);
+            enemies[i].GetComponent<PlatformerCharaterController>().TakeDamage(explosionDamage);
 
             //Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
@@ -78,7 +80,7 @@ public class BulletShooting : MonoBehaviour
         collisions++;
 
         //Explode if bullet hits an enemy directly and explodeOnTouch is activated
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        if (collision.gameObject.CompareTag("Player") && explodeOnTouch) Explode();
     }
 
     private void Setup()
