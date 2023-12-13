@@ -86,10 +86,12 @@ public class PlatformerCharaterController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         hasAnimator = animator != null;
         originalLifePosition = Life.transform.position;
+        
     }
 
     void Update()
     {
+        
         //checking when the last time was the character touched the ground
         lastOnGroundTime -= Time.deltaTime;
         lastPressedJumpTime -= Time.deltaTime;
@@ -300,13 +302,17 @@ void UpdateRotation()
     }
 
 
-    void Jump()
+    public void Jump()
     {
         //ensure the player can't jump twice
         lastPressedJumpTime = 0;
         lastOnGroundTime = 0;
 
         StartCoroutine(ApplyJumpForce());
+    }
+    public void Meditate()
+    {
+        
     }
 
 IEnumerator ApplyJumpForce()

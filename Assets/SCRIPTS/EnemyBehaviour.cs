@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public float moveRange = 5f; // Set the range the enemy can move
-    public float moveSpeed = 2f; // Set the speed of movement
+    public float moveSpeed = 3f; // Set the speed of movement
     private float initialPositionX;
     private bool movingRight = true;
 
@@ -11,6 +11,8 @@ public class EnemyBehaviour : MonoBehaviour
     private bool isChasing = false;
     private bool isRoaming = true;
     public float detectionRange = 10.0f;
+
+    public float rotateSpeed = 3f;
 
 
     void Start()
@@ -21,6 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
+         
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer <= detectionRange)
         {
@@ -62,10 +65,6 @@ public class EnemyBehaviour : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
             
         }
-
-
-
-
-
     }
+    
 }
