@@ -259,8 +259,8 @@ void ToggleCrouch()
         isAttacking = true;
 
         // Get a random attack animation name from the array
-        //string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
-        string randomAttack = "AttackL";
+        string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
+        
 
         // Trigger the randomly selected attack animation immediately without completing the idle animation cycle
         if (hasAnimator)
