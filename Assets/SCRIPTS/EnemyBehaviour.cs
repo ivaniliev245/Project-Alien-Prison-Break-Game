@@ -7,7 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
     private float initialPositionX;
     private bool movingRight = true;
 
-    private Transform player;
+    public Transform player;
     private bool isChasing = false;
     private bool isRoaming = true;
     public float detectionRange = 10.0f;
@@ -18,7 +18,12 @@ public class EnemyBehaviour : MonoBehaviour
     void Start()
     {
         initialPositionX = transform.position.x; // Store the initial position of the enemy
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.freezeRotation = true;
+        }
     }
 
     void Update()
@@ -35,7 +40,6 @@ public class EnemyBehaviour : MonoBehaviour
             isChasing = false;
             isRoaming = true;
         }
-
 
 
         if (!isChasing)
