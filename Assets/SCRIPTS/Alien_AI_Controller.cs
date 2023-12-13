@@ -101,6 +101,8 @@ public class Alien_AI_Controller : MonoBehaviour
             Rigidbody rb =  Instantiate(projectile,transform.position,Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
 
+            //Damage code
+            BulletShooting projectileScript = rb.GetComponent<BulletShooting>();
             //Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsPlayer);
 
 
