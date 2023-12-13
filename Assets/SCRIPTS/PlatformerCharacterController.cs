@@ -27,6 +27,9 @@ public class PlatformerCharaterController : MonoBehaviour
     private bool grounded;
     public float coyoteTime = 0.15f;
     public float jumpInputTimeBuffer = 0.1f;
+    
+    public float idleSpeed = 0.1f;
+
 
     //float timers
     private float lastOnGroundTime = 0f;
@@ -83,70 +86,30 @@ public class PlatformerCharaterController : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        
-        //checking when the last time was the character touched the ground
-        lastOnGroundTime -= Time.deltaTime;
-        lastPressedJumpTime -= Time.deltaTime;
+void Update()
+{
+    lastOnGroundTime -= Time.deltaTime;
+    lastPressedJumpTime -= Time.deltaTime;
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        bool runInput = Input.GetKey(KeyCode.LeftShift);
+    float horizontalInput = Input.GetAxis("Horizontal");
+    float verticalInput = Input.GetAxis("Vertical");
+    bool runInput = Input.GetKey(KeyCode.LeftShift);
 
-        float currentSpeed = runInput ? runSpeed : walkSpeed;
-        float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
+    float currentSpeed = runInput ? runSpeed : walkSpeed;
+    float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
 
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+    Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 
-        bool isMoving = movement.magnitude > 0.1f; // Check if the character is moving
-        bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
-        bool isCrouchingWithMove = isMoving && isCrouching; // Moving and crouching
-        
-        bool isWalkingAttack = isMoving && isAttacking;
-        
-        grounded = characterController.isGrounded;
-        if (grounded)
-        {
-            lastOnGroundTime = coyoteTime;
-        }
+    bool isMoving = movement.magnitude > 0.1f;
+    bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
+    bool isCrouchingNoWalkOrMove = isMoving && isCrouching; // Moving and crouching
+    bool isWalkingAttack = isMoving && isAttacking;
+    
+    
+    float currentVelocity = isMoving ? velocity.magnitude * currentAnimationSpeedMultiplier : idleSpeed; // Calculate speed based on movement or idle state
 
-
-        if (isWalkingAttack)
-        {
-            // Set the parameter in the animator to trigger the walking attack animation
-            if (hasAnimator)
-            {
-                animator.SetBool("AttackWhileWalking", true);
-            }
-        }
-        else
-        {
-            // Reset the parameter in the animator if not performing a walking attack
-            if (hasAnimator)
-            {
-                animator.SetBool("AttackWhileWalking", false);
-            }
-        }
-        if (grounded && lastOnGroundTime > 0)
-        {
-            movement = transform.TransformDirection(movement);
-            movement.Normalize();
-            velocity = movement * currentSpeed;
-
-            if (hasAnimator)
-            {
-                if (grounded) // Only update speed if grounded
-                {
-                    animator.SetFloat("Speed", velocity.magnitude *
-                         currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
-                }
-
-                animator.SetBool("crouchNoWalk", isCrouchingNoWalk);
-                animator.SetBool("Crouch", isCrouchingWithMove);
-            }
-
-            if (Input.GetKeyDown(KeyCode.C))
+    
+    if (Input.GetKeyDown(KeyCode.C))
             {
                 ToggleCrouch();
             }
@@ -155,6 +118,8 @@ public class PlatformerCharaterController : MonoBehaviour
             {
                 ToggleCrouchUp();
                 animator.SetBool("Crouch", false);
+                animator.SetBool("crouchNoWalk", false);
+            
             }
             if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
             {
@@ -165,15 +130,49 @@ public class PlatformerCharaterController : MonoBehaviour
             {
                 StopAttack(); // Call method to stop attack
             }
-        }
-
-        //check if player pressed Jump button
-        
-        PerformJump();
-        UpdateRotation();
-        UpdateGroundedState();
+    
+    
+    
+    
+    
+    
+    
+    grounded = characterController.isGrounded;
+    if (grounded)
+    {
+        lastOnGroundTime = coyoteTime;
     }
 
+    if (grounded && lastOnGroundTime > 0)
+    {
+        movement = transform.TransformDirection(movement);
+        movement.Normalize();
+        velocity = movement * currentSpeed;
+
+        float transitionDuration = 0.0001f;  
+            
+            if (hasAnimator)
+            {
+                if (grounded) // Only update speed if grounded
+                {
+                    animator.SetFloat("Speed", velocity.magnitude *
+                         currentAnimationSpeedMultiplier, locomotionSmoothTime, Time.deltaTime);
+                }
+
+                animator.SetBool("crouchNoWalk", isCrouchingNoWalk);
+                animator.SetBool("Crouch", isCrouchingNoWalkOrMove);
+            }
+
+        
+        }
+
+      
+
+    PerformJump();
+    UpdateRotation();
+    UpdateGroundedState();
+    UpdateAnimatorSpeed(currentVelocity); // Update the speed parameter in the animator
+} 
  private void UpdateLife()
     {
             float movementSpeed = 20.0f;
@@ -213,38 +212,48 @@ void UpdateRotation()
     }
 }
 
-   void ToggleCrouch()
+void ToggleCrouch()
+{
+    if (!isCrouching)
     {
-          if (!isCrouching)
-            {   
-                // Set the trigger parameter in the animator to start the animation
-                animator.SetBool("Crouch", true);
-              
-                isCrouching = true;
-                //Life.SetActive(false);
-                
-                oldHeight = characterController.height;
-                // Life.transform.position = new Vector3(transform.position.x, transform.position.y + crouchD, transform.position.z);
-                oldCenter = characterController.center;
+        isCrouching = true;
+        
+        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
 
-                characterController.height = newHeight;
-                Vector3 newCenter = characterController.center;
-                newCenter.y = newCenterY;
-                characterController.center = newCenter;
-          } 
-   } 
+        // Start crouching animation with cross-fade
+        if (hasAnimator)
+        {
+            animator.CrossFade("Crouch", transitionDuration);
+        }
+
+        oldHeight = characterController.height;
+        oldCenter = characterController.center;
+
+        characterController.height = newHeight;
+        Vector3 newCenter = characterController.center;
+        newCenter.y = newCenterY;
+        characterController.center = newCenter;
+    }
+}
    
    void ToggleCrouchUp()
-   {
+{
     if (isCrouching)
-    {   
-        animator.SetBool("Crouch", false);
+    {
         isCrouching = false;
+
+        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
+
+        // Start uncrouching animation with cross-fade
+        if (hasAnimator)
+        {
+            animator.CrossFade("Crouch", transitionDuration);
+        }
+
         characterController.center = oldCenter;
         characterController.height = oldHeight;
-        // UpdateLife();   
-    } 
-   }
+    }
+}
     void StartAttack()
     {
         isAttacking = true;
@@ -347,6 +356,16 @@ IEnumerator ApplyJumpForce()
 }
 
 
+   void UpdateAnimatorSpeed(float speed)
+{
+    float minSpeed = 0.001f; // Adjust as needed
+    speed = Mathf.Max(speed, minSpeed); // Ensure minimum speed threshold
+    if (hasAnimator)
+    {
+        animator.SetFloat("Speed", speed); // Set the speed parameter in the animator
+    }
+}
+    
     void UpdateGroundedState()  // this is only for animator
     {
         grounded = characterController.isGrounded;
@@ -370,6 +389,5 @@ IEnumerator ApplyJumpForce()
             {
                 animator.SetBool("Grounded", false);
             }
-        }
-    }
+        }}
 }
