@@ -255,33 +255,44 @@ void ToggleCrouch()
     }
 }
     void StartAttack()
+{
+    isAttacking = true;
+
+    // Get a random attack animation name from the array
+    string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
+    animator.SetBool("AttackWhileWalking", true);
+    // Set the random attack animation parameter to true
+    if (hasAnimator)
     {
-        isAttacking = true;
+        animator.SetBool(randomAttack, true);
 
-        // Get a random attack animation name from the array
-        string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
-        
-
-        // Trigger the randomly selected attack animation immediately without completing the idle animation cycle
-        if (hasAnimator)
+        // Ensure all other attack animations are set to false to prevent conflicts
+        foreach (string attackAnimation in attackAnimations)
         {
-            animator.CrossFade(randomAttack, 0); // 0 indicates the transition should be instant
+            if (attackAnimation != randomAttack)
+            {
+                animator.SetBool(attackAnimation, false);
+            }
         }
     }
+}
 
-    void StopAttack()
+   void StopAttack()
+{
+    isAttacking = false;
+
+    // Reset the 'AttackWhileWalking' flag or other related flags/animations
+    if (hasAnimator)
     {
-        isAttacking = false;
-        // Reset attack-related flags or animations here
-        // For example:
-        // If you don't need to stop a specific attack animation by name, this might not be necessary
-
-        // Reset the parameter in the animator when the attack stops
-        if (hasAnimator)
-        {   
-            animator.SetBool("AttackWhileWalking", false);
-        }
+        animator.SetBool("AttackWhileWalking", false);
     }
+
+    // Reset all attack animations by setting their boolean parameters to false
+    foreach (string attackAnimation in attackAnimations)
+    {
+        animator.SetBool(attackAnimation, false);
+    }
+}
 
     public void OnJumpInput()
 	{
