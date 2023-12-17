@@ -6,3 +6,10 @@ NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 239742
+  packageName: Free Fire VFX - HDRP
+  packageVersion: 1.0.1
+  assetPath: Assets/Settings/SkyandFogSettingsProfile.asset
+  uploadId: 627294
