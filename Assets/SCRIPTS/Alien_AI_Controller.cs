@@ -25,6 +25,8 @@ public class Alien_AI_Controller : MonoBehaviour
     public float maxhealth;
     private float currentHealth;
 
+    private Animator enemyAnimator;
+    
     public GameObject projectile;
     [SerializeField] private HealthbarEnemy healthbar;
 
@@ -34,11 +36,24 @@ public class Alien_AI_Controller : MonoBehaviour
         //Check if Player is in sight- and AttackRange
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (!playerInSightRange && !playerInAttackRange) { Patrolling(); }
-        if (playerInSightRange && !playerInAttackRange) { ChasePlayer(); }
-        if (playerInSightRange && playerInAttackRange) { AttackPlayer(); }
+       
+        enemyAnimator = GetComponent<Animator>();
         
+        
+         if (!playerInSightRange && !playerInAttackRange) { 
+            Patrolling();
+            SetAnimatorSpeed(0.5f); // Adjust speed for patrolling
+        }
+        if (playerInSightRange && !playerInAttackRange) { 
+            ChasePlayer();
+            SetAnimatorSpeed(1.0f); // Adjust speed for chasing
+        }
+        if (playerInSightRange && playerInAttackRange) { 
+            AttackPlayer();
+            SetAnimatorSpeed(0.0f); // Adjust speed for attacking
+        }
+        
+
     }
 
     private void Awake()
@@ -49,6 +64,8 @@ public class Alien_AI_Controller : MonoBehaviour
         currentHealth = maxhealth;
         healthbar = GetComponentInChildren<HealthbarEnemy>();
         healthbar.UpdateHealthbar(currentHealth, maxhealth);
+        enemyAnimator = GetComponent<Animator>();
+    
     }
     private void Patrolling()
     {
@@ -140,4 +157,17 @@ public class Alien_AI_Controller : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.position, sightRange);
     }
+
+    private void SetAnimatorSpeed(float speed)
+    {
+        if (enemyAnimator != null)
+        {
+            enemyAnimator.SetFloat("speedEnemy", speed); // Set the speed parameter in Animator
+        }
+        else
+        {
+            Debug.LogError("Animator component not found!");
+        }
+    }
+
 }

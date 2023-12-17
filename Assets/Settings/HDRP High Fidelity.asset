@@ -82,7 +82,7 @@ MonoBehaviour:
     supportProbeVolumeScenarioBlending: 1
     probeVolumeBlendingMemoryBudget: 128
     supportRayTracing: 1
-    supportVFXRayTracing: 0
+    supportVFXRayTracing: 1
     supportedRayTracingMode: 3
     lightLoopSettings:
       cookieAtlasSize: 512
@@ -117,7 +117,7 @@ MonoBehaviour:
       maxShadowRequests: 128
       directionalShadowsDepthBits: 16
       shadowFilteringQuality: 2
-      areaShadowFilteringQuality: 0
+      areaShadowFilteringQuality: 1
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 16
@@ -239,7 +239,7 @@ MonoBehaviour:
       - 0.5
       - 3
       - 20
-      RTAOSampleCount: 010000000200000008000000
+      RTAOSampleCount: 0c0000000200000008000000
       RTAODenoise: 010101
       RTAODenoiserRadius:
       - 0.25
