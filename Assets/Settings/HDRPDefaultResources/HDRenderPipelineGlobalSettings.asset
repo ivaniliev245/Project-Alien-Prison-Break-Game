@@ -130,15 +130,15 @@ MonoBehaviour:
         m_Extent: {x: 81, y: 81, z: 81}
     - sceneGUID: 7d91fa704a89ff44bbe592c904edd4cc
       bounds:
-        m_Center: {x: -40.5, y: -121.5, z: 364.5}
-        m_Extent: {x: 526.5, y: 121.5, z: 526.5}
+        m_Center: {x: -121.5, y: -40.5, z: 526.5}
+        m_Extent: {x: 526.5, y: 202.5, z: 526.5}
     serializedHasVolumes:
     - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
       hasProbeVolumes: 1
     - sceneGUID: 39613a1a2e937684f8db867b7babbb45
       hasProbeVolumes: 0
     - sceneGUID: 7d91fa704a89ff44bbe592c904edd4cc
-      hasProbeVolumes: 0
+      hasProbeVolumes: 1
     bakingSets:
     - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
     - {fileID: 11400000, guid: 67441d4b4d6d87d47af90f58c388d768, type: 2}
