@@ -8365,7 +8365,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ce92677ccb89e4245b81f283b32632b8","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"867b8a691e19c5441a71db92c2f251b5","type":3}}'
     m_Space: -1
   m_Property:
     name: baseColorMap
@@ -14067,7 +14067,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ce92677ccb89e4245b81f283b32632b8","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"867b8a691e19c5441a71db92c2f251b5","type":3}}'
     m_Space: -1
   m_Property:
     name: baseColorMap
