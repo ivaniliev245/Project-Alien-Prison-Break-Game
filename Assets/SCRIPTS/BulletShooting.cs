@@ -34,9 +34,9 @@ public class BulletShooting : MonoBehaviour
 
     private void Update()
     {
-        /*
+        
         //When to explode:
-        if (collisions > maxCollisions) Explode();*/
+        if (collisions > maxCollisions) Explode();
 
         //Count down lifetime
         maxLifetime -= Time.deltaTime;
@@ -51,7 +51,7 @@ public class BulletShooting : MonoBehaviour
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
-        
+        Debug.Log(enemies.length);
         for (int i = 0; i < enemies.Length; i++)
         {
             Debug.Log("I explode");
