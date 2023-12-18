@@ -191,9 +191,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 7743eebf2d0842d41b6e91687dd0e580,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 7743eebf2d0842d41b6e91687dd0e580,
+        type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e7c2e258f34d013498e6e49738869b97, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 7743eebf2d0842d41b6e91687dd0e580,
+        type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15377,28 +15387,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0971d3cbd9cb8fa419b8525dba6f4fc2, type: 3}
---- !u!95 &1911625694
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3370707744353831819}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 32b253c5069a0af468e15425fc5f2750, type: 3}
-  m_Controller: {fileID: 9100000, guid: e7c2e258f34d013498e6e49738869b97, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1914727279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7723482554147344704, guid: 0971d3cbd9cb8fa419b8525dba6f4fc2,
@@ -17348,7 +17336,7 @@ GameObject:
   - component: {fileID: 4723978881447004556}
   - component: {fileID: 6728918101857514199}
   - component: {fileID: 5206774370538087007}
-  - component: {fileID: 1911625694}
+  - component: {fileID: 6728918101857514200}
   m_Layer: 3
   m_Name: Alien_unity
   m_TagString: Enemy
@@ -17717,6 +17705,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &6728918101857514200
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3370707744353831819}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 7743eebf2d0842d41b6e91687dd0e580, type: 3}
+  m_Controller: {fileID: 9100000, guid: e7c2e258f34d013498e6e49738869b97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 1
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!222 &6813485393966259765
 CanvasRenderer:
   m_ObjectHideFlags: 0
