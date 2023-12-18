@@ -51,7 +51,7 @@ public class BulletShooting : MonoBehaviour
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
-        Debug.Log(enemies.length);
+        Debug.Log(enemies.Length);
         for (int i = 0; i < enemies.Length; i++)
         {
             Debug.Log("I explode");
