@@ -107,27 +107,62 @@ public class Alien_AI_Controller : MonoBehaviour
         goblin.SetDestination(player.position);
     }
 
-    private void AttackPlayer()
+    
+    
+    
+    private void PerformAttack()
+{
+    // Attack Code here
+    // For example, instantiate a projectile or perform melee attack
+
+    // Example with projectile:
+    Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+    rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+
+    // Damage code
+    BulletShooting projectileScript = rb.GetComponent<BulletShooting>();
+
+    // Ensure to set the Attack bool to false after the attack animation finishes
+    if (enemyAnimator != null)
     {
-        //Ensure Goblin doesnt move
-        goblin.SetDestination(transform.position);
-
-        transform.LookAt(player);
-        if (!alreadyAttacked) {
-            //Attack Code here
-            Rigidbody rb =  Instantiate(projectile,transform.position,Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-
-            //Damage code
-            BulletShooting projectileScript = rb.GetComponent<BulletShooting>();
-            //Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsPlayer);
-
-
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
+        // Delay the resetting of the "Attack" parameter after a certain duration
+        Invoke(nameof(ResetAttackAnimation), 1.0f); // Adjust the time according to your attack animation duration
     }
+}
+    
+    
+    
+    private void ResetAttackAnimation()
+{
+    // Reset the Attack parameter in the Animator after the attack animation finishes
+    if (enemyAnimator != null)
+    {
+        enemyAnimator.SetBool("Attack", false);
+    }
+}
+    
+    
+    private void AttackPlayer()
+{
+    // Ensure Goblin doesn't move
+    goblin.SetDestination(transform.position);
+
+    transform.LookAt(player);
+
+    if (!alreadyAttacked)
+    {
+        // Trigger Attack animation
+        if (enemyAnimator != null)
+        {
+            enemyAnimator.SetBool("Attack", true); // Trigger the Attack animation
+        }
+
+        // Delay the attack
+        Invoke(nameof(PerformAttack), 0.5f); // Adjust the delay time if needed
+        alreadyAttacked = true;
+        Invoke(nameof(ResetAttack), timeBetweenAttacks);
+    }
+}
 
     private void ResetAttack()
     {
