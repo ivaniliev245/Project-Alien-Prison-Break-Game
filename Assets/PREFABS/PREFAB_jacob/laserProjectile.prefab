@@ -151,11 +151,11 @@ MonoBehaviour:
   explosion: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   bounciness: 0
   useGravity: 0
   explosionDamage: 45
-  explosionRange: 1
+  explosionRange: 2
   explosionForce: 0
   maxCollisions: 1
   maxLifetime: 1
