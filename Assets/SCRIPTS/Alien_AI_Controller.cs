@@ -30,34 +30,67 @@ public class Alien_AI_Controller : MonoBehaviour
     public GameObject projectile;
     [SerializeField] private HealthbarEnemy healthbar;
 
+    private bool isRunningBackward = false;
+    private bool wasMovingBackward = false;
+
+    public float backwardRunRange;
+    public float rotationSpeed = 5f;
 
     void Update()
     {
-        //Check if Player is in sight- and AttackRange
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-       
-        enemyAnimator = GetComponent<Animator>();
-        
-        
-         if (!playerInSightRange && !playerInAttackRange) { 
-            Patrolling();
-            SetAnimatorSpeed(0.5f); // Adjust speed for patrolling
-        }
-        if (playerInSightRange && !playerInAttackRange) { 
-            ChasePlayer();
-            SetAnimatorSpeed(1.0f); // Adjust speed for chasing
-        }
-        if (playerInSightRange && playerInAttackRange) { 
-            AttackPlayer();
-            SetAnimatorSpeed(0.0f); // Adjust speed for attacking
-        }
-        
 
+        enemyAnimator = GetComponent<Animator>();
+
+        
+    playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+    playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+    bool isMovingBackward = IsMovingBackward();
+
+    if (!playerInSightRange && !playerInAttackRange) 
+    { 
+        Patrolling();
+        SetAnimatorSpeed(0.5f); // Adjust speed for patrolling
+    }
+    
+    if (playerInSightRange && !playerInAttackRange) 
+    { 
+        ChasePlayer();
+        SetAnimatorSpeed(1.0f); // Adjust speed for chasing
+    }
+    
+    if (playerInSightRange && playerInAttackRange) 
+    { 
+        AttackPlayer();
+        SetAnimatorSpeed(0.0f); // Adjust speed for attacking
+    }
+        
+    if (playerInSightRange && Vector3.Distance(transform.position, player.position) < backwardRunRange)
+    {
+        RunBackward();
+        SetAnimatorRunningBackward(true); // Trigger backward running animation
+    }
+    else
+    {
+        SetAnimatorRunningBackward(false);
+        isRunningBackward = false;
+    }
+
+    if (isMovingBackward != wasMovingBackward)
+    {
+        SetAnimatorRunningBackward(isMovingBackward);
+        wasMovingBackward = isMovingBackward;
+    }
+    
+    
+    
+    
     }
 
     private void Awake()
     {
+        backwardRunRange = 10.0f;
+        
         player = GameObject.FindGameObjectWithTag("Player").transform;
         goblin = GetComponent<NavMeshAgent>();
 
@@ -142,12 +175,18 @@ public class Alien_AI_Controller : MonoBehaviour
 }
     
     
-    private void AttackPlayer()
+   private void AttackPlayer()
 {
     // Ensure Goblin doesn't move
     goblin.SetDestination(transform.position);
 
-    transform.LookAt(player);
+    Vector3 directionToPlayer = (player.position - transform.position).normalized;
+    directionToPlayer.y = 0; // Ensure no vertical movement
+
+    Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+    // Smoothly rotate the upper body towards the player
+    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
 
     if (!alreadyAttacked)
     {
@@ -163,7 +202,17 @@ public class Alien_AI_Controller : MonoBehaviour
         Invoke(nameof(ResetAttack), timeBetweenAttacks);
     }
 }
+     private bool IsMovingBackward()
+{
+    if (goblin.velocity != Vector3.zero)
+    {
+        Vector3 localVelocity = transform.InverseTransformDirection(goblin.velocity);
+        return localVelocity.z < 0; // Check if the local z velocity is negative (moving backward)
+    }
 
+    return false;
+}
+    
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -203,6 +252,26 @@ public class Alien_AI_Controller : MonoBehaviour
         {
             Debug.LogError("Animator component not found!");
         }
+    }
+    
+    private void RunBackward()
+    {
+    // Implement backward running logic here
+    //
+    //transform.Translate(-transform.forward * backwardRunSpeed * Time.deltaTime);
+    isRunningBackward = true;
+    }
+
+    private void SetAnimatorRunningBackward(bool value)
+    {
+    if (enemyAnimator != null)
+    {
+        enemyAnimator.SetBool("runningBackward", value); // Set the "runningBackward" parameter
+    }
+    else
+    {
+        Debug.LogError("Animator component not found!");
+    }
     }
 
 }
