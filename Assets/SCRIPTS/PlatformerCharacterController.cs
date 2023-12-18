@@ -77,6 +77,9 @@ public class PlatformerCharaterController : MonoBehaviour
     private float currentHealth;
     [SerializeField] private HealthbarPlayer healthbar;
 
+    public float invincibilityLength;
+    private float invincibilityCounter;
+
 
     void Start()
     {
@@ -95,6 +98,11 @@ void Update()
 {
     lastOnGroundTime -= Time.deltaTime;
     lastPressedJumpTime -= Time.deltaTime;
+
+        if (invincibilityCounter > 0)
+        {
+            invincibilityLength -= coyoteTime.deltaTime;
+        }
 
     float horizontalInput = Input.GetAxis("Horizontal");
     float verticalInput = Input.GetAxis("Vertical");
@@ -410,14 +418,17 @@ IEnumerator ApplyJumpForce()
 
     public void TakeDamage(int Damage)
     {
-        Debug.Log("Took Damage");
-        currentHealth -= Damage;
-        healthbar.UpdateHealthbar(currentHealth, maxHealth);
+        if (invincibilityCounter <= 0)
+        {
+            currentHealth -= Damage;
+            invincibilityCounter = invincibilityLength;
+            healthbar.UpdateHealthbar(currentHealth, maxHealth);
 
-        //play enemy damage animation
-        if (currentHealth <= 0) {
-            //ToDo:
-            return;
+            if (currentHealth <= 0)
+            {
+                //ToDo:
+                return;
+            }
         }
     }
 }
