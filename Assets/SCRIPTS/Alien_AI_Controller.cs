@@ -11,7 +11,10 @@ public class Alien_AI_Controller : MonoBehaviour
     private Vector3 walkPoint;
     bool walkPointSet;
     public float walkpointRange;
+
     public bool SetPatrolling;
+    private Vector3 spawnpoint;
+    private bool posWalkpoint;
 
     //Attackspeed  
     public float timeBetweenAttacks;
@@ -96,6 +99,8 @@ public class Alien_AI_Controller : MonoBehaviour
         healthbar = GetComponentInChildren<HealthbarEnemy>();
         healthbar.UpdateHealthbar(currentHealth, maxhealth);
         enemyAnimator = GetComponent<Animator>();
+
+        spawnpoint = transform.position;
     
     }
     private void Patrolling()
@@ -135,9 +140,19 @@ public class Alien_AI_Controller : MonoBehaviour
             }
             return;
         }
-        //create Walkpoint
-        walkPoint = new Vector3(transform.position.x + walkpointRange, transform.position.y, transform.position.z+walkpointRange);
-
+        //if walkpoint set is true
+        //look if the last walkpoint was negativ
+        if (!posWalkpoint)
+        {
+            //create Walkpoint
+            walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
+            posWalkpoint = true;
+        }
+        else if (posWalkpoint)
+        {
+            walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
+            posWalkpoint = false;
+        }
         //Check if Walkpoint is in Map
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
