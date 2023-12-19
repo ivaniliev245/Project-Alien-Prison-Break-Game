@@ -101,7 +101,9 @@ void Update()
 
         if (invincibilityCounter > 0)
         {
-            invincibilityLength -= coyoteTime.deltaTime;
+            //invincibilityLength -= coyoteTime.deltaTime;
+            invincibilityCounter -= Time.deltaTime;
+
         }
 
     float horizontalInput = Input.GetAxis("Horizontal");
