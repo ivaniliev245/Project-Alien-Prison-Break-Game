@@ -15,7 +15,6 @@ public class Alien_AI_Controller : MonoBehaviour
     //Attackspeed  
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    public int attackDamage;
 
     //States
     public float sightRange, attackRange;
@@ -36,7 +35,6 @@ public class Alien_AI_Controller : MonoBehaviour
     public float backwardRunRange;
     public float rotationSpeed = 5f;
 
-    public GameObject Bullet;
     public Transform attackPoint;
 
     void Update()

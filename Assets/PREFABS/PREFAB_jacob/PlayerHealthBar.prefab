@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6119816868516277752}
   - component: {fileID: 7992583493861422411}
-  - component: {fileID: 7979304534773853168}
+  - component: {fileID: 6139349806432331402}
   m_Layer: 5
   m_Name: HealthbarPlayer
   m_TagString: Untagged
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7979304534773853168
+--- !u!114 &6139349806432331402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,12 +352,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8210823876195110583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8b6c15502e3c845864a12053a358e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 62a29067af0a23e4eaf1c0b7a940dae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 7992583493861422411}
-  offset: {x: 0, y: 0, z: 0}
-  camRef: {fileID: 0}
 --- !u!1 &9056908032281119111
 GameObject:
   m_ObjectHideFlags: 0
