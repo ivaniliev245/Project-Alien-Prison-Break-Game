@@ -8,9 +8,10 @@ public class Alien_AI_Controller : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
 
     //patroling
-    public Vector3 walkPoint;
+    private Vector3 walkPoint;
     bool walkPointSet;
     public float walkpointRange;
+    public bool SetPatrolling;
 
     //Attackspeed  
     public float timeBetweenAttacks;
@@ -116,16 +117,29 @@ public class Alien_AI_Controller : MonoBehaviour
     }
 
     private void SearchWalkPoint()
-    {   
-        //calculate a random point in Range
-        float randomZ = Random.Range(-walkpointRange, walkpointRange);
-        float randomX = Random.Range(-walkpointRange, walkpointRange);
+    {
+        //look if ai has a set walkpoint
+        if (!walkPointSet)
+        {
+            //calculate a random point in Range
+            float randomZ = Random.Range(-walkpointRange, walkpointRange);
+            float randomX = Random.Range(-walkpointRange, walkpointRange);
 
+            //create Walkpoint
+            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+            //Check if Walkpoint is in Map
+            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+            {
+                walkPointSet = true;
+            }
+            return;
+        }
         //create Walkpoint
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        walkPoint = new Vector3(transform.position.x + walkpointRange, transform.position.y, transform.position.z+walkpointRange);
 
         //Check if Walkpoint is in Map
-        if (Physics.Raycast(walkPoint,-transform.up,2f,whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
         }
