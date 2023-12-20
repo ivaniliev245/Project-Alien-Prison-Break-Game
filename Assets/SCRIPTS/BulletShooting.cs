@@ -51,10 +51,8 @@ public class BulletShooting : MonoBehaviour
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
-        Debug.Log(enemies.Length);
         for (int i = 0; i < enemies.Length; i++)
         {
-            Debug.Log(enemies[i]);
             //Get component of enemy and call Take Damage
             enemies[i].GetComponent<PlatformerCharaterController>().TakeDamage(explosionDamage);
 
