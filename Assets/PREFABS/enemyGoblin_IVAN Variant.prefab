@@ -300,11 +300,10 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
-  walkPoint: {x: 0, y: 0, z: 0}
   walkpointRange: 10
+  SetPatrolling: 1
   timeBetweenAttacks: 2
-  attackDamage: 5
-  sightRange: 10
+  sightRange: 1
   attackRange: 5
   maxhealth: 100
   projectile: {fileID: 275662106875348368, guid: 67a07e5330e41ab429fabed6dac667a1,
@@ -312,7 +311,6 @@ MonoBehaviour:
   healthbar: {fileID: 4528880839797710055}
   backwardRunRange: 0
   rotationSpeed: 5
-  Bullet: {fileID: 0}
   attackPoint: {fileID: 8815750344939008960}
 --- !u!95 &1851814236924474747
 Animator:

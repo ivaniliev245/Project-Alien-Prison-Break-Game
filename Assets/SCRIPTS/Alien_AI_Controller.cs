@@ -124,7 +124,7 @@ public class Alien_AI_Controller : MonoBehaviour
     private void SearchWalkPoint()
     {
         //look if ai has a set walkpoint
-        if (!walkPointSet)
+        if (!walkPointSet && !SetPatrolling)
         {
             //calculate a random point in Range
             float randomZ = Random.Range(-walkpointRange, walkpointRange);

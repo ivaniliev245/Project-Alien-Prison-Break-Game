@@ -54,7 +54,7 @@ public class BulletShooting : MonoBehaviour
         Debug.Log(enemies.Length);
         for (int i = 0; i < enemies.Length; i++)
         {
-            Debug.Log("I explode");
+            Debug.Log(enemies[i]);
             //Get component of enemy and call Take Damage
             enemies[i].GetComponent<PlatformerCharaterController>().TakeDamage(explosionDamage);
 
