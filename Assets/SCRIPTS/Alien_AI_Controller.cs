@@ -38,6 +38,7 @@ public class Alien_AI_Controller : MonoBehaviour
 
     public float backwardRunRange;
     public float rotationSpeed = 5f;
+    //public float walkSpeed = 0.5f;
 
     public Transform attackPoint;
 
