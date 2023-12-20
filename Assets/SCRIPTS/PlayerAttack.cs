@@ -25,8 +25,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!alreadyAttacked)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton2))
             {
+                Debug.Log("pressed Attack");
                 Attack();
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -39,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
         //play Attack Animation
 
         //detect Enemies
-        Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position,attackRange, whatIsEnemy);
+        Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, whatIsEnemy);
 
         //damage Enemies
         foreach(Collider enemy in enemiesHit)

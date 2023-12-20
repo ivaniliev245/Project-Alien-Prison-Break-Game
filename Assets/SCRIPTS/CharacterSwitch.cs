@@ -39,7 +39,7 @@ public class CharacterSwitch : MonoBehaviour
         
 
         // Check if the switch key is pressed
-        if (Input.GetKeyDown(switchKey))
+        if (Input.GetKeyDown(switchKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
             // Find the closest player within the switch distance
             GameObject closestPlayer = null;

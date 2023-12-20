@@ -135,12 +135,12 @@ void Update()
     StopAttack(); // Call method to stop attack
     }
     
-    if (Input.GetKeyDown(KeyCode.C))
+    if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
             {
                 ToggleCrouch();
             }
 
-            if (Input.GetKeyUp(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.C) || Input.GetKeyUp(KeyCode.JoystickButton1))
             {
                 ToggleCrouchUp();
                 animator.SetBool("Crouch", false);
@@ -327,7 +327,7 @@ void ToggleCrouch()
     
     void PerformJump()
 {
-    if (Input.GetKeyDown(KeyCode.Space))
+    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
     {
         OnJumpInput();
     }
