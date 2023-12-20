@@ -92,6 +92,7 @@ public class PlatformerCharaterController : MonoBehaviour
         originalLifePosition = Life.transform.position;
 
         currentHealth = maxHealth;
+        Life.SetActive(false);
     }
 
 void Update()

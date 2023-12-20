@@ -68,6 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             
                 transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+                transform.LookAt(player);
             
         }
     }
