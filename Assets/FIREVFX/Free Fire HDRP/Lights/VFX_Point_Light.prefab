@@ -90,7 +90,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.721093e-20, y: 4.5928e-40, z: 2.005e-41, w: 0}
+  m_BoundingSphereOverride: {x: 2.7210914e-20, y: 1.83773e-40, z: 4.023e-42, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
