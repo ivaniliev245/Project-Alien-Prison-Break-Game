@@ -23879,11 +23879,11 @@ MonoBehaviour:
   interpolate: 1
   jiggleRigs:
   - rootTransform: {fileID: 1296667614}
-    jiggleSettings: {fileID: 11400000, guid: 4ac7f8309c6332a41a6e0716a1bf34a1, type: 2}
+    jiggleSettings: {fileID: 11400000, guid: 6f6678a094f218441a5c965eba615e58, type: 2}
     ignoredTransforms: []
     colliders: []
   - rootTransform: {fileID: 1498718402}
-    jiggleSettings: {fileID: 11400000, guid: 9f827a2d9a3edb04abf01e46802554cc, type: 2}
+    jiggleSettings: {fileID: 11400000, guid: 6f6678a094f218441a5c965eba615e58, type: 2}
     ignoredTransforms: []
     colliders: []
   wind: {x: 0, y: 0, z: 0}
