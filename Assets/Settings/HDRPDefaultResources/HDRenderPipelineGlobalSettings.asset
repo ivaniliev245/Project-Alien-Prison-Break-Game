@@ -135,8 +135,8 @@ MonoBehaviour:
         m_Extent: {x: 526.5, y: 202.5, z: 526.5}
     - sceneGUID: 56e5efae8932c9e44821e005bfe5a658
       bounds:
-        m_Center: {x: NaN, y: NaN, z: NaN}
-        m_Extent: {x: NaN, y: NaN, z: NaN}
+        m_Center: {x: 810, y: 202.5, z: -162}
+        m_Extent: {x: 1539, y: 202.5, z: 1053}
     serializedHasVolumes:
     - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
       hasProbeVolumes: 1
@@ -150,6 +150,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
     - {fileID: 11400000, guid: 67441d4b4d6d87d47af90f58c388d768, type: 2}
     - {fileID: 11400000, guid: 8511143fda34f0f47b4978cf727a66ba, type: 2}
+    - {fileID: 11400000, guid: a92820dd87efb7646a51a3b8bd6f6f71, type: 2}
     m_LightingScenario: Default
   m_Version: 8
   m_ShaderVariantLogLevel: 0
