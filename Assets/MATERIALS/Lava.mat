@@ -170,7 +170,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BottomPower: -0.16
+    - _BottomPower: 0.4
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
@@ -198,7 +198,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _ExcludeFromTUAndAA: 0
-    - _FrenselPower: -4.15
+    - _FrenselPower: -12.6
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -238,8 +238,8 @@ Material:
     - _SimpleNoiseAmount: 0.6
     - _SimpleNoisePower: 2
     - _SimpleNoiseScale: 30
-    - _SimpleNoiseSpeed: 1
-    - _Smoothnes: 0.53
+    - _SimpleNoiseSpeed: 0.5
+    - _Smoothnes: 0.43
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -287,18 +287,18 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _BottomRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _BottomRemap: {r: -1.16, g: 2.93, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _FrenselColor: {r: 1, g: 0.5615011, b: 0, a: 0}
+    - _FrenselColor: {r: 1, g: 0.4689564, b: 0.08962262, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _LavaNormalSpeed: {r: 0, g: 0.5, b: 0, a: 0}
-    - _LavaRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _LavaNormalSpeed: {r: -0.01, g: -0.02, b: 0, a: 0}
+    - _LavaRemap: {r: -0.03, g: 1, b: 0, a: 0}
     - _LavaScale: {r: 1, g: 1, b: 0, a: 0}
     - _LavaSpeed: {r: 0, g: 0.1, b: 0, a: 0}
     - _Lava_Color: {r: 1, g: 1, b: 1, a: 1}
