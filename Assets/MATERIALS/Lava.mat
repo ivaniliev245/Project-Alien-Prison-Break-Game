@@ -236,7 +236,7 @@ Material:
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SimpleNoiseAmount: 0.49
-    - _SimpleNoisePower: -1.4
+    - _SimpleNoisePower: -2.2
     - _SimpleNoiseScale: 146.26
     - _SimpleNoiseSpeed: -0.01
     - _Smoothnes: 0.7
@@ -277,7 +277,7 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _VoroniAmount: 0.3
+    - _VoroniAmount: 0.6
     - _VoroniAngleOffset: 1
     - _VoroniScale: 4.42
     - _ZTestDepthEqualForOpaque: 3
