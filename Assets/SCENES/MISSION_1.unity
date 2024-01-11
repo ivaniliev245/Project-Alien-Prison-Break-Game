@@ -2351,7 +2351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 110000
+  m_Intensity: 172020
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2473,7 +2473,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.87535214
+  m_Intensity: 1.3688916
   m_Range: 242.81
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2532,7 +2532,7 @@ Transform:
   m_GameObject: {fileID: 188403385}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 186.05847, y: -0.2059021, z: -63.511612}
+  m_LocalPosition: {x: 186.05847, y: -27.3, z: -63.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7817,8 +7817,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511494430}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06924172, y: 0.2987088, z: -0.021735558, w: 0.95158094}
-  m_LocalPosition: {x: 125.0851, y: 2.485239, z: 4.7738876}
+  m_LocalRotation: {x: 0.06924172, y: 0.2987088, z: -0.021735558, w: 0.9515809}
+  m_LocalPosition: {x: 125.08513, y: 2.4852371, z: 4.77388}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26627,8 +26627,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646687240}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07185617, y: 0.13984033, z: -0.010175506, w: 0.987511}
-  m_LocalPosition: {x: 0.152735, y: 2.4276295, z: -9.62562}
+  m_LocalRotation: {x: 0.07185616, y: 0.13984033, z: -0.010175505, w: 0.9875109}
+  m_LocalPosition: {x: 0.15279293, y: 2.4276276, z: -9.625601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27955,13 +27955,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 2
+  m_Intensity: 2.82
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 1
+  m_VolumetricDimmer: 2.25
   m_LightUnit: 2
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -28077,7 +28077,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 2.82
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
