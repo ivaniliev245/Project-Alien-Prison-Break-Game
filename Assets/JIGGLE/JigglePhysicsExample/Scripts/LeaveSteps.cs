@@ -6,11 +6,14 @@ public class LeaveSteps : MonoBehaviour
     public GameObject stepPrefab; // The prefab for the step object
     public float stepInterval = 0.5f; // Time interval between creating steps
     public float stepDistanceMultiplier = 1.0f; // Multiplier for step distance based on speed
-    public Vector3 stepOffset = new Vector3(0f, 0f, -0.5f); // Offset for step position
     public Vector3 stepRotation = new Vector3(0f, 90f, 0f); // Rotation for the step
-    private float stepTimer = 0f; // Timer to control step creation
+    public int maxStepCount = 20; // Maximum number of steps to keep
 
-    private List<GameObject> steps = new List<GameObject>(); // List to hold instantiated steps
+    public Vector3 leftStepOffset = new Vector3(-0.5f, 0f, 0f); // Offset for left step position
+    public Vector3 rightStepOffset = new Vector3(0.5f, 0f, 0f); // Offset for right step position
+
+    private List<GameObject> leftSteps = new List<GameObject>(); // List to hold instantiated left steps
+    private List<GameObject> rightSteps = new List<GameObject>(); // List to hold instantiated right steps
     private Vector3 lastStepPosition; // Position of the last step
 
     private void Update()
@@ -38,29 +41,38 @@ public class LeaveSteps : MonoBehaviour
 
     private void CreateStep()
     {
-        // Calculate the position for the new step with the offset
-        Vector3 stepPosition = transform.position + stepOffset;
+        // Calculate the positions for the new steps with the offsets
+        Vector3 leftStepPosition = transform.position + Quaternion.Euler(0, -90, 0) * leftStepOffset;
+        Vector3 rightStepPosition = transform.position + Quaternion.Euler(0, 90, 0) * rightStepOffset;
 
-        // Instantiate a step prefab at the calculated position
-        GameObject newStep = Instantiate(stepPrefab, stepPosition, Quaternion.Euler(stepRotation));
-        steps.Add(newStep);
+        // Instantiate step prefabs at the calculated positions with rotation
+        GameObject newLeftStep = Instantiate(stepPrefab, leftStepPosition, Quaternion.Euler(stepRotation));
+        leftSteps.Add(newLeftStep);
 
-        // You can modify the step's properties here (e.g., size, rotation, etc.)
+        GameObject newRightStep = Instantiate(stepPrefab, rightStepPosition, Quaternion.Euler(stepRotation));
+        rightSteps.Add(newRightStep);
 
-        // Destroy the oldest step if the number of steps exceeds a certain limit
-        if (steps.Count > 20) // Change the limit as needed
+        // Destroy the oldest steps if the number of steps exceeds the maximum count
+        if (leftSteps.Count > maxStepCount || rightSteps.Count > maxStepCount)
         {
-            DestroyOldestStep();
+            DestroyOldestSteps();
         }
     }
 
-    private void DestroyOldestStep()
+    private void DestroyOldestSteps()
     {
-        if (steps.Count > 0)
+        if (leftSteps.Count > 0)
         {
-            GameObject oldestStep = steps[0];
-            steps.RemoveAt(0);
-            Destroy(oldestStep);
+            GameObject oldestLeftStep = leftSteps[0];
+            leftSteps.RemoveAt(0);
+            Destroy(oldestLeftStep);
+        }
+
+        if (rightSteps.Count > 0)
+        {
+            GameObject oldestRightStep = rightSteps[0];
+            rightSteps.RemoveAt(0);
+            Destroy(oldestRightStep);
         }
     }
 }
