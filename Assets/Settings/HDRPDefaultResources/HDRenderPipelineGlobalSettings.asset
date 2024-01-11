@@ -137,6 +137,10 @@ MonoBehaviour:
       bounds:
         m_Center: {x: 810, y: 202.5, z: -162}
         m_Extent: {x: 1539, y: 202.5, z: 1053}
+    - sceneGUID: 22248b10c7138c546a9647c1d8513345
+      bounds:
+        m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 81, y: 81, z: 81}
     serializedHasVolumes:
     - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
       hasProbeVolumes: 1
@@ -146,8 +150,11 @@ MonoBehaviour:
       hasProbeVolumes: 1
     - sceneGUID: 56e5efae8932c9e44821e005bfe5a658
       hasProbeVolumes: 0
+    - sceneGUID: 22248b10c7138c546a9647c1d8513345
+      hasProbeVolumes: 1
     bakingSets:
     - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
+    - {fileID: 11400000, guid: 75d34884950a33b40afe10d011e03de5, type: 2}
     - {fileID: 11400000, guid: 67441d4b4d6d87d47af90f58c388d768, type: 2}
     - {fileID: 11400000, guid: 8511143fda34f0f47b4978cf727a66ba, type: 2}
     - {fileID: 11400000, guid: a92820dd87efb7646a51a3b8bd6f6f71, type: 2}
