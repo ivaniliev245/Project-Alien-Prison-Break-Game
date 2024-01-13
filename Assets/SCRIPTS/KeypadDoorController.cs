@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class KeypadDoorController : MonoBehaviour
 {
@@ -11,15 +12,24 @@ public class KeypadDoorController : MonoBehaviour
     public float proximityDistance = 3f; // Adjust the distance for player proximity
     public LayerMask keypadButtonLayer; // Set the layer for the keypad buttons
     public AudioClip hoverSound; // Sound when hovering over a button
-    public Color hoverColor = Color.yellow; // Color when hovering over a button
+   
     private bool isKeypadActive = false;
     private Material originalMaterial; // Store the original material of the button
     private bool isHovering = false;
 
     private string enteredCode = "";
-  private void Start()
+    public Material normalMaterial;
+    public Material hoverMaterial;
+   // public Color hoverColor = Color.yellow;
+    private Color originalColor;
+    
+    private MaterialPropertyBlock hoverMaterialPropertyBlock;
+    public Color hoverColor = Color.yellow; // Color when hovering over a button
+    private GameObject lastHoveredObject;
+  
+   private void Start()
 {
-    // Subscribe to button click events and add hover callbacks
+    // Subscribe to button click events
     KeypadButton[] keypadButtons = FindObjectsOfType<KeypadButton>(true);
     foreach (KeypadButton button in keypadButtons)
     {
@@ -30,8 +40,9 @@ public class KeypadDoorController : MonoBehaviour
         {
             uiButton.onClick.AddListener(() => OnKeypadButtonClick(button.Value));
 
+            // Add EventTrigger to handle hover events
             EventTrigger eventTrigger = uiButton.gameObject.AddComponent<EventTrigger>();
-            AddHoverCallbacks(eventTrigger, uiButton);
+            AddHoverCallbacks(eventTrigger, button.gameObject);
         }
         else
         {
@@ -42,20 +53,20 @@ public class KeypadDoorController : MonoBehaviour
 
 
 
-private void AddHoverCallbacks(EventTrigger eventTrigger, Button button)
-    {
-        // Add the OnPointerEnter callback
-        EventTrigger.Entry entryEnter = new EventTrigger.Entry();
-        entryEnter.eventID = EventTriggerType.PointerEnter;
-        entryEnter.callback.AddListener((data) => { OnButtonHoverEnter(button); });
-        eventTrigger.triggers.Add(entryEnter);
+private void AddHoverCallbacks(EventTrigger eventTrigger, GameObject buttonObject)
+{
+    // Add the OnPointerEnter callback
+    EventTrigger.Entry entryEnter = new EventTrigger.Entry();
+    entryEnter.eventID = EventTriggerType.PointerEnter;
+    entryEnter.callback.AddListener((data) => { OnButtonHoverEnter(buttonObject); });
+    eventTrigger.triggers.Add(entryEnter);
 
-        // Add the OnPointerExit callback
-        EventTrigger.Entry entryExit = new EventTrigger.Entry();
-        entryExit.eventID = EventTriggerType.PointerExit;
-        entryExit.callback.AddListener((data) => { OnButtonHoverExit(button); });
-        eventTrigger.triggers.Add(entryExit);
-    }
+    // Add the OnPointerExit callback
+    EventTrigger.Entry entryExit = new EventTrigger.Entry();
+    entryExit.eventID = EventTriggerType.PointerExit;
+    entryExit.callback.AddListener((data) => { OnButtonHoverExit(buttonObject); });
+    eventTrigger.triggers.Add(entryExit);
+}
 
 
     private void Update()
@@ -92,7 +103,7 @@ private void AddHoverCallbacks(EventTrigger eventTrigger, Button button)
     RaycastHit hit;
 
     // Raycast only on objects in the specified layer (keypadButtonLayer)
-    if (Physics.Raycast(ray, out hit, Mathf.Infinity, keypadButtonLayer))
+   if (Physics.Raycast(ray, out hit, Mathf.Infinity, keypadButtonLayer))
     {
         KeypadButton keypadButton = hit.collider.GetComponent<KeypadButton>();
 
@@ -101,7 +112,7 @@ private void AddHoverCallbacks(EventTrigger eventTrigger, Button button)
             if (!isHovering)
             {
                 Debug.Log("Mouse hovering over button: " + keypadButton.Value);
-                OnButtonHoverEnter(keypadButton.GetComponent<Button>());
+                OnButtonHoverEnter(keypadButton.gameObject); // Pass the GameObject representing the button
             }
 
             if (Input.GetMouseButtonDown(0)) // Assuming left mouse button is used
@@ -113,7 +124,7 @@ private void AddHoverCallbacks(EventTrigger eventTrigger, Button button)
         else if (isHovering)
         {
             Debug.Log("Mouse not hovering over a button anymore.");
-            OnButtonHoverExit(hit.collider.GetComponent<Button>());
+            OnButtonHoverExit(hit.collider.gameObject); // Pass the GameObject representing the button
         }
     }
     else if (isHovering)
@@ -123,72 +134,61 @@ private void AddHoverCallbacks(EventTrigger eventTrigger, Button button)
     }
 }
 
-private void OnButtonHoverEnter(Button button)
-{
-    isHovering = true;
-
-    // Play sound
-    if (hoverSound != null)
+private void OnButtonHoverEnter(GameObject buttonObject)
     {
-        AudioSource.PlayClipAtPoint(hoverSound, Camera.main.transform.position);
-    }
+        isHovering = true;
+        lastHoveredObject = buttonObject; // Store the last hovered object
 
-    // Change color
-    if (button != null)
-    {
-        // Assuming you have a Renderer component on your 3D button
-        Renderer buttonRenderer = button.GetComponent<Renderer>();
+        Debug.Log("OnButtonHoverEnter called");
+
+        // Play sound
+        if (hoverSound != null)
+        {
+            AudioSource.PlayClipAtPoint(hoverSound, Camera.main.transform.position);
+        }
+
+        // Get the Renderer component
+        Renderer buttonRenderer = buttonObject.GetComponent<Renderer>();
 
         if (buttonRenderer != null)
         {
-            originalMaterial = buttonRenderer.material;
-            buttonRenderer.material.color = hoverColor;
+            buttonRenderer.material = hoverMaterial;
         }
         else
         {
-            Debug.LogError("Renderer component is null in OnButtonHoverEnter for button: " + button.gameObject.name);
+            Debug.LogError("Renderer component is null in OnButtonHoverEnter for button: " + buttonObject.name);
         }
     }
-    else
+
+
+private void OnButtonHoverExit(GameObject buttonObject)
     {
-        Debug.LogError("Button is null in OnButtonHoverEnter.");
-    }
-}
+        isHovering = false;
 
+        Debug.Log("OnButtonHoverExit called");
 
+        // Use the last hovered object if the current buttonObject is null
+        GameObject exitObject = buttonObject != null ? buttonObject : lastHoveredObject;
 
-private void OnButtonHoverExit(Button button)
-{
-    isHovering = false;
-
-    // Restore original color
-    if (button != null)
-    {
-        // Assuming you have a Renderer component on your 3D button
-        Renderer buttonRenderer = button.GetComponent<Renderer>();
-
-        if (buttonRenderer != null)
+        if (exitObject != null)
         {
-            buttonRenderer.material = originalMaterial;
+            // Get the Renderer component
+            Renderer buttonRenderer = exitObject.GetComponent<Renderer>();
+
+            if (buttonRenderer != null)
+            {
+                buttonRenderer.material = normalMaterial;
+            }
+            else
+            {
+                Debug.LogError("Renderer component is null in OnButtonHoverExit for button: " + exitObject.name);
+            }
         }
         else
         {
-            Debug.LogError("Renderer component is null in OnButtonHoverExit for button: " + button.gameObject.name);
+            Debug.LogError("Both buttonObject and lastHoveredObject are null in OnButtonHoverExit.");
         }
     }
-    else
-    {
-        Debug.Log("Button is null in OnButtonHoverExit.");
-    }
-}
-
-
-    
-    
-    
-    
-    
-    
     // Call this function when a keypad button is clicked
      public void OnKeypadButtonClick(string value)
     {
