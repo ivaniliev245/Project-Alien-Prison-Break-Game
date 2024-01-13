@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton2))
             {
-                Debug.Log("pressed Attack");
+                //Debug.Log("pressed Attack");
                 Attack();
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
