@@ -242,10 +242,31 @@ private void OnButtonHoverExit(Button button)
     }
     
      private void TriggerDoorAnimation()
+{
+    // Assuming your door has an Animator component
+    Animator doorAnimator = door.GetComponent<Animator>();
+
+    if (doorAnimator != null)
     {
-        // Implement your door animation logic here
-        // Example: door.GetComponent<Animator>().SetTrigger("Open");
+        // Set the boolean parameter to trigger the door opening animation
+        doorAnimator.SetBool("IsDoorOpen", true);
+
+        // Optionally, play a sound or perform other actions related to the door opening
+
+        // Reset the entered code for subsequent attempts
+        enteredCode = "";
+
+        // Deactivate the keypad after successful entry (you may adjust this based on your game logic)
+        ToggleKeypadActivation();
+
+        Debug.Log("Door opening animation triggered.");
     }
+    else
+    {
+        Debug.LogError("Animator component not found on the door GameObject.");
+    }
+}
+
 
 
 }
