@@ -33,8 +33,15 @@ public class KeypadDoorController : MonoBehaviour
     public float buttonPressDistance = 0.01f; 
     public float interpolationTime = 0.2f;
     private bool isButtonPressed = false;
+    public float doorAnimationDelay = 1.0f;
 
     public bool allowZAxis = true;
+
+    //keypad display
+     
+    public List<Transform> spawnPositions;
+    private int buttonPressCount = 0;
+    public List<GameObject> spawnPrefabs; // Reference to the prefab you want to spawn
    
    private void Start()
 {
@@ -200,7 +207,7 @@ private void OnButtonHoverExit(GameObject buttonObject)
         }
     }
     // Call this function when a keypad button is clicked
-    public void OnKeypadButtonClick(string value)
+ public void OnKeypadButtonClick(string value)
 {
     if (isKeypadActive && !isButtonPressed)
     {
@@ -209,17 +216,21 @@ private void OnButtonHoverExit(GameObject buttonObject)
         if (pressedButton != null)
         {
             StartCoroutine(PressButton(pressedButton));
-             isButtonPressed = true; // Set it to true after starting the coroutine
+            isButtonPressed = true; // Set it to true after starting the coroutine
+
+            // Instantiate a new game object at the specified spawn point
+            SpawnNewObject(value);
+
             // Add the clicked button's value to the entered code
             enteredCode += value;
 
             // Check if the entered code matches the correct code
             if (enteredCode == correctCode)
             {
-                Debug.Log("Correct code entered. Triggering animation.");
+                Debug.Log("Correct code entered. Triggering animation with delay.");
 
-                // Trigger your animation here
-                TriggerDoorAnimation();
+                // Trigger your animation with a delay
+                StartCoroutine(DelayedDoorAnimation());
 
                 // Optionally, reset the entered code for subsequent attempts
                 enteredCode = "";
@@ -228,12 +239,11 @@ private void OnButtonHoverExit(GameObject buttonObject)
             // Release the button after a short delay
             StartCoroutine(DelayedReleaseButton(pressedButton));
         }
-    
-    
-    
+
+        // Increment the button press count outside the if statement
+        buttonPressCount++;
     }
 }
-
     private void ToggleKeypadActivation()
     {
         if (!isKeypadActive)
@@ -334,7 +344,13 @@ private IEnumerator DelayedReleaseButton(GameObject buttonObject)
         buttonObject.transform.position = targetPosition; // Ensure the final position is set
     }
 
-    
+ private IEnumerator DelayedDoorAnimation()
+{
+    yield return new WaitForSeconds(doorAnimationDelay); // Adjust the delay time as needed
+
+    // Trigger the door animation
+    TriggerDoorAnimation();
+}   
 private void ReleaseButton(GameObject buttonObject)
 {
     // Implement any necessary actions to release the button here
@@ -362,7 +378,23 @@ private IEnumerator ReverseButtonAnimation(GameObject buttonObject, Vector3 orig
     isButtonPressed = false;
 }
 
+private void SpawnNewObject(string value)
+{
+    // Ensure that button presses don't exceed the number of spawn prefabs
+    int spawnIndex = Mathf.Min(buttonPressCount, spawnPrefabs.Count - 1);
 
+    // Instantiate the prefab at the specified spawn point
+    GameObject newObject = Instantiate(spawnPrefabs[spawnIndex], spawnPositions[spawnIndex].position, spawnPositions[spawnIndex].rotation);
+
+    // Optionally, set the name of the new object based on the button value
+    newObject.name = "SpawnedObject_" + value;
+
+    // You can perform additional actions with the spawned object if needed
+    // For example, you might want to move it or apply some behavior.
+
+    // Increment the button press count
+    buttonPressCount++;
+}
 
 
 
