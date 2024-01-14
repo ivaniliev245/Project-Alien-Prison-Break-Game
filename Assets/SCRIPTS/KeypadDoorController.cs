@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Collections;
 
 public class KeypadDoorController : MonoBehaviour
 {
-    public string correctCode = "1"; // Set your desired code
+    public string correctCode = "1234"; // Set your desired code
     public GameObject door;
     public Cinemachine.CinemachineVirtualCamera mainCamera;
     public Cinemachine.CinemachineVirtualCamera keypadCamera;
@@ -27,8 +28,17 @@ public class KeypadDoorController : MonoBehaviour
     public Color hoverColor = Color.yellow; // Color when hovering over a button
     private GameObject lastHoveredObject;
   
+   //keypad animation
+
+    public float buttonPressDistance = 0.01f; 
+    public float interpolationTime = 0.2f;
+    private bool isButtonPressed = false;
+
+    public bool allowZAxis = true;
+   
    private void Start()
 {
+     isButtonPressed = false; // Make sure to set it to false
     // Subscribe to button click events
     KeypadButton[] keypadButtons = FindObjectsOfType<KeypadButton>(true);
     foreach (KeypadButton button in keypadButtons)
@@ -190,14 +200,18 @@ private void OnButtonHoverExit(GameObject buttonObject)
         }
     }
     // Call this function when a keypad button is clicked
-     public void OnKeypadButtonClick(string value)
+    public void OnKeypadButtonClick(string value)
+{
+    if (isKeypadActive && !isButtonPressed)
     {
-        if (isKeypadActive)
+        GameObject pressedButton = lastHoveredObject;
+
+        if (pressedButton != null)
         {
+            StartCoroutine(PressButton(pressedButton));
+             isButtonPressed = true; // Set it to true after starting the coroutine
             // Add the clicked button's value to the entered code
             enteredCode += value;
-
-            Debug.Log("Button Clicked: " + value);
 
             // Check if the entered code matches the correct code
             if (enteredCode == correctCode)
@@ -210,8 +224,15 @@ private void OnButtonHoverExit(GameObject buttonObject)
                 // Optionally, reset the entered code for subsequent attempts
                 enteredCode = "";
             }
+
+            // Release the button after a short delay
+            StartCoroutine(DelayedReleaseButton(pressedButton));
         }
+    
+    
+    
     }
+}
 
     private void ToggleKeypadActivation()
     {
@@ -259,13 +280,89 @@ private void OnButtonHoverExit(GameObject buttonObject)
         // Deactivate the keypad after successful entry (you may adjust this based on your game logic)
         ToggleKeypadActivation();
 
-        Debug.Log("Door opening animation triggered.");
+        Debug.Log("Door opening: animation triggered.");
     }
     else
     {
         Debug.LogError("Animator component not found on the door GameObject.");
     }
 }
+
+     private IEnumerator PressButton(GameObject buttonObject)
+{
+    // Store the original position of the button
+    Vector3 originalPosition = buttonObject.transform.position;
+
+    // Calculate the target position based on buttonPressDistance
+    Vector3 targetPosition = allowZAxis
+        ? originalPosition - new Vector3(0f, 0f, buttonPressDistance)
+        : originalPosition;
+
+    float elapsedTime = 0f;
+
+    while (elapsedTime < interpolationTime)
+    {
+        buttonObject.transform.position = Vector3.Lerp(originalPosition, targetPosition, elapsedTime / interpolationTime);
+        elapsedTime += Time.deltaTime;
+        yield return null;
+    }
+
+    buttonObject.transform.position = targetPosition; // Ensure the final position is set
+
+    // Reverse animation after a short delay
+    StartCoroutine(ReverseButtonAnimation(buttonObject, originalPosition));
+}
+
+
+private IEnumerator DelayedReleaseButton(GameObject buttonObject)
+{
+    yield return new WaitForSeconds(0.5f); // Adjust the delay time as needed
+    ReleaseButton(buttonObject);
+}
+
+    private IEnumerator InterpolatePosition(GameObject buttonObject, Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < interpolationTime)
+        {
+            buttonObject.transform.position = Vector3.Lerp(buttonObject.transform.position, targetPosition, elapsedTime / interpolationTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        buttonObject.transform.position = targetPosition; // Ensure the final position is set
+    }
+
+    
+private void ReleaseButton(GameObject buttonObject)
+{
+    // Implement any necessary actions to release the button here
+    Debug.Log("Button released: " + buttonObject.name);
+    isButtonPressed = false;
+}
+
+private IEnumerator ReverseButtonAnimation(GameObject buttonObject, Vector3 originalPosition)
+{
+    yield return new WaitForSeconds(0.5f); // Adjust the delay time as needed
+
+    float elapsedTime = 0f;
+    Vector3 currentPosition = buttonObject.transform.position;
+
+    while (elapsedTime < interpolationTime)
+    {
+        buttonObject.transform.position = Vector3.Lerp(currentPosition, originalPosition, elapsedTime / interpolationTime);
+        elapsedTime += Time.deltaTime;
+        yield return null;
+    }
+
+    buttonObject.transform.position = originalPosition; // Ensure the final position is set
+
+    // Reset the flag to allow another transformation on the next button click
+    isButtonPressed = false;
+}
+
+
 
 
 
