@@ -1,8 +1,9 @@
-using UnityEngine;
+ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Collections;
+
 
 public class KeypadDoorController : MonoBehaviour
 {
@@ -206,9 +207,11 @@ private void OnButtonHoverExit(GameObject buttonObject)
             Debug.LogError("Both buttonObject and lastHoveredObject are null in OnButtonHoverExit.");
         }
     }
-    // Call this function when a keypad button is clicked
- public void OnKeypadButtonClick(string value)
+// Call this function when a keypad button is clicked
+public void OnKeypadButtonClick(string value)
 {
+
+    
     if (isKeypadActive && !isButtonPressed)
     {
         GameObject pressedButton = lastHoveredObject;
@@ -218,6 +221,9 @@ private void OnButtonHoverExit(GameObject buttonObject)
             StartCoroutine(PressButton(pressedButton));
             isButtonPressed = true; // Set it to true after starting the coroutine
 
+            // Instantiate a new game object at the specified spawn point
+            SpawnNewObject(value);
+            buttonPressCount++;
             // Add the clicked button's value to the entered code
             enteredCode += value;
 
@@ -232,14 +238,11 @@ private void OnButtonHoverExit(GameObject buttonObject)
                 // Optionally, reset the entered code for subsequent attempts
                 enteredCode = "";
             }
-            else if (enteredCode.Length == 4) // Wrong 4-digit combination entered
+            else if (enteredCode.Length >= correctCode.Length)
             {
-                Debug.Log("Wrong code entered. Clearing the screen and resetting the keypad.");
-
-                // Clear the screen (delete all spawned objects)
-                ClearScreen();
-
-                // Reset the entered code for subsequent attempts
+                Debug.Log("Wrong code entered. Resetting the code.");
+                DeleteAllSpawnedObjects(); // delete spawned digits
+                // Reset the entered code for wrong attempts
                 enteredCode = "";
             }
 
@@ -247,10 +250,11 @@ private void OnButtonHoverExit(GameObject buttonObject)
             StartCoroutine(DelayedReleaseButton(pressedButton));
         }
 
-        // Increment the button press count outside the if statement
-        buttonPressCount++;
+     
+        
     }
 }
+
     private void ToggleKeypadActivation()
     {
         if (!isKeypadActive)
@@ -393,6 +397,9 @@ private void SpawnNewObject(string value)
     // Instantiate the prefab at the specified spawn point
     GameObject newObject = Instantiate(spawnPrefabs[spawnIndex], spawnPositions[spawnIndex].position, spawnPositions[spawnIndex].rotation);
 
+    // Set the tag to "SpawnedObject_" + value
+    newObject.tag = "SpawnedObject";
+
     // Optionally, set the name of the new object based on the button value
     newObject.name = "SpawnedObject_" + value;
 
@@ -403,15 +410,21 @@ private void SpawnNewObject(string value)
     buttonPressCount++;
 }
 
-private void ClearScreen()
+
+
+private void DeleteAllSpawnedObjects()
 {
-    foreach (Transform spawnPosition in spawnPositions)
+    GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("SpawnedObject");
+
+    foreach (GameObject spawnedObject in spawnedObjects)
     {
-        foreach (Transform child in spawnPosition)
-        {
-            Destroy(child.gameObject);
-        }
+
+        //Destroy(spawnedObject);
     }
+
+    Debug.Log("All spawned objects deleted.");
 }
+
+
 
 }
