@@ -218,9 +218,6 @@ private void OnButtonHoverExit(GameObject buttonObject)
             StartCoroutine(PressButton(pressedButton));
             isButtonPressed = true; // Set it to true after starting the coroutine
 
-            // Instantiate a new game object at the specified spawn point
-            SpawnNewObject(value);
-
             // Add the clicked button's value to the entered code
             enteredCode += value;
 
@@ -233,6 +230,16 @@ private void OnButtonHoverExit(GameObject buttonObject)
                 StartCoroutine(DelayedDoorAnimation());
 
                 // Optionally, reset the entered code for subsequent attempts
+                enteredCode = "";
+            }
+            else if (enteredCode.Length == 4) // Wrong 4-digit combination entered
+            {
+                Debug.Log("Wrong code entered. Clearing the screen and resetting the keypad.");
+
+                // Clear the screen (delete all spawned objects)
+                ClearScreen();
+
+                // Reset the entered code for subsequent attempts
                 enteredCode = "";
             }
 
@@ -396,6 +403,15 @@ private void SpawnNewObject(string value)
     buttonPressCount++;
 }
 
-
+private void ClearScreen()
+{
+    foreach (Transform spawnPosition in spawnPositions)
+    {
+        foreach (Transform child in spawnPosition)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+}
 
 }
