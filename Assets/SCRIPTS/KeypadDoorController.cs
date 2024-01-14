@@ -40,13 +40,23 @@ public class KeypadDoorController : MonoBehaviour
 
     //keypad display
      
-    public List<Transform> spawnPositions;
+    
     private int buttonPressCount = 0;
-    public List<GameObject> spawnPrefabs; // Reference to the prefab you want to spawn
-   
-   private void Start()
+    //digits
+
+    public GameObject digit1;
+    public GameObject digit2;
+    public GameObject digit3;
+    public GameObject digit4;
+
+    private List<GameObject> digitObjects;
+
+
+  private void Start()
 {
-     isButtonPressed = false; // Make sure to set it to false
+    isButtonPressed = false; // Make sure to set it to false
+    digitObjects = new List<GameObject> { digit1, digit2, digit3, digit4 };
+
     // Subscribe to button click events
     KeypadButton[] keypadButtons = FindObjectsOfType<KeypadButton>(true);
     foreach (KeypadButton button in keypadButtons)
@@ -210,8 +220,6 @@ private void OnButtonHoverExit(GameObject buttonObject)
 // Call this function when a keypad button is clicked
 public void OnKeypadButtonClick(string value)
 {
-
-    
     if (isKeypadActive && !isButtonPressed)
     {
         GameObject pressedButton = lastHoveredObject;
@@ -219,41 +227,36 @@ public void OnKeypadButtonClick(string value)
         if (pressedButton != null)
         {
             StartCoroutine(PressButton(pressedButton));
-            isButtonPressed = true; // Set it to true after starting the coroutine
+            isButtonPressed = true;
 
-            // Instantiate a new game object at the specified spawn point
-            SpawnNewObject(value);
             buttonPressCount++;
-            // Add the clicked button's value to the entered code
             enteredCode += value;
 
-            // Check if the entered code matches the correct code
             if (enteredCode == correctCode)
             {
                 Debug.Log("Correct code entered. Triggering animation with delay.");
 
-                // Trigger your animation with a delay
-                StartCoroutine(DelayedDoorAnimation());
+                // Activate the corresponding digit object
+                ActivateDigitObject(buttonPressCount - 1);
 
-                // Optionally, reset the entered code for subsequent attempts
+                StartCoroutine(DelayedDoorAnimation());
                 enteredCode = "";
             }
             else if (enteredCode.Length >= correctCode.Length)
             {
-                Debug.Log("Wrong code entered. Resetting the code.");
-                DeleteAllSpawnedObjects(); // delete spawned digits
-                // Reset the entered code for wrong attempts
+                Debug.Log("Wrong code entered. Resetting the code and marking objects for deletion.");
+
+                // Deactivate all digit objects
+                DeactivateAllDigitObjects();
+
                 enteredCode = "";
             }
 
-            // Release the button after a short delay
             StartCoroutine(DelayedReleaseButton(pressedButton));
         }
-
-     
-        
     }
 }
+
 
     private void ToggleKeypadActivation()
     {
@@ -388,43 +391,25 @@ private IEnumerator ReverseButtonAnimation(GameObject buttonObject, Vector3 orig
     // Reset the flag to allow another transformation on the next button click
     isButtonPressed = false;
 }
-
-private void SpawnNewObject(string value)
+    
+    
+   private void ActivateDigitObject(int index)
 {
-    // Ensure that button presses don't exceed the number of spawn prefabs
-    int spawnIndex = Mathf.Min(buttonPressCount, spawnPrefabs.Count - 1);
-
-    // Instantiate the prefab at the specified spawn point
-    GameObject newObject = Instantiate(spawnPrefabs[spawnIndex], spawnPositions[spawnIndex].position, spawnPositions[spawnIndex].rotation);
-
-    // Set the tag to "SpawnedObject_" + value
-    newObject.tag = "SpawnedObject";
-
-    // Optionally, set the name of the new object based on the button value
-    newObject.name = "SpawnedObject_" + value;
-
-    // You can perform additional actions with the spawned object if needed
-    // For example, you might want to move it or apply some behavior.
-
-    // Increment the button press count
-    buttonPressCount++;
-}
-
-
-
-private void DeleteAllSpawnedObjects()
-{
-    GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("SpawnedObject");
-
-    foreach (GameObject spawnedObject in spawnedObjects)
+    if (index >= 0 && index < digitObjects.Count)
     {
-
-        //Destroy(spawnedObject);
+        digitObjects[index].SetActive(true);
     }
+}
 
-    Debug.Log("All spawned objects deleted.");
+private void DeactivateAllDigitObjects()
+{
+    foreach (var digitObject in digitObjects)
+    {
+        digitObject.SetActive(false);
+    }
+}
 }
 
 
 
-}
+
