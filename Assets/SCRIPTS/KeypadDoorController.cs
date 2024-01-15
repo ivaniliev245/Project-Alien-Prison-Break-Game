@@ -74,7 +74,7 @@ public class KeypadDoorController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Button component not found on KeypadButton object: " + button.gameObject.name);
+            Debug.Log("Button component currently not found on KeypadButton object: " + button.gameObject.name);
         }
     }
 }
