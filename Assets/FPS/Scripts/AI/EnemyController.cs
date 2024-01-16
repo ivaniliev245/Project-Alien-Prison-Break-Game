@@ -95,9 +95,9 @@ namespace Unity.FPS.AI
             m_SelfColliders = GetComponentsInChildren<Collider>();
 
 
-            // Subscribe to damage & death actions
-            m_Health.OnDie += OnDie;
-            m_Health.OnDamaged += OnDamaged;
+            // // Subscribe to damage & death actions
+            // m_Health.OnDie += OnDie;
+            // m_Health.OnDamaged += OnDamaged;
 
             // Find and initialize all weapons
             FindAndInitializeAllWeapons();
@@ -136,8 +136,6 @@ namespace Unity.FPS.AI
             EnsureIsWithinLevelBounds();
 
             DetectionModule.HandleTargetDetection(m_Actor, m_SelfColliders);
-
-            m_WasDamagedThisFrame = false;
         }
 
         void EnsureIsWithinLevelBounds()
@@ -246,26 +244,12 @@ namespace Unity.FPS.AI
             }
         }
 
-        void OnDamaged(float damage, GameObject damageSource)
+        void OnDamaged()
         {
-            // test if the damage source is the player
-            if (damageSource && !damageSource.GetComponent<EnemyController>())
-            {
-                // pursue the player
-                DetectionModule.OnDamaged(damageSource);
-                
-                onDamaged?.Invoke();
-                m_LastTimeDamaged = Time.time;
             
-                // play the damage tick sound
-                if (DamageTick && !m_WasDamagedThisFrame)
-                    AudioUtility.CreateSFX(DamageTick, transform.position, AudioUtility.AudioGroups.DamageTick, 0f);
-            
-                m_WasDamagedThisFrame = true;
-            }
         }
 
- void OnDie()
+        void OnDie()
         {
             // spawn a particle system when dying
             var vfx = Instantiate(DeathVfx, DeathVfxSpawnPoint.position, Quaternion.identity);
