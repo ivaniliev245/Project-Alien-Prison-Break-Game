@@ -5349,8 +5349,8 @@ Transform:
   m_GameObject: {fileID: 376757307}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -984.44, y: 12.639999, z: 254.81}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -984.44, y: 12.375, z: 254.81}
+  m_LocalScale: {x: 0.68179, y: 0.68179, z: 0.68179}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1900436209}
@@ -12554,7 +12554,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -975.0687, y: 12.720001, z: 252.85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55806, y: 0.55806, z: 0.55806}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1900436209}
@@ -38488,7 +38488,7 @@ GameObject:
   - component: {fileID: 4143182000223552198}
   m_Layer: 0
   m_Name: piccolo
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
