@@ -19827,7 +19827,7 @@ Transform:
   m_GameObject: {fileID: 1246802698}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15765381, y: -0.37507248, z: 0.6542053}
+  m_LocalPosition: {x: -0.77, y: -0.37507248, z: -0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41826,7 +41826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 5866666019935509804}
-  AttackStopDistanceRatio: 0.2
+  AttackStopDistanceRatio: 0.1
   RandomHitSparks: []
   OnDetectVfx: []
   OnDetectSfx: {fileID: 8300000, guid: 828c4b84cab1a7c4f968da5868be0707, type: 3}
@@ -42121,7 +42121,7 @@ Transform:
   m_GameObject: {fileID: 5815776745589246805}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.801, z: 0.123}
+  m_LocalPosition: {x: 0.066, y: 0.319, z: 0.449}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
