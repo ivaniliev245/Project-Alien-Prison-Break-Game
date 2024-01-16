@@ -74,6 +74,8 @@ namespace Unity.FPS.AI
         WeaponController[] m_Weapons;
         NavigationModule m_NavigationModule;
 
+
+
         void Start()
         {
             m_EnemyManager = FindObjectOfType<EnemyManager>();

@@ -38277,7 +38277,7 @@ Transform:
   m_GameObject: {fileID: 3573178607905738816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.026}
+  m_LocalPosition: {x: -0.096, y: 0, z: 0.028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38295,6 +38295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad90ba0b1477764da373f5ec01a8cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponName: 
+  WeaponIcon: {fileID: 0}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
@@ -38472,10 +38474,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450651630339926}
+  - {fileID: 3386345043389343053}
   - {fileID: 8370037997708453285}
   - {fileID: 3050201222663567232}
   - {fileID: 219221770730643902}
-  - {fileID: 3386345043389343053}
   m_Father: {fileID: 546804091}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &3826320961939643662
@@ -39797,7 +39799,7 @@ Transform:
   m_GameObject: {fileID: 6146808805973790020}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.145, y: -0.086, z: 0.255}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39999,7 +40001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelfDestructYHeight: 1
-  PathReachingRadius: 2.63
+  PathReachingRadius: 1.76
   OrientationSpeed: 5
   DeathDuration: 1
   SwapToNextWeapon: 0
@@ -41928,9 +41930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectionSourcePoint: {fileID: 8370037997708453285}
-  DetectionRange: 20
-  AttackRange: 10
-  KnownTargetTimeout: 10
+  DetectionRange: 10
+  AttackRange: 5
+  KnownTargetTimeout: 1
   Animator: {fileID: 0}
 --- !u!23 &8217513487174730650
 MeshRenderer:
