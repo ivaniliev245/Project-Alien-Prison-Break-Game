@@ -8190,7 +8190,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: projectile_prefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1395606185543311086, guid: 8e9a991e317c79c46bcd2edaf27659be, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -15836,20 +15837,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1346207373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &972149237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810323381369911825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b0ce1bb69c96b49a7ac1098a7f5796, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DamageMultiplier: 1
-  SensibilityToSelfdamage: 0.5
 --- !u!1 &972786113 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 466bd32df79d60a4aa9a7ea120ab727c,
@@ -38308,8 +38295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad90ba0b1477764da373f5ec01a8cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponName: MAIN_PICCOLO_WAEPON
-  WeaponIcon: {fileID: 0}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 0}
     CrosshairSize: 0
@@ -38324,7 +38309,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 8924682559891268397, guid: 3f2f6130eeb0e9c4b82477a2a1b14b76,
     type: 3}
   DelayBetweenShots: 1.5
-  BulletSpreadAngle: 0
+  BulletSpreadAngle: 0.1
   BulletsPerShot: 1
   RecoilForce: 2
   AimZoomRatio: 1
@@ -38466,7 +38451,6 @@ GameObject:
   - component: {fileID: 7992678818287000404}
   - component: {fileID: 8545963024158967698}
   - component: {fileID: 4143182000223552198}
-  - component: {fileID: 972149237}
   m_Layer: 0
   m_Name: piccolo
   m_TagString: Untagged
@@ -38719,7 +38703,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3810323381369911825}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243469522734499658, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
@@ -41946,7 +41930,7 @@ MonoBehaviour:
   DetectionSourcePoint: {fileID: 8370037997708453285}
   DetectionRange: 20
   AttackRange: 10
-  KnownTargetTimeout: 1000000
+  KnownTargetTimeout: 10
   Animator: {fileID: 0}
 --- !u!23 &8217513487174730650
 MeshRenderer:

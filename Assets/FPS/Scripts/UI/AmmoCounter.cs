@@ -63,9 +63,7 @@ namespace Unity.FPS.UI
 
         public void Initialize(WeaponController weapon, int weaponIndex)
         {
-            m_Weapon = weapon;
-            WeaponCounterIndex = weaponIndex;
-            WeaponImage.sprite = weapon.WeaponIcon;
+            
             if (!weapon.HasPhysicalBullets)
                 BulletCounter.transform.parent.gameObject.SetActive(false);
             else
