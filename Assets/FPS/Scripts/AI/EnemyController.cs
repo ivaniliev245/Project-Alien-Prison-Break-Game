@@ -21,68 +21,25 @@ namespace Unity.FPS.AI
                 MaterialIndex = index;
             }
         }
-
-        [Header("Parameters")]
-        [Tooltip("The Y height at which the enemy will be automatically killed (if it falls off of the level)")]
         public float SelfDestructYHeight = -20f;
-
-        [Tooltip("The distance at which the enemy considers that it has reached its current path destination point")]
+      //     "The distance at which the enemy considers that it has reached its current path destination point")]
         public float PathReachingRadius = 2f;
-
-        [Tooltip("The speed at which the enemy rotates")]
         public float OrientationSpeed = 10f;
 
-        [Tooltip("Delay after death where the GameObject is destroyed (to allow for animation)")]
-        public float DeathDuration = 0f;
+       // to allow animation
+        public float DeathDuration = 1f;
 
-
-        [Header("Weapons Parameters")] [Tooltip("Allow weapon swapping for this enemy")]
         public bool SwapToNextWeapon = false;
-
-        [Tooltip("Time delay between a weapon swap and the next attack")]
         public float DelayAfterWeaponSwap = 0f;
-
-        [Header("Eye color")] [Tooltip("Material for the eye color")]
-        public Material EyeColorMaterial;
-
-        [Tooltip("The default color of the bot's eye")] [ColorUsageAttribute(true, true)]
-        public Color DefaultEyeColor;
-
-        [Tooltip("The attack color of the bot's eye")] [ColorUsageAttribute(true, true)]
-        public Color AttackEyeColor;
-
-        [Header("Flash on hit")] [Tooltip("The material used for the body of the hoverbot")]
-        public Material BodyMaterial;
-
-        [Tooltip("The gradient representing the color of the flash on hit")] [GradientUsageAttribute(true)]
-        public Gradient OnHitBodyGradient;
-
-        [Tooltip("The duration of the flash on hit")]
         public float FlashOnHitDuration = 0.5f;
-
-        [Header("Sounds")] [Tooltip("Sound played when recieving damages")]
-        public AudioClip DamageTick;
-
-        [Header("VFX")] [Tooltip("The VFX prefab spawned when the enemy dies")]
+        public AudioClip DamageTick; // sound when recieve damage
         public GameObject DeathVfx;
-
-        [Tooltip("The point at which the death VFX is spawned")]
         public Transform DeathVfxSpawnPoint;
-
-        [Header("Loot")] [Tooltip("The object this enemy can drop when dying")]
         public GameObject LootPrefab;
-
-        [Tooltip("The chance the object has to drop")] [Range(0, 1)]
         public float DropRate = 1f;
-
-        [Header("Debug Display")] [Tooltip("Color of the sphere gizmo representing the path reaching range")]
-        public Color PathReachingRangeColor = Color.yellow;
-
-        [Tooltip("Color of the sphere gizmo representing the attack range")]
-        public Color AttackRangeColor = Color.red;
-
-        [Tooltip("Color of the sphere gizmo representing the detection range")]
-        public Color DetectionRangeColor = Color.blue;
+        public Color PathReachingRangeColor = Color.yellow; // gizmo color
+        public Color AttackRangeColor = Color.red; // attack range gizmo
+        public Color DetectionRangeColor = Color.blue; // detection range color gizmo
 
         public UnityAction onAttack;
         public UnityAction onDetectedTarget;
@@ -110,7 +67,7 @@ namespace Unity.FPS.AI
         Health m_Health;
         Actor m_Actor;
         Collider[] m_SelfColliders;
-        GameFlowManager m_GameFlowManager;
+        
         bool m_WasDamagedThisFrame;
         float m_LastTimeWeaponSwapped = Mathf.NegativeInfinity;
         int m_CurrentWeaponIndex;
@@ -137,8 +94,6 @@ namespace Unity.FPS.AI
             NavMeshAgent = GetComponent<NavMeshAgent>();
             m_SelfColliders = GetComponentsInChildren<Collider>();
 
-            m_GameFlowManager = FindObjectOfType<GameFlowManager>();
-            DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, EnemyController>(m_GameFlowManager, this);
 
             // Subscribe to damage & death actions
             m_Health.OnDie += OnDie;
@@ -172,32 +127,8 @@ namespace Unity.FPS.AI
                 NavMeshAgent.acceleration = m_NavigationModule.Acceleration;
             }
 
-            foreach (var renderer in GetComponentsInChildren<Renderer>(true))
-            {
-                for (int i = 0; i < renderer.sharedMaterials.Length; i++)
-                {
-                    if (renderer.sharedMaterials[i] == EyeColorMaterial)
-                    {
-                        m_EyeRendererData = new RendererIndexData(renderer, i);
-                    }
-
-                    if (renderer.sharedMaterials[i] == BodyMaterial)
-                    {
-                        m_BodyRenderers.Add(new RendererIndexData(renderer, i));
-                    }
-                }
-            }
-
             m_BodyFlashMaterialPropertyBlock = new MaterialPropertyBlock();
 
-            // Check if we have an eye renderer for this enemy
-            if (m_EyeRendererData.Renderer != null)
-            {
-                m_EyeColorMaterialPropertyBlock = new MaterialPropertyBlock();
-                m_EyeColorMaterialPropertyBlock.SetColor("_EmissionColor", DefaultEyeColor);
-                m_EyeRendererData.Renderer.SetPropertyBlock(m_EyeColorMaterialPropertyBlock,
-                    m_EyeRendererData.MaterialIndex);
-            }
         }
 
         void Update()
@@ -222,30 +153,14 @@ namespace Unity.FPS.AI
         void OnLostTarget()
         {
             onLostTarget.Invoke();
-
-            // Set the eye attack color and property block if the eye renderer is set
-            if (m_EyeRendererData.Renderer != null)
-            {
-                m_EyeColorMaterialPropertyBlock.SetColor("_EmissionColor", DefaultEyeColor);
-                m_EyeRendererData.Renderer.SetPropertyBlock(m_EyeColorMaterialPropertyBlock,
-                    m_EyeRendererData.MaterialIndex);
-            }
         }
 
         void OnDetectedTarget()
         {
             onDetectedTarget.Invoke();
-
-            // Set the eye default color and property block if the eye renderer is set
-            if (m_EyeRendererData.Renderer != null)
-            {
-                m_EyeColorMaterialPropertyBlock.SetColor("_EmissionColor", AttackEyeColor);
-                m_EyeRendererData.Renderer.SetPropertyBlock(m_EyeColorMaterialPropertyBlock,
-                    m_EyeRendererData.MaterialIndex);
-            }
         }
 
-        public void OrientTowards(Vector3 lookPosition)
+        public void OrientTowards(Vector3 lookPosition) // my orientations script
         {
             Vector3 lookDirection = Vector3.ProjectOnPlane(lookPosition - transform.position, Vector3.up).normalized;
             if (lookDirection.sqrMagnitude != 0f)
@@ -350,15 +265,12 @@ namespace Unity.FPS.AI
             }
         }
 
-        void OnDie()
+ void OnDie()
         {
             // spawn a particle system when dying
             var vfx = Instantiate(DeathVfx, DeathVfxSpawnPoint.position, Quaternion.identity);
             Destroy(vfx, 5f);
-
-            // tells the game flow manager to handle the enemy destuction
-            m_EnemyManager.UnregisterEnemy(this);
-
+     
             // loot an object
             if (TryDropItem())
             {
@@ -401,14 +313,11 @@ namespace Unity.FPS.AI
 
         public bool TryAtack(Vector3 enemyPosition)
 {
-    if (m_GameFlowManager.GameIsEnding)
-        return false;
+    
 
     // Ensure weapons are oriented towards the target position
     OrientWeaponsTowards(enemyPosition);
 
-    if ((m_LastTimeWeaponSwapped + DelayAfterWeaponSwap) >= Time.time)
-        return false;
 
     // Shoot the weapon
     bool didFire = GetCurrentWeapon().HandleShootInputs(false, true, false);
@@ -443,9 +352,7 @@ namespace Unity.FPS.AI
             if (m_Weapons == null)
             {
                 m_Weapons = GetComponentsInChildren<WeaponController>();
-                DebugUtility.HandleErrorIfNoComponentFound<WeaponController, EnemyController>(m_Weapons.Length, this,
-                    gameObject);
-
+               
                 for (int i = 0; i < m_Weapons.Length; i++)
                 {
                     m_Weapons[i].Owner = gameObject;
@@ -463,9 +370,6 @@ namespace Unity.FPS.AI
                 SetCurrentWeapon(0);
             }
 
-            DebugUtility.HandleErrorIfNullGetComponent<WeaponController, EnemyController>(m_CurrentWeapon, this,
-                gameObject);
-
             return m_CurrentWeapon;
         }
 
@@ -473,14 +377,6 @@ namespace Unity.FPS.AI
         {
             m_CurrentWeaponIndex = index;
             m_CurrentWeapon = m_Weapons[m_CurrentWeaponIndex];
-            if (SwapToNextWeapon)
-            {
-                m_LastTimeWeaponSwapped = Time.time;
-            }
-            else
-            {
-                m_LastTimeWeaponSwapped = Mathf.NegativeInfinity;
-            }
         }
     }
 }
