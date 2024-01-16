@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class HealthbarEnemy : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
-    [SerializeField] private Vector3 offset;
-    public Camera camRef;
+    private Vector3 offset;
+    private Camera camRef;
+    public float rotationSpeed = 5f;
+    private Quaternion targetRotation;
 
     public void Start()
     {
@@ -18,9 +18,12 @@ public class HealthbarEnemy : MonoBehaviour
         healthbar.value = currentHealth / maxHealth;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - camRef.transform.position);
+        // Calculate the target rotation based on the camera's orientation
+        targetRotation = Quaternion.LookRotation(camRef.transform.forward, camRef.transform.up);
 
+        // Smoothly rotate the health bar towards the target rotation
+        healthbar.transform.rotation = Quaternion.Slerp(healthbar.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
     }
 }

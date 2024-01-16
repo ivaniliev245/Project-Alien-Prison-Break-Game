@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletShooting : MonoBehaviour
@@ -51,14 +49,12 @@ public class BulletShooting : MonoBehaviour
 
         //Check for enemies 
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
+        Debug.Log(enemies.Length);
         for (int i = 0; i < enemies.Length; i++)
         {
             //Get component of enemy and call Take Damage
             enemies[i].GetComponent<PlatformerCharaterController>().TakeDamage(explosionDamage);
-
-            //Add explosion force (if enemy has a rigidbody)
-            if (enemies[i].GetComponent<Rigidbody>())
-                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange);
+            Debug.Log(enemies[i]);
         }
 
         //Add a little delay, just to make sure everything works fine

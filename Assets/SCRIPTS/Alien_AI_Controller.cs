@@ -171,10 +171,6 @@ public class Alien_AI_Controller : MonoBehaviour
 
     private void PerformAttack()
     {
-        // Attack Code here
-        // For example, instantiate a projectile or perform melee attack
-
-        // Example with projectile:
         Rigidbody rb = Instantiate(projectile, attackPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
 
