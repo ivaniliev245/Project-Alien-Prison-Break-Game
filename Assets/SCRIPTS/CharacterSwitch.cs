@@ -36,7 +36,7 @@ public class CharacterSwitch : MonoBehaviour
     void Update()
     {   freeze freeze = mainplayer.GetComponent<freeze>();
         
-        
+
 
         // Check if the switch key is pressed
         if (Input.GetKeyDown(switchKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
@@ -49,9 +49,9 @@ public class CharacterSwitch : MonoBehaviour
            if (isSwitched)
             {   if(currentEnemy != null)
                 {
-                    EnemyBehaviour eb = currentEnemy.GetComponent<EnemyBehaviour>();
-                    EnemyBehaviour2 eb2 = currentEnemy.GetComponent<EnemyBehaviour2>();
-                    eb.enabled=true;
+                    //EnemyBehaviour eb = currentEnemy.GetComponent<EnemyBehaviour>();
+                    Alien_AI_Controller eb2 = currentEnemy.GetComponent<Alien_AI_Controller>();
+                   // eb.enabled=true;
                     eb2.enabled=false;
                     currentEnemy= null;
                 }
@@ -67,11 +67,11 @@ public class CharacterSwitch : MonoBehaviour
             else if (closestPlayer != null && !isSwitched)
             {   
                 currentPlayer = closestPlayer;
-                EnemyBehaviour eb = currentPlayer.GetComponent<EnemyBehaviour>();
-                EnemyBehaviour2 eb2 = currentPlayer.GetComponent<EnemyBehaviour2>();
-                eb.enabled=false;
-               eb2.enabled=true;
-               currentEnemy =  currentPlayer;
+                //EnemyBehaviour eb = currentPlayer.GetComponent<EnemyBehaviour>();
+                Alien_AI_Controller eb2 = currentPlayer.GetComponent<Alien_AI_Controller>();
+               // eb.enabled=false;
+                eb2.enabled=true;
+                currentEnemy =  currentPlayer;
                 isSwitched = true;                
                 Debug.Log("NEW PLAYER");
                 Debug.Log("Current Player " + currentPlayer);
@@ -110,7 +110,7 @@ public class CharacterSwitch : MonoBehaviour
     void UpdateCameraTarget(Transform newTarget)
     {
         // Set the camera's target to follow the new player
-        mainCamera.GetComponent<CameraFollow>().SetTarget(newTarget);
+       // mainCamera.GetComponent<CameraFollow>().SetTarget(newTarget);
     }
       
 }
