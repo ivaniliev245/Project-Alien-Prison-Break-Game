@@ -37,6 +37,12 @@ namespace Unity.FPS.AI
         const string k_AnimAlertedParameter = "Alerted";
         const string k_AnimOnDamagedParameter = "OnDamaged";
 
+        //patrooling values speed
+
+        public float PatrolSpeed = 2.0f; // Default patrol speed
+        private float originalSpeed;
+        
+        
         void Start()
         {
             m_EnemyController = GetComponent<EnemyController>();
@@ -57,6 +63,12 @@ namespace Unity.FPS.AI
             DebugUtility.HandleErrorIfNullGetComponent<AudioSource, EnemyMobile>(m_AudioSource, this, gameObject);
             m_AudioSource.clip = MovementSound;
             m_AudioSource.Play();
+       
+            // patrool speed
+
+            originalSpeed = m_EnemyController.NavMeshAgent.speed;
+            m_EnemyController.NavMeshAgent.speed = PatrolSpeed;
+       
         }
 
         void Update()
@@ -81,12 +93,13 @@ namespace Unity.FPS.AI
             switch (AiState)
             {
                 case AIState.Follow:
-                    // Transition to attack when there is a line of sight to the target
-                    if (m_EnemyController.IsSeeingTarget && m_EnemyController.IsTargetInAttackRange)
-                    {
-                        AiState = AIState.Attack;
-                        m_EnemyController.SetNavDestination(transform.position);
-                    }
+            if (m_EnemyController.IsSeeingTarget && m_EnemyController.IsTargetInAttackRange)
+            {
+                AiState = AIState.Attack;
+                m_EnemyController.SetNavDestination(transform.position);
+                m_EnemyController.NavMeshAgent.speed = originalSpeed; // Set back to original speed
+            }
+            break;
 
                     break;
                 case AIState.Attack:
@@ -105,9 +118,10 @@ namespace Unity.FPS.AI
             // Handle logic 
             switch (AiState)
             {
-                case AIState.Patrol:
+                     case AIState.Patrol:
                     m_EnemyController.UpdatePathDestination();
                     m_EnemyController.SetNavDestination(m_EnemyController.GetDestinationOnPath());
+                    m_EnemyController.NavMeshAgent.speed = PatrolSpeed; // Set patrol speed
                     break;
                 case AIState.Follow:
                     m_EnemyController.SetNavDestination(m_EnemyController.KnownDetectedTarget.transform.position);
