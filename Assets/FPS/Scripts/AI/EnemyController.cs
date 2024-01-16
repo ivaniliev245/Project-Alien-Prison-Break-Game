@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Unity.FPS.AI
 {
-    [RequireComponent(typeof(Health), typeof(Actor), typeof(NavMeshAgent))]
+    [RequireComponent(typeof(Actor), typeof(NavMeshAgent))]
     public class EnemyController : MonoBehaviour
     {
         [System.Serializable]
@@ -64,7 +64,6 @@ namespace Unity.FPS.AI
         int m_PathDestinationNodeIndex;
         EnemyManager m_EnemyManager;
         ActorsManager m_ActorsManager;
-        Health m_Health;
         Actor m_Actor;
         Collider[] m_SelfColliders;
         
@@ -85,19 +84,12 @@ namespace Unity.FPS.AI
 
             m_EnemyManager.RegisterEnemy(this);
 
-            m_Health = GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyController>(m_Health, this, gameObject);
-
             m_Actor = GetComponent<Actor>();
             DebugUtility.HandleErrorIfNullGetComponent<Actor, EnemyController>(m_Actor, this, gameObject);
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
             m_SelfColliders = GetComponentsInChildren<Collider>();
 
-
-            // // Subscribe to damage & death actions
-            // m_Health.OnDie += OnDie;
-            // m_Health.OnDamaged += OnDamaged;
 
             // Find and initialize all weapons
             FindAndInitializeAllWeapons();
