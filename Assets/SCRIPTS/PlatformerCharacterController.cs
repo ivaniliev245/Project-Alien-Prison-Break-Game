@@ -417,14 +417,16 @@ public class PlatformerCharaterController : MonoBehaviour
             invincibilityCounter = invincibilityLength;
             healthbar.UpdateHealthbar(currentHealth, maxHealth);
 
-            //Force velocity to 0
-            velocity = Vector3.zero;
-
             if (currentHealth <= 0)
             {
                 //ToDo:
                 return;
             }
         }
+    }
+
+    public void SetVelocity(Vector3 newVelocity)
+    {
+        velocity = newVelocity;
     }
 }
