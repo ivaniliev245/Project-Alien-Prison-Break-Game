@@ -95,10 +95,10 @@ public class PlatformerCharaterController : MonoBehaviour
         Life.SetActive(false);
     }
 
-void Update()
-{
-    lastOnGroundTime -= Time.deltaTime;
-    lastPressedJumpTime -= Time.deltaTime;
+    void Update()
+    {
+        lastOnGroundTime -= Time.deltaTime;
+        lastPressedJumpTime -= Time.deltaTime;
 
         if (invincibilityCounter > 0)
         {
@@ -107,62 +107,69 @@ void Update()
 
         }
 
-    float horizontalInput = Input.GetAxis("Horizontal");
-    float verticalInput = Input.GetAxis("Vertical");
-    bool runInput = Input.GetKey(KeyCode.LeftShift);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        bool runInput = Input.GetKey(KeyCode.LeftShift);
 
-    float currentSpeed = runInput ? runSpeed : walkSpeed;
-    float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
+        // ensure no micro movement
+        if (Mathf.Abs(horizontalInput) < 0.1f && Mathf.Abs(verticalInput) < 0.1f)
+        {
+            horizontalInput = 0f;
+            verticalInput = 0f;
+        }
 
-    Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+        float currentSpeed = runInput ? runSpeed : walkSpeed;
+        float currentAnimationSpeedMultiplier = runInput ? runAnimationSpeedMultiplier : walkAnimationSpeedMultiplier;
 
-    bool isMoving = movement.magnitude > 0.1f;
-    bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
-    bool isCrouchingNoWalkOrMove = isMoving && isCrouching; // Moving and crouching
-    bool isWalkingAttack = isMoving && isAttacking;
-    
-    
-    float currentVelocity = isMoving ? velocity.magnitude * currentAnimationSpeedMultiplier : idleSpeed; // Calculate speed based on movement or idle state
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
 
-    
-    if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
-    {
-    StartAttack(); // Call method to initiate attack
-    }
+        bool isMoving = movement.magnitude > 0.1f;
+        bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
+        bool isCrouchingNoWalkOrMove = isMoving && isCrouching; // Moving and crouching
+        bool isWalkingAttack = isMoving && isAttacking;
 
-    if (Input.GetMouseButtonUp(0)) // 0 represents left mouse button, change as needed
-    {
-    StopAttack(); // Call method to stop attack
-    }
-    
-    if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
-            {
-                ToggleCrouch();
-            }
 
-            if (Input.GetKeyUp(KeyCode.C) || Input.GetKeyUp(KeyCode.JoystickButton1))
-            {
-                ToggleCrouchUp();
-                animator.SetBool("Crouch", false);
-                animator.SetBool("crouchNoWalk", false);
-            
-            }
-           
+        float currentVelocity = isMoving ? velocity.magnitude * currentAnimationSpeedMultiplier : idleSpeed; // Calculate speed based on movement or idle state
+
+
+        if (Input.GetMouseButtonDown(0)) // 0 represents left mouse button, change as needed
+        {
+            StartAttack(); // Call method to initiate attack
+        }
+
+        if (Input.GetMouseButtonUp(0)) // 0 represents left mouse button, change as needed
+        {
+            StopAttack(); // Call method to stop attack
+        }
+
+        if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.JoystickButton1))
+        {
+            ToggleCrouch();
+        }
+
+        if (Input.GetKeyUp(KeyCode.C) || Input.GetKeyUp(KeyCode.JoystickButton1))
+        {
+            ToggleCrouchUp();
+            animator.SetBool("Crouch", false);
+            animator.SetBool("crouchNoWalk", false);
+
+        }
+
         grounded = characterController.isGrounded;
-    
-    if (grounded)
-    {
-        lastOnGroundTime = coyoteTime;
-    }
 
-    if (grounded && lastOnGroundTime > 0)
-    {
-        movement = transform.TransformDirection(movement);
-        movement.Normalize();
-        velocity = movement * currentSpeed;
+        if (grounded)
+        {
+            lastOnGroundTime = coyoteTime;
+        }
 
-        float transitionDuration = 0.0001f;  
-            
+        if (grounded && lastOnGroundTime > 0)
+        {
+            movement = transform.TransformDirection(movement);
+            movement.Normalize();
+            velocity = movement * currentSpeed;
+
+            float transitionDuration = 0.0001f;
+
             if (hasAnimator)
             {
                 if (grounded) // Only update speed if grounded
@@ -175,96 +182,86 @@ void Update()
                 animator.SetBool("Crouch", isCrouchingNoWalkOrMove);
             }
 
-        
+
         }
 
+        PerformJump();
+        UpdateRotation();
+        UpdateGroundedState();
+        UpdateAnimatorSpeed(currentVelocity); // Update the speed parameter in the animator
+    }
 
-    PerformJump();
-    UpdateRotation();
-    UpdateGroundedState();
-    UpdateAnimatorSpeed(currentVelocity); // Update the speed parameter in the animator
-} 
- private void UpdateLife()
+    void UpdateRotation()
     {
-            float movementSpeed = 20.0f;
-            float step = movementSpeed * Time.deltaTime;
-            Vector3 newPosition  = new Vector3(transform.position.x, originalLifePosition.y, transform.position.z);
-            Life.transform.position = Vector3.Lerp(Life.transform.position, newPosition, step);
-           
-            //Life.SetActive(true);
- }
-
-void UpdateRotation()
-{
-    if (!lockedRotation)
-    {
-        // Get the input for horizontal (A and D keys) and vertical (W and S keys) movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        // Calculate the angle in radians based on the input
-        float targetAngle = Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg;
-
-        // If there is no input, don't update the rotation
-        if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
+        if (!lockedRotation)
         {
-            // Convert it to Euler angles
-            Vector3 newEulerAngles = new Vector3(0, targetAngle, 0);
+            // Get the input for horizontal (A and D keys) and vertical (W and S keys) movement
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
-            // Apply the adjustable follow axis
-            newEulerAngles.y += followAxis;
+            // Calculate the angle in radians based on the input
+            float targetAngle = Mathf.Atan2(horizontalInput, verticalInput) * Mathf.Rad2Deg;
 
-            // Create the new rotation quaternion for the child object
-            Quaternion newRotation = Quaternion.Euler(newEulerAngles);
+            // If there is no input, don't update the rotation
+            if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
+            {
+                // Convert it to Euler angles
+                Vector3 newEulerAngles = new Vector3(0, targetAngle, 0);
 
-            // Rotate the child object
-            childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
+                // Apply the adjustable follow axis
+                newEulerAngles.y += followAxis;
+
+                // Create the new rotation quaternion for the child object
+                Quaternion newRotation = Quaternion.Euler(newEulerAngles);
+
+                // Rotate the child object
+                childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
+            }
         }
     }
-}
 
-void ToggleCrouch()
-{
-    if (!isCrouching)
+    void ToggleCrouch()
     {
-        isCrouching = true;
-        
-        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
-
-        // Start crouching animation with cross-fade
-        if (hasAnimator)
+        if (!isCrouching)
         {
-            animator.CrossFade("Crouch", transitionDuration);
+            isCrouching = true;
+
+            float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
+
+            // Start crouching animation with cross-fade
+            if (hasAnimator)
+            {
+                animator.CrossFade("Crouch", transitionDuration);
+            }
+
+            oldHeight = characterController.height;
+            oldCenter = characterController.center;
+
+            characterController.height = newHeight;
+            Vector3 newCenter = characterController.center;
+            newCenter.y = newCenterY;
+            characterController.center = newCenter;
         }
-
-        oldHeight = characterController.height;
-        oldCenter = characterController.center;
-
-        characterController.height = newHeight;
-        Vector3 newCenter = characterController.center;
-        newCenter.y = newCenterY;
-        characterController.center = newCenter;
     }
-}
-   
-   void ToggleCrouchUp()
-{
-    if (isCrouching)
+
+    void ToggleCrouchUp()
     {
-        isCrouching = false;
-
-        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
-
-        // Start uncrouching animation with cross-fade
-        if (hasAnimator)
+        if (isCrouching)
         {
-            animator.CrossFade("Crouch", transitionDuration);
-        }
+            isCrouching = false;
 
-        characterController.center = oldCenter;
-        characterController.height = oldHeight;
+            float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
+
+            // Start uncrouching animation with cross-fade
+            if (hasAnimator)
+            {
+                animator.CrossFade("Crouch", transitionDuration);
+            }
+
+            characterController.center = oldCenter;
+            characterController.height = oldHeight;
+        }
     }
-}
     void StartAttack()
 {
     isAttacking = true;
@@ -312,7 +309,7 @@ void ToggleCrouch()
     
     public bool CanJump()
     {
-        return lastOnGroundTime > 0 && grounded;
+        return lastOnGroundTime > 0 && grounded && lastPressedJumpTime > 0;
     }
 
 
@@ -324,74 +321,67 @@ void ToggleCrouch()
 
         StartCoroutine(ApplyJumpForce());
     }
-    
+
     void PerformJump()
-{
-    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
     {
-        OnJumpInput();
-    }
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
+        {
+            OnJumpInput();
+        }
 
-    if (CanJump() && lastPressedJumpTime > 0)
-    {
-        grounded = characterController.isGrounded;
-        Jump();
-    }
+        if (CanJump())
+        {
+            grounded = characterController.isGrounded;
+            Jump();
+        }
 
-    velocity.y += gravity * Time.deltaTime;
-    characterController.Move(velocity * Time.deltaTime);
-}
-    
-    
-    public void Meditate()
-    {
-        
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
     }
-
-IEnumerator ApplyJumpForce()
-{
-
-    float timeInAir = 0f;
-    float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
-    
-    if (hasAnimator)
+    IEnumerator ApplyJumpForce()
     {
-        animator.SetBool("Jump", true);
-    }
-    while (timeInAir < jumpDuration) // Use adjustable jump duration
-    {
-        float jumpVelocity = initialJumpForce - (gravity * timeInAir);
-        velocity.y = jumpVelocity;
+
+        float timeInAir = 0f;
+        float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
+
+        if (hasAnimator)
+        {
+            animator.SetBool("Jump", true);
+        }
+        while (timeInAir < jumpDuration) // Use adjustable jump duration
+        {
+            float jumpVelocity = initialJumpForce - (gravity * timeInAir);
+            velocity.y = jumpVelocity;
 
             timeInAir += Time.deltaTime;
 
             yield return null;
         }
 
-    //important value for animator pls dont reomove
-    if (hasAnimator)
-    {
-        animator.SetBool("Jump", false);
+        //important value for animator pls dont reomove
+        if (hasAnimator)
+        {
+            animator.SetBool("Jump", false);
+        }
     }
-}
 
 
-   void UpdateAnimatorSpeed(float speed)
-{
-    float minSpeed = 0.001f; // Adjust as needed
-    float maxAnimatorSpeed = 1.5f; // Define the maximum speed value for the animator here
-
-    // Ensure minimum speed threshold
-    speed = Mathf.Max(speed, minSpeed);
-
-    // Ensure speed doesn't exceed the maximum speed value for the animator
-    speed = Mathf.Min(speed, maxAnimatorSpeed);
-
-    if (hasAnimator)
+    void UpdateAnimatorSpeed(float speed)
     {
-        animator.SetFloat("Speed", speed); // Set the speed parameter in the animator
+        float minSpeed = 0.001f; // Adjust as needed
+        float maxAnimatorSpeed = 1.5f; // Define the maximum speed value for the animator here
+
+        // Ensure minimum speed threshold
+        speed = Mathf.Max(speed, minSpeed);
+
+        // Ensure speed doesn't exceed the maximum speed value for the animator
+        speed = Mathf.Min(speed, maxAnimatorSpeed);
+
+        if (hasAnimator)
+        {
+            animator.SetFloat("Speed", speed); // Set the speed parameter in the animator
+        }
     }
-}
     
     void UpdateGroundedState()  // this is only for animator
     {
@@ -433,5 +423,10 @@ IEnumerator ApplyJumpForce()
                 return;
             }
         }
+    }
+
+    public void SetVelocity(Vector3 newVelocity)
+    {
+        velocity = newVelocity;
     }
 }
