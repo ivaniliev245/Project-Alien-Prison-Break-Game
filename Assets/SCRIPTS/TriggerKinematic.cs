@@ -26,7 +26,7 @@ public class TriggerKinematic : MonoBehaviour
 
     private System.Collections.IEnumerator SetKinematicAfterDelay()
     {
-        yield return new WaitForSeconds(1.3f); // Wait for seconds
+        yield return new WaitForSeconds(1.0f); // Wait for seconds
 
         if (objectC != null)
         {
