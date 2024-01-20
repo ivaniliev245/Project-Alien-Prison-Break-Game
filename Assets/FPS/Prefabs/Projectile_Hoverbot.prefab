@@ -51,8 +51,8 @@ MonoBehaviour:
   MaxLifeTime: 5
   ImpactVfx: {fileID: 7655095426451682942, guid: 4d48b487f11e62940a978c7c0c0cbcb4,
     type: 3}
-  ImpactVfxLifetime: 7.35
-  ImpactVfxSpawnOffset: 0.2
+  ImpactVfxLifetime: 5
+  ImpactVfxSpawnOffset: 0.1
   ImpactSfxClip: {fileID: 8300000, guid: a56e3c9f90e17894eb1625f603eceb54, type: 3}
   HittableLayers:
     serializedVersion: 2
