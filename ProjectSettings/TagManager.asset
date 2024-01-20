@@ -7,8 +7,6 @@ TagManager:
   - Enemy
   - GoodFellas
   - Bullet
-  - SpawnedObject
-  - Lava
   layers:
   - Default
   - TransparentFX
