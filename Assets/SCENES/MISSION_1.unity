@@ -20116,12 +20116,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8616755866083672851, guid: a46e382b04988064da129d7269169cf5, type: 3}
---- !u!23 &937036136 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -8086566096492888898, guid: a46e382b04988064da129d7269169cf5,
-    type: 3}
-  m_PrefabInstance: {fileID: 165073149}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &937036138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20136,7 +20130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeSpeed: 10
   fadeAmount: 0.44
-  renderer: {fileID: 937036136}
+  renderer: {fileID: 0}
   DoFade: 0
 --- !u!1001 &938975209
 PrefabInstance:
@@ -21872,6 +21866,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 391624944}
     m_Modifications:
+    - target: {fileID: 2433943540930157298, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 69ad6f06424d7fc47b84a495dae57865, type: 2}
+    - target: {fileID: 2433943540930157298, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2742095187dddf04ea392c693e3a0b6c, type: 2}
     - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -21942,7 +21946,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: big_rock_geo_39 (33)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3924746803306283719, guid: 0fcda3a54090fec4499f1a7c6ac52fe3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
