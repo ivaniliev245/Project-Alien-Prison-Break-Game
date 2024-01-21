@@ -3156,6 +3156,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 391624944}
     m_Modifications:
+    - target: {fileID: 3662109960180618613, guid: 12876fb488026444dbb206d866b18994,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.7342662
+      objectReference: {fileID: 0}
     - target: {fileID: 5902239172940285488, guid: 12876fb488026444dbb206d866b18994,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6646,6 +6651,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bigrock1 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
