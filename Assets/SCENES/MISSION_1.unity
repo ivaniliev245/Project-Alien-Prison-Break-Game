@@ -24197,8 +24197,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: bigrock1 (17)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 1265847856238489378, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eb43c5003f798504280ccf8a922ece45, type: 2}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 2776076893363030570, guid: 8083979d731b48e41be210a53a6831a6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8083979d731b48e41be210a53a6831a6, type: 3}
@@ -43154,6 +43176,11 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2433943540930157298, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 69ad6f06424d7fc47b84a495dae57865, type: 2}
     - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -43224,8 +43251,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: big_rock_geo_39 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 6975008758475161628, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6975008758475161628, guid: 0fcda3a54090fec4499f1a7c6ac52fe3, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 1728518546458048572, guid: 0fcda3a54090fec4499f1a7c6ac52fe3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fcda3a54090fec4499f1a7c6ac52fe3, type: 3}
