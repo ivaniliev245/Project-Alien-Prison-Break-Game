@@ -1,14 +1,14 @@
 using UnityEngine;
 using Cinemachine;
 
-public class CameraFocalLengthControl : MonoBehaviour
+public class CameraFOVControl : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
-    public float newFocalLength = 30f; // Set the desired new focal length
-    public float damping = 5f; // Set the desired damping value
+    public float newFOV = 80f; // Set the desired new field of view
+    public float transitionDuration = 1f; // Set the duration of the transition
 
-    private float originalFocalLength;
-    private float currentFocalLength;
+    private float originalFOV;
+    private bool isTransitioning = false;
 
     private void Start()
     {
@@ -18,40 +18,47 @@ public class CameraFocalLengthControl : MonoBehaviour
             return;
         }
 
-        // Store the original focal length
-        originalFocalLength = virtualCamera.m_Lens.FieldOfView;
-        currentFocalLength = originalFocalLength;
+        // Store the original field of view
+        originalFOV = virtualCamera.m_Lens.FieldOfView;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isTransitioning)
         {
-            // Set the new focal length
-            StartCoroutine(SmoothTransition(newFocalLength));
+            // Set the new field of view with a smooth transition
+            StartCoroutine(SmoothTransition(newFOV));
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isTransitioning)
         {
-            // Revert to the original focal length
-            StartCoroutine(SmoothTransition(originalFocalLength));
+            // Revert to the original field of view with a smooth transition
+            StartCoroutine(SmoothTransition(originalFOV));
         }
     }
 
-    private System.Collections.IEnumerator SmoothTransition(float targetFocalLength)
+    private System.Collections.IEnumerator SmoothTransition(float targetFOV)
     {
-        while (!Mathf.Approximately(currentFocalLength, targetFocalLength))
+        isTransitioning = true;
+
+        float elapsed_time = 0f;
+        float initialFOV = virtualCamera.m_Lens.FieldOfView;
+
+        while (elapsed_time < transitionDuration)
         {
-            // Smoothly interpolate towards the target focal length
-            currentFocalLength = Mathf.Lerp(currentFocalLength, targetFocalLength, Time.deltaTime * damping);
+            // Smoothly interpolate towards the target field of view
+            float newFOVValue = Mathf.Lerp(initialFOV, targetFOV, elapsed_time / transitionDuration);
+            virtualCamera.m_Lens.FieldOfView = newFOVValue;
 
-            // Apply the new focal length
-            virtualCamera.m_Lens.FieldOfView = currentFocalLength;
-
+            elapsed_time += Time.deltaTime;
             yield return null;
         }
+
+        // Ensure the field of view is set to the exact target value
+        virtualCamera.m_Lens.FieldOfView = targetFOV;
+        isTransitioning = false;
     }
 }
