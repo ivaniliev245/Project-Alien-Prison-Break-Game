@@ -747,7 +747,7 @@ PrefabInstance:
     - target: {fileID: 3662109960180618613, guid: 12876fb488026444dbb206d866b18994,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.8989572
+      value: 0.5720993
       objectReference: {fileID: 0}
     - target: {fileID: 5902239172940285488, guid: 12876fb488026444dbb206d866b18994,
         type: 3}
@@ -9170,7 +9170,6 @@ Transform:
   - {fileID: 1551169555}
   - {fileID: 933866573}
   - {fileID: 433673886}
-  - {fileID: 1640795197}
   - {fileID: 1151028837}
   - {fileID: 301727374}
   - {fileID: 828129045}
@@ -10536,6 +10535,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: big_rock_geo_39 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6975008758475161628, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.02619862
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975008758475161628, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.91613555
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11831,6 +11840,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bigrock1 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.07324904
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.07324904
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14889,7 +14908,17 @@ PrefabInstance:
     - target: {fileID: 3662109960180618613, guid: 12876fb488026444dbb206d866b18994,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.51455736
+      value: 0.44458184
+      objectReference: {fileID: 0}
+    - target: {fileID: 3662109960180618613, guid: 12876fb488026444dbb206d866b18994,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.1880359
+      objectReference: {fileID: 0}
+    - target: {fileID: 3662109960180618613, guid: 12876fb488026444dbb206d866b18994,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.17707969
       objectReference: {fileID: 0}
     - target: {fileID: 5902239172940285488, guid: 12876fb488026444dbb206d866b18994,
         type: 3}
@@ -15421,6 +15450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bigrock1 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.02530911
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18188,7 +18222,7 @@ PrefabInstance:
     - target: {fileID: 6309727193625259881, guid: d179bfc83afb71047a6c87467d1430c6,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.5187404
+      value: 0.3948373
       objectReference: {fileID: 0}
     - target: {fileID: 6639170200978241613, guid: d179bfc83afb71047a6c87467d1430c6,
         type: 3}
@@ -23069,7 +23103,17 @@ PrefabInstance:
     - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.4528933
+      value: 0.38842705
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.11470437
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.11470437
       objectReference: {fileID: 0}
     - target: {fileID: 7990451962222536037, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
@@ -24703,6 +24747,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RockPlatform (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.055689346
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.055689346
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26419,6 +26473,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: bigrock1 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.06621536
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.06621536
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27027,6 +27091,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RockPlatform (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.055689346
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.055689346
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30927,6 +31001,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockPlatform (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.05695611
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.05695611
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31378,57 +31462,67 @@ PrefabInstance:
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.84826535
+      value: -0.84870124
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.28123936
+      value: -0.28115574
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.71978146
+      value: 0.7192391
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.31124878
+      value: 0.3218953
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.20920223
+      value: -0.2047746
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.57231957
+      value: -0.59778666
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.72925234
+      value: -0.7050546
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -105.213
+      value: -102.896
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -50.026
+      value: -205.503
       objectReference: {fileID: 0}
     - target: {fileID: 133451263417717837, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 54.829002
+      value: 69.525
       objectReference: {fileID: 0}
     - target: {fileID: 761615877948264183, guid: 8083979d731b48e41be210a53a6831a6,
         type: 3}
       propertyPath: m_Name
       value: bigrock1 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_Size
+      value: 0.02530911
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.9060295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42425,95 +42519,6 @@ Transform:
   - {fileID: 1483113255}
   m_Father: {fileID: 1095553793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1640795196
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 391624944}
-    m_Modifications:
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 14.056603
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 14.056607
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 14.056603
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.059785683
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.26927978
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.42175633
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.92342764
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.07292647
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.22032952
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.30564368
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -191.947
-      objectReference: {fileID: 0}
-    - target: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -36.628
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235607624442198823, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-        type: 3}
-      propertyPath: m_Name
-      value: big_rock_geo_39 (5)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0fcda3a54090fec4499f1a7c6ac52fe3, type: 3}
---- !u!4 &1640795197 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3570288106745651613, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1640795196}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1642094847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46729,6 +46734,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockPlatform (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.06349988
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.06349988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -48574,6 +48589,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RockPlatform (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.05695611
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980000599300612853, guid: 8083979d731b48e41be210a53a6831a6,
+        type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.05695611
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
