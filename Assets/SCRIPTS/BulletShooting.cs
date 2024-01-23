@@ -58,7 +58,7 @@ public class BulletShooting : MonoBehaviour
         }
 
         //Add a little delay, just to make sure everything works fine
-        Invoke("Delay", 0.05f);
+        Invoke("Delay", 0.01f);
     }
     private void Delay()
     {
