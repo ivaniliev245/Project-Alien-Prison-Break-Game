@@ -11,8 +11,9 @@ public class Alien_AI_Controller : MonoBehaviour
     private Vector3 walkPoint;
     bool walkPointSet;
     public float walkpointRange;
-
-    public bool SetPatrolling;
+    
+    //for some reason seems to break the ai
+    public bool SetPatrolling;  //Needs one of SetPatrollingX or -Y to be eneabled
     public bool SetPatrollingX; //ONLY WORKS WITH SET PATROLLING. if true enemy only patrolls on X axis, if false on x and z axis.
     public bool SetPatrollingZ; //ONLY WORKS WITH SET PATROLLING. if true enemy only patrolls on Z axis, if false on x and z axis.
     private Vector3 spawnpoint;
@@ -46,9 +47,7 @@ public class Alien_AI_Controller : MonoBehaviour
 
     void Update()
     {
-
         enemyAnimator = GetComponent<Animator>();
-
 
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -90,7 +89,6 @@ public class Alien_AI_Controller : MonoBehaviour
             wasMovingBackward = isMovingBackward;
         }
     }
-
     private void Awake()
     {
         backwardRunRange = attackRange;
@@ -124,7 +122,6 @@ public class Alien_AI_Controller : MonoBehaviour
         }
 
     }
-
     private void SearchWalkPoint() 
     {
         //Checks if Patrolling is disabled -> enemy moves completly random from point to point over the map
@@ -150,55 +147,58 @@ public class Alien_AI_Controller : MonoBehaviour
         //Check if Patrolling is set
         if (SetPatrolling)
         {
-            //check if Patrolling on x and z axis
-            if (SetPatrollingX && SetPatrollingZ)
+            if (!walkPointSet)
             {
-                //look if the last walkpoint was negativ, if not create positive walkpoint
-                if (!posWalkpoint)
+                //check if Patrolling on x and z axis
+                if (SetPatrollingX && SetPatrollingZ)
                 {
-                    //create Walkpoint
-                    walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
-                    posWalkpoint = true;
+                    //look if the last walkpoint was negativ, if not create positive walkpoint
+                    if (!posWalkpoint)
+                    {
+                        //create Walkpoint
+                        walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
+                        posWalkpoint = true;
+                    }
+                    //if true create a negative walkpoint from spawnpoint
+                    if (posWalkpoint)
+                    {
+                        walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
+                        posWalkpoint = false;
+                    }
                 }
-                //if true create a negative walkpoint from spawnpoint
-                if (posWalkpoint)
+                //check if only Patrolling on X axis
+                if (SetPatrollingX && !SetPatrollingZ)
                 {
-                    walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
-                    posWalkpoint = false;
+                    //look if the last walkpoint was negativ, if not create positive walkpoint
+                    if (!posWalkpoint)
+                    {
+                        //create Walkpoint
+                        walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z);
+                        posWalkpoint = true;
+                    }
+                    //if true create a negative walkpoint from spawnpoint
+                    if (posWalkpoint)
+                    {
+                        walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z);
+                        posWalkpoint = false;
+                    }
                 }
-            }
-            //check if only Patrolling on X axis
-            if (SetPatrollingX && !SetPatrollingZ)
-            {
-                //look if the last walkpoint was negativ, if not create positive walkpoint
-                if (!posWalkpoint)
+                //check if only Patrolling on Z axis
+                if (!SetPatrollingX && SetPatrollingZ)
                 {
-                    //create Walkpoint
-                    walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z);
-                    posWalkpoint = true;
-                }
-                //if true create a negative walkpoint from spawnpoint
-                if (posWalkpoint)
-                {
-                    walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z);
-                    posWalkpoint = false;
-                }
-            }
-            //check if only Patrolling on Z axis
-            if (!SetPatrollingX && SetPatrollingZ)
-            {
-                //look if the last walkpoint was negativ, if not create positive walkpoint
-                if (!posWalkpoint)
-                {
-                    //create Walkpoint
-                    walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z + walkpointRange);
-                    posWalkpoint = true;
-                }
-                //if true create a negative walkpoint from spawnpoint
-                if (posWalkpoint)
-                {
-                    walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z - walkpointRange);
-                    posWalkpoint = false;
+                    //look if the last walkpoint was negativ, if not create positive walkpoint
+                    if (!posWalkpoint)
+                    {
+                        //create Walkpoint
+                        walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z + walkpointRange);
+                        posWalkpoint = true;
+                    }
+                    //if true create a negative walkpoint from spawnpoint
+                    if (posWalkpoint)
+                    {
+                        walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z - walkpointRange);
+                        posWalkpoint = false;
+                    }
                 }
             }
         }
@@ -208,7 +208,6 @@ public class Alien_AI_Controller : MonoBehaviour
             walkPointSet = true;
         }
     }
-
     private void SearchWalkPointOld()
     {
         //look if ai has a set walkpoint
@@ -249,15 +248,10 @@ public class Alien_AI_Controller : MonoBehaviour
             walkPointSet = true;
         }
     }
-
     private void ChasePlayer()
     {
         goblin.SetDestination(player.position);
     }
-
-
-
-
     private void PerformAttack()
     {
         Rigidbody rb = Instantiate(projectile, attackPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
@@ -273,9 +267,6 @@ public class Alien_AI_Controller : MonoBehaviour
             Invoke(nameof(ResetAttackAnimation), 1.0f); // Adjust the time according to your attack animation duration
         }
     }
-
-
-
     private void ResetAttackAnimation()
     {
         // Reset the Attack parameter in the Animator after the attack animation finishes
