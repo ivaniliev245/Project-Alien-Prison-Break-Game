@@ -12,9 +12,17 @@ public class LeaveSteps : MonoBehaviour
     public Vector3 leftStepOffset = new Vector3(-0.5f, 0f, 0f); // Offset for left step position
     public Vector3 rightStepOffset = new Vector3(0.5f, 0f, 0f); // Offset for right step position
 
+    private Transform stepsParent;
     private List<GameObject> leftSteps = new List<GameObject>(); // List to hold instantiated left steps
     private List<GameObject> rightSteps = new List<GameObject>(); // List to hold instantiated right steps
     private Vector3 lastStepPosition; // Position of the last step
+    
+    private void Start()
+    {
+        // Create a parent object for all steps
+        stepsParent = new GameObject("StepsParent").transform;
+    }
+
 
     private void Update()
     {
@@ -46,10 +54,10 @@ public class LeaveSteps : MonoBehaviour
         Vector3 rightStepPosition = transform.position + Quaternion.Euler(0, 90, 0) * rightStepOffset;
 
         // Instantiate step prefabs at the calculated positions with rotation
-        GameObject newLeftStep = Instantiate(stepPrefab, leftStepPosition, Quaternion.Euler(stepRotation));
+        GameObject newLeftStep = Instantiate(stepPrefab, leftStepPosition, Quaternion.Euler(stepRotation), stepsParent);
         leftSteps.Add(newLeftStep);
 
-        GameObject newRightStep = Instantiate(stepPrefab, rightStepPosition, Quaternion.Euler(stepRotation));
+        GameObject newRightStep = Instantiate(stepPrefab, rightStepPosition, Quaternion.Euler(stepRotation), stepsParent);
         rightSteps.Add(newRightStep);
 
         // Destroy the oldest steps if the number of steps exceeds the maximum count
