@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - SpawnedObject
   - Lava
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Wall Layer
   - keypadButtonLayer
   - cinemachine
-  - 
+  - Water
   - 
   - 
   - 
