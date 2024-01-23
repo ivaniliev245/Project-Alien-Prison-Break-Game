@@ -113,12 +113,23 @@ public class Alien_AI_Controller : MonoBehaviour
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        Debug.Log("Distance: " + distanceToWalkPoint.magnitude);
 
         //check if Walkpoint Reached
         if (distanceToWalkPoint.magnitude < 1.0f)
         {
             walkPointSet = false;
+            Debug.Log("Walkpoint " + posWalkpoint);
+            //toggle posWalkPoint
+            if (posWalkpoint)
+            {
+                posWalkpoint = false;
+                Debug.Log("Toggle1: " + posWalkpoint);
+            }
+            else if (!posWalkpoint)
+            {
+                posWalkpoint = true;
+                Debug.Log("Toggle2: " + posWalkpoint);
+            }
         }
 
     }
@@ -157,13 +168,11 @@ public class Alien_AI_Controller : MonoBehaviour
                     {
                         //create Walkpoint
                         walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
-                        posWalkpoint = true;
                     }
                     //if true create a negative walkpoint from spawnpoint
                     if (posWalkpoint)
                     {
                         walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
-                        posWalkpoint = false;
                     }
                 }
                 //check if only Patrolling on X axis
@@ -172,15 +181,16 @@ public class Alien_AI_Controller : MonoBehaviour
                     //look if the last walkpoint was negativ, if not create positive walkpoint
                     if (!posWalkpoint)
                     {
-                        //create Walkpoint
+                        //create positive Walkpoint
                         walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z);
-                        posWalkpoint = true;
+                        Debug.Log("Pos: " + walkPoint);
                     }
                     //if true create a negative walkpoint from spawnpoint
                     if (posWalkpoint)
                     {
+                        //create negative Walkpoint
                         walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z);
-                        posWalkpoint = false;
+                        Debug.Log("Neg:" + walkPoint);
                     }
                 }
                 //check if only Patrolling on Z axis
@@ -191,58 +201,16 @@ public class Alien_AI_Controller : MonoBehaviour
                     {
                         //create Walkpoint
                         walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z + walkpointRange);
-                        posWalkpoint = true;
                     }
                     //if true create a negative walkpoint from spawnpoint
                     if (posWalkpoint)
                     {
                         walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z - walkpointRange);
-                        posWalkpoint = false;
                     }
                 }
             }
         }
         //Check if Walkpoint is in Map then set walkPointSet true
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-        {
-            walkPointSet = true;
-        }
-    }
-    private void SearchWalkPointOld()
-    {
-        //look if ai has a set walkpoint
-        if (!walkPointSet && !SetPatrolling)
-        {
-            //calculate a random point in Range
-            float randomZ = Random.Range(-walkpointRange, walkpointRange);
-            float randomX = Random.Range(-walkpointRange, walkpointRange);
-
-            //create Walkpoint
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-            //Check if Walkpoint is in Map
-            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            {
-                walkPointSet = true;
-            }
-            return;
-        }
-
-        //if walkpoint set is true
-        //look if the last walkpoint was negativ
-        if (!posWalkpoint)
-        {
-            //create Walkpoint
-            walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
-            posWalkpoint = true;
-        }
-        else if (posWalkpoint)
-        {
-            walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
-            posWalkpoint = false;
-        }
-
-        //Check if Walkpoint is in Map
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
