@@ -13,6 +13,8 @@ public class Alien_AI_Controller : MonoBehaviour
     public float walkpointRange;
 
     public bool SetPatrolling;
+    public bool SetPatrollingX; //ONLY WORKS WITH SET PATROLLING. if true enemy only patrolls on X axis, if false on x and z axis.
+    public bool SetPatrollingZ; //ONLY WORKS WITH SET PATROLLING. if true enemy only patrolls on Z axis, if false on x and z axis.
     private Vector3 spawnpoint;
     private bool posWalkpoint;
 
@@ -36,7 +38,7 @@ public class Alien_AI_Controller : MonoBehaviour
     private bool isRunningBackward = false;
     private bool wasMovingBackward = false;
 
-    public float backwardRunRange;
+    private float backwardRunRange;
     public float rotationSpeed = 5f;
     //public float walkSpeed = 0.5f;
 
@@ -91,7 +93,7 @@ public class Alien_AI_Controller : MonoBehaviour
 
     private void Awake()
     {
-        backwardRunRange = 10.0f;
+        backwardRunRange = attackRange;
         
         player = GameObject.FindGameObjectWithTag("Player").transform;
         goblin = GetComponent<NavMeshAgent>();
@@ -112,17 +114,102 @@ public class Alien_AI_Controller : MonoBehaviour
             goblin.SetDestination(walkPoint);
         }
 
-        Vector3 disctanceToWalkPoint = transform.position - walkPoint;
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        Debug.Log("Distance: " + distanceToWalkPoint.magnitude);
 
         //check if Walkpoint Reached
-        if (disctanceToWalkPoint.magnitude < 1.0f)
+        if (distanceToWalkPoint.magnitude < 1.0f)
         {
             walkPointSet = false;
         }
 
     }
 
-    private void SearchWalkPoint()
+    private void SearchWalkPoint() 
+    {
+        //Checks if Patrolling is disabled -> enemy moves completly random from point to point over the map
+        if (!SetPatrolling)
+        {   
+            //check if a walkpoint is already set
+            if (!walkPointSet)
+            {
+                //calculate a random point in Range
+                float randomZ = Random.Range(-walkpointRange, walkpointRange);
+                float randomX = Random.Range(-walkpointRange, walkpointRange);
+
+                //create Walkpoint
+                walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+                //Check if Walkpoint is in Map
+                if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+                {
+                    walkPointSet = true;
+                }
+            }
+        }
+        //Check if Patrolling is set
+        if (SetPatrolling)
+        {
+            //check if Patrolling on x and z axis
+            if (SetPatrollingX && SetPatrollingZ)
+            {
+                //look if the last walkpoint was negativ, if not create positive walkpoint
+                if (!posWalkpoint)
+                {
+                    //create Walkpoint
+                    walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
+                    posWalkpoint = true;
+                }
+                //if true create a negative walkpoint from spawnpoint
+                if (posWalkpoint)
+                {
+                    walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
+                    posWalkpoint = false;
+                }
+            }
+            //check if only Patrolling on X axis
+            if (SetPatrollingX && !SetPatrollingZ)
+            {
+                //look if the last walkpoint was negativ, if not create positive walkpoint
+                if (!posWalkpoint)
+                {
+                    //create Walkpoint
+                    walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z);
+                    posWalkpoint = true;
+                }
+                //if true create a negative walkpoint from spawnpoint
+                if (posWalkpoint)
+                {
+                    walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z);
+                    posWalkpoint = false;
+                }
+            }
+            //check if only Patrolling on Z axis
+            if (!SetPatrollingX && SetPatrollingZ)
+            {
+                //look if the last walkpoint was negativ, if not create positive walkpoint
+                if (!posWalkpoint)
+                {
+                    //create Walkpoint
+                    walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z + walkpointRange);
+                    posWalkpoint = true;
+                }
+                //if true create a negative walkpoint from spawnpoint
+                if (posWalkpoint)
+                {
+                    walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z - walkpointRange);
+                    posWalkpoint = false;
+                }
+            }
+        }
+        //Check if Walkpoint is in Map then set walkPointSet true
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
+            walkPointSet = true;
+        }
+    }
+
+    private void SearchWalkPointOld()
     {
         //look if ai has a set walkpoint
         if (!walkPointSet && !SetPatrolling)
@@ -141,6 +228,7 @@ public class Alien_AI_Controller : MonoBehaviour
             }
             return;
         }
+
         //if walkpoint set is true
         //look if the last walkpoint was negativ
         if (!posWalkpoint)
@@ -154,6 +242,7 @@ public class Alien_AI_Controller : MonoBehaviour
             walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
             posWalkpoint = false;
         }
+
         //Check if Walkpoint is in Map
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
@@ -184,17 +273,17 @@ public class Alien_AI_Controller : MonoBehaviour
             Invoke(nameof(ResetAttackAnimation), 1.0f); // Adjust the time according to your attack animation duration
         }
     }
-    
-    
-    
+
+
+
     private void ResetAttackAnimation()
-{
-    // Reset the Attack parameter in the Animator after the attack animation finishes
-    if (enemyAnimator != null)
     {
-        enemyAnimator.SetBool("Attack", false);
+        // Reset the Attack parameter in the Animator after the attack animation finishes
+        if (enemyAnimator != null)
+        {
+            enemyAnimator.SetBool("Attack", false);
+        }
     }
-}
 
 
     private void AttackPlayer()
@@ -280,10 +369,15 @@ public class Alien_AI_Controller : MonoBehaviour
 
     private void RunBackward()
     {
-        // Implement backward running logic here
-        //
         //transform.Translate(-transform.forward * backwardRunSpeed * Time.deltaTime);
         isRunningBackward = true;
+
+        Invoke(nameof(ResetRunningBackward), 1.0f);//Adjust Time to Animation Speed
+    }
+
+    private void ResetRunningBackward()
+    {
+        isRunningBackward = false;
     }
 
     private void SetAnimatorRunningBackward(bool value)
