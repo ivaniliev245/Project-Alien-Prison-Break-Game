@@ -86,7 +86,7 @@ public class BulletShooting : MonoBehaviour
         physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
 
         //Assign material to collider
-        GetComponent<SphereCollider>().material = physics_mat;
+        GetComponent<CapsuleCollider>().material = physics_mat;
 
         //Set gravity
         rb.useGravity = useGravity;

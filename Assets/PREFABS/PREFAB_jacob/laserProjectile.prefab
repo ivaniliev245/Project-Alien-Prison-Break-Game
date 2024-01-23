@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7233064650348327057}
   - component: {fileID: 4067312413890201164}
   - component: {fileID: 2915220844432128654}
-  - component: {fileID: 3246575918855766099}
   - component: {fileID: 6109160881762958825}
   - component: {fileID: 1540127375622718864}
+  - component: {fileID: 8540252161208751722}
   m_Layer: 9
   m_Name: laserProjectile
   m_TagString: Bullet
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 275662106875348368}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.36, z: -1.02}
+  m_LocalPosition: {x: 0.012, y: 2.36, z: -1.033}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3246575918855766099
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275662106875348368}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.149674
-  m_Center: {x: 0.000000009313226, y: 0, z: 0.13967401}
 --- !u!54 &6109160881762958825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -159,3 +138,26 @@ MonoBehaviour:
   maxCollisions: 1
   maxLifetime: 1
   explodeOnTouch: 1
+--- !u!136 &8540252161208751722
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275662106875348368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.015
+  m_Height: 0.3
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.135}
