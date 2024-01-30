@@ -12866,7 +12866,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 13.769076
+  m_FocalLength: 32.96973
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -12881,7 +12881,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 82.145485
+  field of view: 40
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -12907,8 +12907,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511494430}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.026223695, y: 0.055755988, z: 0.0066118697, w: 0.9980781}
-  m_LocalPosition: {x: 125.39909, y: 0.8916092, z: 25.831543}
+  m_LocalRotation: {x: -0, y: 0.20750059, z: -0, w: 0.9782349}
+  m_LocalPosition: {x: 8.553955, y: 19.02761, z: -35.267315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50396,22 +50396,22 @@ PrefabInstance:
     - target: {fileID: 871302780871414221, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.44668454
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 871302780871414221, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 9.097634e-13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 871302780871414221, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.8946915
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 871302780871414221, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 4.542093e-13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 871302780871414221, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
@@ -50438,6 +50438,51 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f990b302edcae704aa0647dce3339882, type: 2}
+    - target: {fileID: 1927621116571150501, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.21240225
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927621116571150501, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5981325
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927621116571150501, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.9446092
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927621116571150501, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.6243
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927621116571150501, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7.526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927621116571150501, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.12392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846363065940344597, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846363065940344597, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846363065940344597, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5215
+      objectReference: {fileID: 0}
     - target: {fileID: 2919440080900504116, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -50453,6 +50498,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1611006227964984019}
+    - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: sightRange

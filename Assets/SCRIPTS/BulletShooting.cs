@@ -75,6 +75,13 @@ public class BulletShooting : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && explodeOnTouch) Explode();
     }
 
+    public void SetTargetPosition(Vector3 targetPosition)
+    {
+    // Set any logic related to targeting or aiming here
+    // For example, you might use this information to adjust the projectile's trajectory
+    }
+
+
     private void Setup()
     {
         //Create a new Physic material
