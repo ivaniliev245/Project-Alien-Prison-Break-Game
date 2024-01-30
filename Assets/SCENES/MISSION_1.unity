@@ -5964,6 +5964,7 @@ GameObject:
   - component: {fileID: 265418430}
   - component: {fileID: 265418429}
   - component: {fileID: 265418428}
+  - component: {fileID: 265418433}
   m_Layer: 14
   m_Name: LAVA (1)
   m_TagString: Lava
@@ -6091,6 +6092,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265418426}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &265418433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265418426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccece2d75d968ac43b393345c0265195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 9999
 --- !u!1 &267597959 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4235607624442198823, guid: 0fcda3a54090fec4499f1a7c6ac52fe3,
@@ -12852,7 +12866,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 32.96973
+  m_FocalLength: 13.769076
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -12867,7 +12881,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 82.145485
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -12893,8 +12907,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511494430}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.20750059, z: -0, w: 0.9782349}
-  m_LocalPosition: {x: 8.553955, y: 19.02761, z: -35.267315}
+  m_LocalRotation: {x: -0.026223695, y: 0.055755988, z: 0.0066118697, w: 0.9980781}
+  m_LocalPosition: {x: 125.39909, y: 0.8916092, z: 25.831543}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27439,6 +27453,7 @@ GameObject:
   - component: {fileID: 1082427338}
   - component: {fileID: 1082427337}
   - component: {fileID: 1082427336}
+  - component: {fileID: 1082427341}
   m_Layer: 14
   m_Name: LAVA (1)
   m_TagString: Lava
@@ -27566,6 +27581,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082427334}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1082427341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082427334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccece2d75d968ac43b393345c0265195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1001 &1085084671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41670,6 +41698,7 @@ GameObject:
   - component: {fileID: 1615300069}
   - component: {fileID: 1615300072}
   - component: {fileID: 1615300073}
+  - component: {fileID: 1615300074}
   m_Layer: 14
   m_Name: LAVA
   m_TagString: Lava
@@ -41797,6 +41826,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnLocation: {fileID: 2127955465}
+--- !u!114 &1615300074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615300067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccece2d75d968ac43b393345c0265195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1 &1620905958 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 565184426676175421, guid: 0971d3cbd9cb8fa419b8525dba6f4fc2,
