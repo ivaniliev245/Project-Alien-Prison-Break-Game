@@ -118,17 +118,14 @@ public class Alien_AI_Controller : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1.0f)
         {
             walkPointSet = false;
-            Debug.Log("Walkpoint " + posWalkpoint);
             //toggle posWalkPoint
             if (posWalkpoint)
             {
                 posWalkpoint = false;
-                Debug.Log("Toggle1: " + posWalkpoint);
             }
             else if (!posWalkpoint)
             {
                 posWalkpoint = true;
-                Debug.Log("Toggle2: " + posWalkpoint);
             }
         }
 
@@ -183,14 +180,12 @@ public class Alien_AI_Controller : MonoBehaviour
                     {
                         //create positive Walkpoint
                         walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z);
-                        Debug.Log("Pos: " + walkPoint);
                     }
                     //if true create a negative walkpoint from spawnpoint
                     if (posWalkpoint)
                     {
                         //create negative Walkpoint
                         walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z);
-                        Debug.Log("Neg:" + walkPoint);
                     }
                 }
                 //check if only Patrolling on Z axis
