@@ -17,7 +17,8 @@ public class PlaneTrigger : MonoBehaviour
 
     private void RespawnPlayer(GameObject player)
     {
-        player.transform.position = respawnLocation.position;       
+        player.transform.position = respawnLocation.position;
         // You might want to add more logic here like resetting player stats, etc.
+        player.GetComponent<PlatformerCharaterController>().SetCurrentHealth(100);
     }
 }
