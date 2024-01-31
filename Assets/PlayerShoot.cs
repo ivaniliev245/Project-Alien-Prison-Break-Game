@@ -21,7 +21,7 @@ public class PlayerShoot : MonoBehaviour
                 waterscript script = GetComponent<waterscript>();
                 if (script != null && script.currentHealth > 0)
                 {
-                script.Updatewaterbar(script.currentHealth - 8f);
+                script.Updatewaterbar(script.currentHealth - 2f);
                 }
             }
         }
