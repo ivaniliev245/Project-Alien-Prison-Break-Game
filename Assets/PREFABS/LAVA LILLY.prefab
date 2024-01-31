@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9212952092615553029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.7669883
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.7669883
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7.7669883
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 347.34
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.452
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 79.686
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -521320154150234421, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 611a11378c076bc45a08e1501c6c4e15, type: 2}
+    - target: {fileID: 919132149155446097, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: m_Name
+      value: LAVA LILLY
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833681293501606226, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5494c87e33245c743b5c12deb4bc243a, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3c0140fc8cd93b48a2e1921ac9d4e8b, type: 3}
