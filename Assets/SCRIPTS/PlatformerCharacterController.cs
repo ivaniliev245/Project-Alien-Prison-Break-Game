@@ -430,4 +430,5 @@ public class PlatformerCharaterController : MonoBehaviour
         velocity = newVelocity;
     }
     public void SetCurrentHealth(int health) { currentHealth = health; }
+    public float GetCurrentHealth() { return currentHealth; }
 }
