@@ -7,6 +7,8 @@ public class PiccoloHealthBar : MonoBehaviour
     public float currentHealth;
     public Image healthBar; // Reference to the UI Image component representing enemy health.
     public GameObject objectToHide;
+    private float invincibilityLength = 0.25f;
+    private float invincibilityCounter;
 
     void Start()
     {   
@@ -19,6 +21,15 @@ public class PiccoloHealthBar : MonoBehaviour
         }
     }
 
+    /*public void Update() 
+    { 
+        if (invincibilityCounter > 0)
+        {
+            //invincibilityLength -= coyoteTime.deltaTime;
+            invincibilityCounter -= Time.deltaTime;
+        }
+    }*/
+
     void OnCollisionEnter(Collision collision)
     {  
         // Assuming the player has a collider tagged as "Attackhands"
@@ -30,20 +41,25 @@ public class PiccoloHealthBar : MonoBehaviour
         }
     }
 
-    void TakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
-        currentHealth -= damageAmount;
-
-        // Ensure health doesn't go below 0
-        currentHealth = Mathf.Max(0, currentHealth);
-
-        // Update the UI health bar fill amount
-        UpdateHealthBar();
-
-        // Check if the enemy is dead
-        if (currentHealth <= 0)
+        if (invincibiltyCounter <= 0)
         {
-            Die();
+            invincibilityCounter = invincibilityLength;
+
+            currentHealth -= damageAmount;
+
+            // Ensure health doesn't go below 0
+            currentHealth = Mathf.Max(0, currentHealth);
+
+            // Update the UI health bar fill amount
+            UpdateHealthBar();
+
+            // Check if the enemy is dead
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 

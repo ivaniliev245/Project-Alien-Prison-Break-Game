@@ -109,11 +109,12 @@ public class Alien_AI_Controller : MonoBehaviour
         if (!walkPointSet) { SearchWalkPoint(); }
         if(walkPointSet)
         {
+            //Debug.Log("Destination Set");
             goblin.SetDestination(walkPoint);
         }
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
+        //Debug.Log("distance: " + distanceToWalkPoint.magnitude);
         //check if Walkpoint Reached
         if (distanceToWalkPoint.magnitude < 1.0f)
         {
@@ -130,55 +131,6 @@ public class Alien_AI_Controller : MonoBehaviour
         }
 
     }
-
-
-// Updated by Anoth
-private void SearchWalkPoint2()
-{
-    // Checks if Patrolling is disabled -> enemy moves completely random from point to point over the map
-    if (!SetPatrolling)
-    {
-        // Check if a walkpoint is already set
-        if (!walkPointSet)
-        {
-            // Calculate a random point in Range
-            float randomZ = Random.Range(-walkpointRange, walkpointRange);
-            float randomX = Random.Range(-walkpointRange, walkpointRange);
-
-            // Create Walkpoint
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-            // Check if Walkpoint is in Map
-            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            {
-                walkPointSet = true;
-            }
-        }
-    }
-    // Check if Patrolling is set
-    else
-    {
-        // Check if the current walkPoint is not set or if the distance to the walkPoint is less than 1.0f
-        if (!walkPointSet || Vector3.Distance(transform.position, walkPoint) < 1.0f)
-        {
-            // Calculate a random point in Range
-            float randomZ = Random.Range(-walkpointRange, walkpointRange);
-            float randomX = Random.Range(-walkpointRange, walkpointRange);
-
-            // Create Walkpoint
-            walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-            // Check if Walkpoint is in Map
-            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            {
-                walkPointSet = true;
-            }
-        }
-    }
-}
-
-
-
 
     private void SearchWalkPoint() 
     {

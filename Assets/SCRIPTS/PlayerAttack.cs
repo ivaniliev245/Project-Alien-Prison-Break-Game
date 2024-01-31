@@ -45,7 +45,15 @@ public class PlayerAttack : MonoBehaviour
         //damage Enemies
         foreach(Collider enemy in enemiesHit)
         {
-            enemy.GetComponent<Alien_AI_Controller>().TakeDamage(attackDamage);
+            if (enemy.CompareTag("Enemy"))
+            {
+                enemy.GetComponent<Alien_AI_Controller>().TakeDamage(attackDamage);
+            }
+            else if (enemy.CompareTag("piccolo"))
+            {
+                Debug.Log("hit");
+                enemy.GetComponent<PiccoloHealthBar>().TakeDamage((float) attackDamage);
+            }
         }
     }
 

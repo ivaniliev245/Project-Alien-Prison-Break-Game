@@ -12,6 +12,7 @@ TagManager:
   - Water
   - Attackhands
   - Lavalilly
+  - piccolo
   layers:
   - Default
   - TransparentFX
