@@ -51709,7 +51709,7 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1611006227964984019}
+      objectReference: {fileID: 0}
     - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_Enabled
@@ -51738,7 +51738,7 @@ PrefabInstance:
     - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: walkpointRange
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}

@@ -12,12 +12,7 @@ public class Alien_AI_Controller : MonoBehaviour
     bool walkPointSet;
     public float walkpointRange;
     
-    //for some reason seems to break the ai
-    public bool SetPatrolling;  //Needs one of SetPatrollingX or -Y to be eneabled
-    public bool SetPatrollingX; //ONLY WORKS WITH SET PATROLLING. if true enemy only patrolls on X axis, if false on x and z axis.
-    public bool SetPatrollingZ; //ONLY WORKS WITH SET PATROLLING. if true enemy only patrolls on Z axis, if false on x and z axis.
     private Vector3 spawnpoint;
-    private bool posWalkpoint;
 
     //Attackspeed  
     public float timeBetweenAttacks;
@@ -112,105 +107,46 @@ public class Alien_AI_Controller : MonoBehaviour
             //Debug.Log("Destination Set");
             goblin.SetDestination(walkPoint);
         }
+        float distanceToWalkPoint = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(walkPoint.x, 0, walkPoint.z));
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        //Debug.Log("distance: " + distanceToWalkPoint.magnitude);
         //check if Walkpoint Reached
-        if (distanceToWalkPoint.magnitude < 1.0f)
+        if (distanceToWalkPoint < 1.0f)
         {
             walkPointSet = false;
-            //toggle posWalkPoint
-            if (posWalkpoint)
-            {
-                posWalkpoint = false;
-            }
-            else if (!posWalkpoint)
-            {
-                posWalkpoint = true;
-            }
         }
 
     }
 
-    private void SearchWalkPoint() 
+    private bool IsInWalkRange(Vector3 position)
     {
-        //Checks if Patrolling is disabled -> enemy moves completly random from point to point over the map
-        if (!SetPatrolling)
-        {   
-            //check if a walkpoint is already set
-            if (!walkPointSet)
-            {
-                //calculate a random point in Range
-                float randomZ = Random.Range(-walkpointRange, walkpointRange);
-                float randomX = Random.Range(-walkpointRange, walkpointRange);
+        // Calculate the boundaries of the box
+        float minX = spawnpoint.x - walkpointRange;
+        float maxX = spawnpoint.x + walkpointRange;
+        float minZ = spawnpoint.z - walkpointRange;
+        float maxZ = spawnpoint.z + walkpointRange;
 
-                //create Walkpoint
-                walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+        // Check if the position is within the box
+        return (position.x >= minX && position.x <= maxX && position.z >= minZ && position.z <= maxZ);
+    }
 
-                //Check if Walkpoint is in Map
-                if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-                {
-                    walkPointSet = true;
-                }
-            }
-        }
-        //Check if Patrolling is set
-        if (SetPatrolling)
+    private void SearchWalkPoint()
+    {
+        //check if a walkpoint is already set
+        if (!walkPointSet)
         {
-            if (!walkPointSet)
+            //calculate a random point in Range
+            float randomX = Random.Range(-walkpointRange, walkpointRange);
+            float randomZ = Random.Range(-walkpointRange, walkpointRange);
+
+            //create Walkpoint
+            walkPoint = new Vector3(spawnpoint.x + randomX, transform.position.y, spawnpoint.z + randomZ);
+            Debug.Log(IsInWalkRange(walkPoint));
+
+            //Check if Walkpoint is in Map
+            if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround) && IsInWalkRange(walkPoint))
             {
-                //check if Patrolling on x and z axis
-                if (SetPatrollingX && SetPatrollingZ)
-                {
-                    //look if the last walkpoint was negativ, if not create positive walkpoint
-                    if (!posWalkpoint)
-                    {
-                        //create Walkpoint
-                        walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z + walkpointRange);
-                    }
-                    //if true create a negative walkpoint from spawnpoint
-                    if (posWalkpoint)
-                    {
-                        walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z - walkpointRange);
-                    }
-                }
-                //check if only Patrolling on X axis
-                if (SetPatrollingX && !SetPatrollingZ)
-                {
-                    //look if the last walkpoint was negativ, if not create positive walkpoint
-                    if (!posWalkpoint)
-                    {
-                        //create positive Walkpoint
-                        walkPoint = new Vector3(spawnpoint.x + walkpointRange, spawnpoint.y, spawnpoint.z);
-                    }
-                    //if true create a negative walkpoint from spawnpoint
-                    if (posWalkpoint)
-                    {
-                        //create negative Walkpoint
-                        walkPoint = new Vector3(spawnpoint.x - walkpointRange, spawnpoint.y, spawnpoint.z);
-                    }
-                }
-                //check if only Patrolling on Z axis
-                if (!SetPatrollingX && SetPatrollingZ)
-                {
-                    //look if the last walkpoint was negativ, if not create positive walkpoint
-                    if (!posWalkpoint)
-                    {
-                        //create Walkpoint
-                        walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z + walkpointRange);
-                    }
-                    //if true create a negative walkpoint from spawnpoint
-                    if (posWalkpoint)
-                    {
-                        walkPoint = new Vector3(spawnpoint.x, spawnpoint.y, spawnpoint.z - walkpointRange);
-                    }
-                }
+                walkPointSet = true;
             }
-        }
-        //Check if Walkpoint is in Map then set walkPointSet true
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-        {
-            walkPointSet = true;
         }
     }
     private void ChasePlayer()

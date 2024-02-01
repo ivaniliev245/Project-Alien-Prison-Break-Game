@@ -1215,6 +1215,11 @@ PrefabInstance:
       propertyPath: SetPatrollingX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
+        type: 3}
+      propertyPath: SetPatrollingZ
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4424725253156258520, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_AnchorMax.x
