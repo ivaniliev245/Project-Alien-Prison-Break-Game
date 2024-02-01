@@ -140,7 +140,6 @@ public class Alien_AI_Controller : MonoBehaviour
 
             //create Walkpoint
             walkPoint = new Vector3(spawnpoint.x + randomX, transform.position.y, spawnpoint.z + randomZ);
-            Debug.Log(IsInWalkRange(walkPoint));
 
             //Check if Walkpoint is in Map
             if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround) && IsInWalkRange(walkPoint))

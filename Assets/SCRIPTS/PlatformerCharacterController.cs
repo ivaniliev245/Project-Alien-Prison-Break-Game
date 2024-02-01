@@ -80,6 +80,8 @@ public class PlatformerCharaterController : MonoBehaviour
     public float invincibilityLength;
     private float invincibilityCounter;
 
+    public GameOverScreen gameOverScreen;
+
 
     void Start()
     {
@@ -419,8 +421,7 @@ public class PlatformerCharaterController : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                //ToDo:
-                return;
+                gameOverScreen.Setup();
             }
         }
     }

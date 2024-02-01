@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class TerrainLava : MonoBehaviour
 {
-    public int damage = 100;
+    public int damage = 999;
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("Trigger");
         if (collider.CompareTag("Player"))
         {
-            Debug.Log(collider);
             collider.GetComponent<PlatformerCharaterController>().TakeDamage(damage);
         }
     }
