@@ -25,12 +25,20 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!alreadyAttacked)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton2))
+            if (Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton2))
             {
                 //Debug.Log("pressed Attack");
                 Attack();
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            }
+        }
+        else
+        {
+            // Reset the attack if the attack button is not being held down anymore
+            if (!(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton2)))
+            {
+                alreadyAttacked = false;
             }
         }
     }
