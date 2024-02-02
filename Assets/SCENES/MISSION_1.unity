@@ -63382,7 +63382,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.0519524
   MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
@@ -63510,6 +63510,7 @@ GameObject:
   - component: {fileID: 8917663049161757639}
   - component: {fileID: 8917663049161757640}
   - component: {fileID: 8917663049161757641}
+  - component: {fileID: 8917663049161757642}
   m_Layer: 7
   m_Name: PLAYER
   m_TagString: Player
@@ -67475,7 +67476,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.39537922, y: 0.73992246, z: 0.33795226}
+  m_Size: {x: 0.39537922, y: 0.9, z: 0.33795226}
   m_Center: {x: 0.084442526, y: 0.28021538, z: 0.1083223}
 --- !u!114 &8607091553750400759
 MonoBehaviour:
@@ -68057,7 +68058,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4209164365815798333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e4ad83c20729c546be43933db4990f6, type: 3}
   m_Name: 
@@ -68083,6 +68084,22 @@ MonoBehaviour:
   newMaterial: {fileID: 2100000, guid: 611a11378c076bc45a08e1501c6c4e15, type: 2}
   oldmaterial: {fileID: 2100000, guid: 88e91153af4840a4da451dc09326dbd8, type: 2}
   playerRenderer: {fileID: 5015241535883324640}
+--- !u!114 &8917663049161757642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4209164365815798333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de0ba6b8c96dff43abb9ec128c05761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acidPool: {fileID: 3258073524368035258, guid: 2d956aedf88053048ba2b12efa71c11a,
+    type: 3}
+  spawnDistance: 1.12
+  spawnCost: 2
 --- !u!137 &8936975393927243122
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
