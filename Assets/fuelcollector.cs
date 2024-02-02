@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class fuelcollector : MonoBehaviour
 {
@@ -15,7 +18,8 @@ public class fuelcollector : MonoBehaviour
             ChangeMaterial();
             Destroy(other.gameObject);
             SetCondition(true);
-             Time.timeScale = 0f;
+             //Time.timeScale = 0f;
+             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
         }
     }
 

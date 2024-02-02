@@ -16,6 +16,11 @@ public class PiccoloHealthBar : MonoBehaviour
         currentHealth = maxHealth;
         invincibilityLength = 0.25f;
         invincibilityCounter = invincibilityLength;
+         // Hide the cursor at the beginning of the game
+        Cursor.visible = false;
+
+        // Lock the cursor to the center of the screen
+        Cursor.lockState = CursorLockMode.Locked;
 
         if (healthBar == null)
         {
