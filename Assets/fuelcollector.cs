@@ -15,6 +15,7 @@ public class fuelcollector : MonoBehaviour
             ChangeMaterial();
             Destroy(other.gameObject);
             SetCondition(true);
+             Time.timeScale = 0f;
         }
     }
 
