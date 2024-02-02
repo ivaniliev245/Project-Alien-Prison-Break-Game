@@ -5,6 +5,7 @@ public class fuelcollector : MonoBehaviour
     public Material newMaterial; // Assign the material you want to apply in the Inspector
     public Material oldmaterial;
     public Renderer playerRenderer;
+    public Endgame Endgame;
 
    private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +14,7 @@ public class fuelcollector : MonoBehaviour
             Debug.Log("Collectable collected!");
             ChangeMaterial();
             Destroy(other.gameObject);
+            SetCondition(true);
         }
     }
 
@@ -28,5 +30,14 @@ public class fuelcollector : MonoBehaviour
         {
             Debug.LogError("Player Renderer or New Material is null. Check the Inspector settings.");
         }
+    }
+
+     void SetCondition(bool newCondition)
+    {
+        // Set the condition in the ColliderController script
+        Endgame.fuelfilled = newCondition;
+
+        // Log a message (you can remove this in the final version)
+        Debug.Log($"Condition set to {newCondition}");
     }
 }
