@@ -5836,7 +5836,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221622889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 251.6}
+  m_LocalPosition: {x: 0, y: 0, z: 251.95}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5844,7 +5844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1048, y: 16.3}
+  m_AnchoredPosition: {x: -984.5503, y: 13.15}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221622891
@@ -5863,7 +5863,7 @@ MonoBehaviour:
   door: {fileID: 1605963482}
   mainCamera: {fileID: 1646687244}
   keypadCamera: {fileID: 892561344}
-  proximityDistance: 2
+  proximityDistance: 2.14
   keypadButtonLayer:
     serializedVersion: 2
     m_Bits: 2048
@@ -14053,7 +14053,7 @@ Transform:
   m_GameObject: {fileID: 511494430}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.20750059, z: -0, w: 0.9782349}
-  m_LocalPosition: {x: 113.82628, y: -1.6413918, z: 7.0991516}
+  m_LocalPosition: {x: 147.78627, y: 3.4576092, z: -10.750839}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46884,7 +46884,7 @@ Transform:
   m_GameObject: {fileID: 1646687240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020004034, y: 1.2399988, z: -9.739998}
+  m_LocalPosition: {x: 0.020004034, y: 1.2399998, z: -9.739998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -63846,7 +63846,7 @@ Transform:
   m_GameObject: {fileID: 4209164365815798333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.20750059, z: -0, w: 0.9782349}
-  m_LocalPosition: {x: -992.66, y: 9.401, z: 242.15}
+  m_LocalPosition: {x: -958.7, y: 14.5, z: 224.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

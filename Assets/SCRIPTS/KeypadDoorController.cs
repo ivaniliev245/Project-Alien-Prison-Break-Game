@@ -33,6 +33,9 @@ public class KeypadDoorController : MonoBehaviour
     private int buttonPressCount = 0;
     public CorrectInputDisplay correctInputDisplay;
     public WrongInputDisplay wrongInputDisplay;
+
+
+    private bool isDoorOpened = false;
     
     private void Start()
     {
@@ -40,28 +43,29 @@ public class KeypadDoorController : MonoBehaviour
     }
 
     private void Update()
-    {
-        // Check for player proximity and 'Q' key press
-        if (Input.GetKeyDown(KeyCode.Q))
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, proximityDistance);
-
-            foreach (var collider in colliders)
+            // Check for player proximity and 'Q' key press
+            if (!isDoorOpened && Input.GetKeyDown(KeyCode.Q)) // Check if the door is not opened
             {
-                if (collider.CompareTag("Player"))
+                Collider[] colliders = Physics.OverlapSphere(transform.position, proximityDistance);
+
+                foreach (var collider in colliders)
                 {
-                    ToggleKeypadActivation();
-                    break;
+                    if (collider.CompareTag("Player"))
+                    {
+                        ToggleKeypadActivation();
+                        break;
+                    }
                 }
+            }
+
+            // Check for input only when the keypad is active and the door is not opened
+            if (!isDoorOpened && isKeypadActive)
+            {
+                HandleMouseInput();
             }
         }
 
-        // Check for input only when the keypad is active
-        if (isKeypadActive)
-        {
-            HandleMouseInput();
-        }
-    }
 
     private void HandleMouseInput()
     {
@@ -233,7 +237,7 @@ public class KeypadDoorController : MonoBehaviour
         }
     }
 
-    private void TriggerDoorAnimation()
+   private void TriggerDoorAnimation()
     {
         // Assuming your door has an Animator component
         Animator doorAnimator = door.GetComponent<Animator>();
@@ -248,16 +252,10 @@ public class KeypadDoorController : MonoBehaviour
             // Reset the entered code for subsequent attempts
             enteredCode = "";
 
-            // Deactivate the keypad after successful entry (you may adjust this based on
-// Optionally, play a sound or perform other actions related to the door opening
-
-            // You can add sound or other actions here
-
-            // Reset the entered code for subsequent attempts
-            enteredCode = "";
-
             // Deactivate the keypad after successful entry (you may adjust this based on your game logic)
             ToggleKeypadActivation();
+
+            isDoorOpened = true; // Set the flag to indicate that the door is opened
 
             Debug.Log("Door opening: animation triggered.");
         }
@@ -348,4 +346,12 @@ public class KeypadDoorController : MonoBehaviour
     }
 
   
+    private void OnDrawGizmosSelected()
+    {
+        // Draw a wire sphere gizmo to represent player detection distance
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, proximityDistance);
+    }
+
+
 }
