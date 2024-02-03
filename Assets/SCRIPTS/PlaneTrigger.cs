@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlaneTrigger : MonoBehaviour
 {
     public Transform respawnLocation; // Assign the respawn location in the Unity Inspector
-   
+    //public GameObject Splat;
 
     private void OnTriggerEnter(Collider other)
     {
