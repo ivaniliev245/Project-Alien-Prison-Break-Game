@@ -3,9 +3,18 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class MeshProjector : MonoBehaviour
 {
+    public enum SnapDirection
+    {
+        Bottom,
+        Top,
+        All
+    }
+
     public float maxDistance = 10f; // Maximum distance to search for objects
     public LayerMask objectLayerMask; // Layer mask to filter the objects
     public bool snapToMultipleObjects = false; // Whether to snap to multiple nearest objects
+    public SnapDirection snapDirection = SnapDirection.Bottom; // Direction to snap
+    public float volumeRetentionFactor = 0.5f; // Factor to control volume retention
 
     private Mesh originalMesh;
     private Mesh copiedMesh;
@@ -38,6 +47,15 @@ public class MeshProjector : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
+            if (snapDirection == SnapDirection.Bottom && hit.normal != Vector3.up)
+            {
+                continue; // Skip this hit if snapping to bottom faces and the normal is not up
+            }
+            else if (snapDirection == SnapDirection.Top && hit.normal != Vector3.down)
+            {
+                continue; // Skip this hit if snapping to top faces and the normal is not down
+            }
+
             ProjectMeshOntoSurface(hit);
             if (!snapToMultipleObjects)
             {
@@ -61,8 +79,11 @@ public class MeshProjector : MonoBehaviour
         {
             Vector3 vertexToProject = transform.TransformPoint(sourceVertices[i]); // Transform vertex to world space
 
-            // Project the vertex onto the surface plane
-            Vector3 projectedPosition = vertexToProject - Vector3.Dot(vertexToProject - surfacePoint, surfaceNormal) * surfaceNormal;
+            // Calculate the distance from the vertex to the surface plane
+            float distanceToSurface = Vector3.Dot(vertexToProject - surfacePoint, surfaceNormal);
+
+            // Adjust the projected position based on the distance to retain part of the volume
+            Vector3 projectedPosition = vertexToProject - surfaceNormal * Mathf.Min(distanceToSurface, volumeRetentionFactor);
 
             // Transform the projected position back to local space of the source mesh
             Vector3 localProjectedPosition = transform.InverseTransformPoint(projectedPosition);
