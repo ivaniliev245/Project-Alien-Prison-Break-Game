@@ -14,10 +14,10 @@ AnimatorStateMachine:
     m_Position: {x: 150, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2243015981627812712}
-    m_Position: {x: 130, y: 40, z: 0}
+    m_Position: {x: 110, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1520753919036801325}
-    m_Position: {x: 165, y: 105, z: 0}
+    m_Position: {x: 270, y: 130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:
@@ -205,7 +205,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsDoorOpen
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2243015981627812712}
   m_Solo: 1
