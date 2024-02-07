@@ -79,7 +79,10 @@ public class PlatformerCharaterController : MonoBehaviour
     public float invincibilityLength;
     private float invincibilityCounter;
 
+    public GameObject objectToDestroy;
+    public GameObject deathSplashPrefab;
     public GameOverScreen gameOverScreen;
+    public float gameOverDelay = 2.0f;
 
 
     void Start()
@@ -395,20 +398,44 @@ void UpdateGroundedState()
     }
 }
 
-public void TakeDamage(int Damage)
-{
-    if (invincibilityCounter <= 0)
+ public void TakeDamage(int damage)
     {
-        currentHealth -= Damage;
-        invincibilityCounter = invincibilityLength;
-        healthbar.UpdateHealthbar(currentHealth, maxHealth);
-
-        if (currentHealth <= 0)
+        if (invincibilityCounter <= 0)
         {
-            gameOverScreen.Setup();
+            currentHealth -= damage;
+            invincibilityCounter = invincibilityLength;
+            healthbar.UpdateHealthbar(currentHealth, maxHealth);
+
+            if (currentHealth <= 0)
+            {
+                Die( objectToDestroy);
+            }
         }
     }
+
+ private void Die(GameObject objectToDestroy)
+{
+    // Destroy the specific game object before replacing it
+    Destroy(objectToDestroy);
+
+    // Instantiate a new character prefab with adjustable settings
+    GameObject deathSplash = Instantiate(deathSplashPrefab, transform.position, transform.rotation);
+    // You may need to adjust the position and rotation as needed
+
+    // Additional setup for the new character prefab, such as adjusting settings or adding components, can be done here
+
+    // Invoke the game over setup with a delay
+    Invoke("GameOverSetup", gameOverDelay);
 }
+
+private void GameOverSetup()
+{
+    // Show game over screen or perform other game over actions
+    gameOverScreen.Setup();
+
+    // Additional actions, such as stopping movement or disabling collisions, can be added here
+}
+
 
 public void SetVelocity(Vector3 newVelocity)
 {
