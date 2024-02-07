@@ -19,7 +19,6 @@ public class PlatformerCharaterController : MonoBehaviour
     public float newHeight = 0.3f; // For Crouching
     private float oldHeight;
     public float newCenterY = -0.72f;// For Crouching
-   // private float newLifeHeight = 0.3f;// For Crouching
     private Vector3 originalLifePosition;// For Crouching
     private Vector3 newLifePosition;// For Crouching
     private Vector3 oldCenter;// For Crouching
@@ -104,9 +103,7 @@ public class PlatformerCharaterController : MonoBehaviour
 
         if (invincibilityCounter > 0)
         {
-            //invincibilityLength -= coyoteTime.deltaTime;
             invincibilityCounter -= Time.deltaTime;
-
         }
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -128,7 +125,6 @@ public class PlatformerCharaterController : MonoBehaviour
         bool isMoving = movement.magnitude > 0.1f;
         bool isCrouchingNoWalk = !isMoving && isCrouching; // Not moving and crouching
         bool isCrouchingNoWalkOrMove = isMoving && isCrouching; // Moving and crouching
-        bool isWalkingAttack = isMoving && isAttacking;
 
 
         float currentVelocity = isMoving ? velocity.magnitude * currentAnimationSpeedMultiplier : idleSpeed; // Calculate speed based on movement or idle state
@@ -217,60 +213,61 @@ public class PlatformerCharaterController : MonoBehaviour
                 Quaternion newRotation = Quaternion.Euler(newEulerAngles);
 
                 // Rotate the child object
-                childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
-            }
-        }
-    }
-
-    void ToggleCrouch()
+                childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * 
+rotationSpeed);
+}
+}
+}
+void ToggleCrouch()
+{
+    if (!isCrouching)
     {
-        if (!isCrouching)
+        isCrouching = true;
+
+        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
+
+        // Start crouching animation with cross-fade
+        if (hasAnimator)
         {
-            isCrouching = true;
-
-            float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
-
-            // Start crouching animation with cross-fade
-            if (hasAnimator)
-            {
-                animator.CrossFade("Crouch", transitionDuration);
-            }
-
-            oldHeight = characterController.height;
-            oldCenter = characterController.center;
-
-            characterController.height = newHeight;
-            Vector3 newCenter = characterController.center;
-            newCenter.y = newCenterY;
-            characterController.center = newCenter;
+            animator.CrossFade("Crouch", transitionDuration);
         }
-    }
 
-    void ToggleCrouchUp()
+        oldHeight = characterController.height;
+        oldCenter = characterController.center;
+
+        characterController.height = newHeight;
+        Vector3 newCenter = characterController.center;
+        newCenter.y = newCenterY;
+        characterController.center = newCenter;
+    }
+}
+
+void ToggleCrouchUp()
+{
+    if (isCrouching)
     {
-        if (isCrouching)
+        isCrouching = false;
+
+        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
+
+        // Start uncrouching animation with cross-fade
+        if (hasAnimator)
         {
-            isCrouching = false;
-
-            float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
-
-            // Start uncrouching animation with cross-fade
-            if (hasAnimator)
-            {
-                animator.CrossFade("Crouch", transitionDuration);
-            }
-
-            characterController.center = oldCenter;
-            characterController.height = oldHeight;
+            animator.CrossFade("Crouch", transitionDuration);
         }
+
+        characterController.center = oldCenter;
+        characterController.height = oldHeight;
     }
-    void StartAttack()
+}
+
+void StartAttack()
 {
     isAttacking = true;
 
     // Get a random attack animation name from the array
     string randomAttack = attackAnimations[Random.Range(0, attackAnimations.Length)];
-    animator.SetBool("AttackWhileWalking", true);
+
     // Set the random attack animation parameter to true
     if (hasAnimator)
     {
@@ -287,15 +284,9 @@ public class PlatformerCharaterController : MonoBehaviour
     }
 }
 
-   void StopAttack()
+void StopAttack()
 {
     isAttacking = false;
-
-    // Reset the 'AttackWhileWalking' flag or other related flags/animations
-    if (hasAnimator)
-    {
-        animator.SetBool("AttackWhileWalking", false);
-    }
 
     // Reset all attack animations by setting their boolean parameters to false
     foreach (string attackAnimation in attackAnimations)
@@ -304,132 +295,127 @@ public class PlatformerCharaterController : MonoBehaviour
     }
 }
 
-    public void OnJumpInput()
-	{
-        lastPressedJumpTime = jumpInputTimeBuffer;
-    }
-    
-    public bool CanJump()
+public void OnJumpInput()
+{
+    lastPressedJumpTime = jumpInputTimeBuffer;
+}
+
+public bool CanJump()
+{
+    return lastOnGroundTime > 0 && grounded && lastPressedJumpTime > 0;
+}
+
+public void Jump()
+{
+    //ensure the player can't jump twice
+    lastPressedJumpTime = 0;
+    lastOnGroundTime = 0;
+
+    StartCoroutine(ApplyJumpForce());
+}
+
+void PerformJump()
+{
+    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
     {
-        return lastOnGroundTime > 0 && grounded && lastPressedJumpTime > 0;
+        OnJumpInput();
     }
 
-
-    public void Jump()
-    {
-        //ensure the player can't jump twice
-        lastPressedJumpTime = 0;
-        lastOnGroundTime = 0;
-
-        StartCoroutine(ApplyJumpForce());
-    }
-
-    void PerformJump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
-        {
-            OnJumpInput();
-        }
-
-        if (CanJump())
-        {
-            grounded = characterController.isGrounded;
-            Jump();
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
-    }
-    IEnumerator ApplyJumpForce()
-    {
-
-        float timeInAir = 0f;
-        float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
-
-        if (hasAnimator)
-        {
-            animator.SetBool("Jump", true);
-        }
-        while (timeInAir < jumpDuration) // Use adjustable jump duration
-        {
-            float jumpVelocity = initialJumpForce - (gravity * timeInAir);
-            velocity.y = jumpVelocity;
-
-            timeInAir += Time.deltaTime;
-
-            yield return null;
-        }
-
-        //important value for animator pls dont reomove
-        if (hasAnimator)
-        {
-            animator.SetBool("Jump", false);
-        }
-    }
-
-
-    void UpdateAnimatorSpeed(float speed)
-    {
-        float minSpeed = 0.001f; // Adjust as needed
-        float maxAnimatorSpeed = 1.5f; // Define the maximum speed value for the animator here
-
-        // Ensure minimum speed threshold
-        speed = Mathf.Max(speed, minSpeed);
-
-        // Ensure speed doesn't exceed the maximum speed value for the animator
-        speed = Mathf.Min(speed, maxAnimatorSpeed);
-
-        if (hasAnimator)
-        {
-            animator.SetFloat("Speed", speed); // Set the speed parameter in the animator
-        }
-    }
-    
-    void UpdateGroundedState()  // this is only for animator
+    if (CanJump())
     {
         grounded = characterController.isGrounded;
-        if (grounded && lastOnGroundTime > 0)
-        {
-            // Check if the character is touching the ground
-            grounded = characterController.isGrounded;
-
-            // Set the 'Grounded' boolean parameter in the animator based on character's grounded state
-            if (hasAnimator)
-            {
-                animator.SetBool("Grounded", grounded);
-            }
-        }
-        else
-        {
-            // If not grounded or jump timer active, set the 'Grounded' parameter to false
-            //important value for animator pls dont remove
-
-            if (hasAnimator)
-            {
-                animator.SetBool("Grounded", false);
-            }
-        }
+        Jump();
     }
 
-    public void TakeDamage(int Damage)
+    velocity.y += gravity * Time.deltaTime;
+    characterController.Move(velocity * Time.deltaTime);
+}
+
+IEnumerator ApplyJumpForce()
+{
+    float timeInAir = 0f;
+    float initialJumpForce = Mathf.Sqrt(jumpForce * -2f * gravity);
+
+    if (hasAnimator)
     {
-        if (invincibilityCounter <= 0)
-        {
-            currentHealth -= Damage;
-            invincibilityCounter = invincibilityLength;
-            healthbar.UpdateHealthbar(currentHealth, maxHealth);
+        animator.SetBool("Jump", true);
+    }
 
-            if (currentHealth <= 0)
-            {
-                gameOverScreen.Setup();
-            }
+    while (timeInAir < jumpDuration) // Use adjustable jump duration
+    {
+        float jumpVelocity = initialJumpForce - (gravity * timeInAir);
+        velocity.y = jumpVelocity;
+
+        timeInAir += Time.deltaTime;
+
+        yield return null;
+    }
+
+    if (hasAnimator)
+    {
+        animator.SetBool("Jump", false);
+    }
+}
+
+void UpdateAnimatorSpeed(float speed)
+{
+    float minSpeed = 0.001f; // Adjust as needed
+    float maxAnimatorSpeed = 1.5f; // Define the maximum speed value for the animator here
+
+    // Ensure minimum speed threshold
+    speed = Mathf.Max(speed, minSpeed);
+
+    // Ensure speed doesn't exceed the maximum speed value for the animator
+    speed = Mathf.Min(speed, maxAnimatorSpeed);
+
+    if (hasAnimator)
+    {
+        animator.SetFloat("Speed", speed); // Set the speed parameter in the animator
+    }
+}
+
+void UpdateGroundedState()
+{
+    grounded = characterController.isGrounded;
+    if (grounded && lastOnGroundTime > 0)
+    {
+        grounded = characterController.isGrounded;
+
+        if (hasAnimator)
+        {
+            animator.SetBool("Grounded", grounded);
         }
     }
-
-    public void SetVelocity(Vector3 newVelocity)
+    else
     {
-        velocity = newVelocity;
+        if (hasAnimator)
+        {
+            animator.SetBool("Grounded", false);
+        }
     }
-    public void SetCurrentHealth(int health) { currentHealth = health; }
-    public float GetCurrentHealth() { return currentHealth; }
+}
+
+public void TakeDamage(int Damage)
+{
+    if (invincibilityCounter <= 0)
+    {
+        currentHealth -= Damage;
+        invincibilityCounter = invincibilityLength;
+        healthbar.UpdateHealthbar(currentHealth, maxHealth);
+
+        if (currentHealth <= 0)
+        {
+            gameOverScreen.Setup();
+        }
+    }
+}
+
+public void SetVelocity(Vector3 newVelocity)
+{
+    velocity = newVelocity;
+}
+
+public void SetCurrentHealth(int health) { currentHealth = health; }
+
+public float GetCurrentHealth() { return currentHealth; }
 }
