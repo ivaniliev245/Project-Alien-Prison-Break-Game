@@ -84,6 +84,7 @@ public class PlatformerCharaterController : MonoBehaviour
     public GameOverScreen gameOverScreen;
     public float gameOverDelay = 2.0f;
 
+    public Transform deathSplashLocation;
 
     void Start()
     {
@@ -419,7 +420,7 @@ void UpdateGroundedState()
     Destroy(objectToDestroy);
 
     // Instantiate a new character prefab with adjustable settings
-    GameObject deathSplash = Instantiate(deathSplashPrefab, transform.position, transform.rotation);
+    GameObject deathSplash = Instantiate(deathSplashPrefab, deathSplashLocation.position, deathSplashLocation.rotation);
     // You may need to adjust the position and rotation as needed
 
     // Additional setup for the new character prefab, such as adjusting settings or adding components, can be done here
