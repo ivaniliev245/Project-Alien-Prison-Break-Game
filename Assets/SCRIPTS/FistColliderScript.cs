@@ -6,8 +6,6 @@ public class FistColliderScript : MonoBehaviour
     public float destroyDelay = 5.0f;
     public float kickbackForce = 100f; // Adjust as needed
 
-
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
