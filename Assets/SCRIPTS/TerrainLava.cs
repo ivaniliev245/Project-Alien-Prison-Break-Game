@@ -13,6 +13,7 @@ public class TerrainLava : MonoBehaviour
 
     private PlatformerCharaterController playerController; // Reference to the player controller
     private bool isPlayerOnFire = false; // Flag to track if player is on fire
+    private GameObject currentFirstVfx; // Reference to the instantiated first VFX
     private GameObject currentSecondVfx; // Reference to the instantiated second VFX
 
     private Coroutine damageCoroutine; // Reference to the coroutine
@@ -30,7 +31,9 @@ public class TerrainLava : MonoBehaviour
                 // Spawn first visual effects if available
                 if (vfxPrefab != null && vfxSpawnPoint != null)
                 {
-                    Instantiate(vfxPrefab, vfxSpawnPoint.position, Quaternion.identity);
+                    currentFirstVfx = Instantiate(vfxPrefab, vfxSpawnPoint.position, Quaternion.identity);
+                    // Remove the first VFX after onFireDuration
+                    StartCoroutine(RemoveVfxAfterDelay(currentFirstVfx, onFireDuration));
                 }
                 // Spawn second visual effects if player is on fire
                 if (secondVfxPrefab != null && vfxSpawnPoint != null)
