@@ -6,11 +6,13 @@ public class GoodFellas : MonoBehaviour
 {
     public Transform player; // Reference to the player
     public float followDistance = 5f; // Distance to follow the player
+    public float stopDistanceFromPlayer = 1f; // Distance to stop moving when following the player
     public float enemyDetectionDistance = 5f; // Distance to detect enemies
     public LayerMask enemyLayer; // LayerMask for enemies
 
     private Transform currentTarget; // Current target to follow (player or enemy)
     private Animator animator; // Reference to the Animator component
+    private bool isFollowingEnemy; // Flag to indicate if currently following an enemy
 
     void Start()
     {
@@ -22,6 +24,9 @@ public class GoodFellas : MonoBehaviour
 
         // Get the Animator component attached to the child object
         animator = GetComponentInChildren<Animator>();
+
+        // Initialize flags
+        isFollowingEnemy = false;
     }
 
     void Update()
@@ -32,32 +37,46 @@ public class GoodFellas : MonoBehaviour
         // Check if an enemy is within the detection range
         Collider[] colliders = Physics.OverlapSphere(transform.position, enemyDetectionDistance, enemyLayer);
         bool enemyDetected = colliders.Length > 0;
+        Transform nearestEnemy = null;
 
         // If an enemy is detected, set it as the target
         if (enemyDetected)
         {
-            currentTarget = colliders[0].transform;
+            nearestEnemy = colliders[0].transform;
+        }
+
+        // If the current target is not null and it's within the follow distance, follow it
+        if (nearestEnemy != null && distanceToPlayer <= followDistance)
+        {
+            currentTarget = nearestEnemy;
+            isFollowingEnemy = true;
         }
         else
         {
             currentTarget = player;
+            isFollowingEnemy = false;
         }
 
-        // If the current target is not null and it's within the follow distance, follow it
-        if (currentTarget != null && distanceToPlayer <= followDistance)
+        // If the current target is the player and the distance is less than or equal to the follow distance
+        if (currentTarget == player && distanceToPlayer <= followDistance)
         {
+            // If the character is within the stop distance from the player, stop moving
+            if (distanceToPlayer <= stopDistanceFromPlayer)
+            {
+                animator.SetFloat("Speed", 0f);
+            }
+            else
+            {
+                // Otherwise, continue following the player
+                FollowTarget(player);
+                animator.SetFloat("Speed", 1f); // Adjust speed as needed
+            }
+        }
+        else if (currentTarget != null)
+        {
+            // Continue following the enemy without stopping
             FollowTarget(currentTarget);
-
-            // Calculate speed based on distance to the target
-            float speed = (currentTarget == player) ? 1f : 0.5f; // Adjust as needed
-
-            // Update the Animator speed parameter
-            animator.SetFloat("Speed", speed);
-        }
-        else
-        {
-            // If not following, set speed to 0 for idle animation
-            animator.SetFloat("Speed", 0f);
+            animator.SetFloat("Speed", 1f); // Adjust speed as needed
         }
     }
 
@@ -65,8 +84,8 @@ public class GoodFellas : MonoBehaviour
     void FollowTarget(Transform target)
     {
         // Rotate towards the target
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        Vector3 directionToTarget = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
         // Move ObjectX towards the target
