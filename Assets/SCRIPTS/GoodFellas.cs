@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoodFellas : MonoBehaviour
@@ -8,6 +6,7 @@ public class GoodFellas : MonoBehaviour
     public float followDistance = 5f; // Distance to follow the player
     public float stopDistanceFromPlayer = 1f; // Distance to stop moving when following the player
     public float enemyDetectionDistance = 5f; // Distance to detect enemies
+    public float maxChaseDistance = 10f; // Maximum distance to chase an enemy
     public LayerMask enemyLayer; // LayerMask for enemies
 
     private Transform currentTarget; // Current target to follow (player or enemy)
@@ -31,64 +30,104 @@ public class GoodFellas : MonoBehaviour
 
     void Update()
     {
-        // Calculate distance between ObjectX and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // Check if an enemy is within the detection range
         Collider[] colliders = Physics.OverlapSphere(transform.position, enemyDetectionDistance, enemyLayer);
         bool enemyDetected = colliders.Length > 0;
         Transform nearestEnemy = null;
 
-        // If an enemy is detected, set it as the target
         if (enemyDetected)
         {
             nearestEnemy = colliders[0].transform;
         }
 
-        // If the current target is not null and it's within the follow distance, follow it
-        if (nearestEnemy != null && distanceToPlayer <= followDistance)
+        if (nearestEnemy != null)
         {
-            currentTarget = nearestEnemy;
-            isFollowingEnemy = true;
+            float distanceToEnemy = Vector3.Distance(transform.position, nearestEnemy.position);
+
+            // Check if the distance to the enemy exceeds the maximum chase distance
+            if (distanceToEnemy > maxChaseDistance)
+            {
+                // Give up chasing the enemy and return to the player
+                currentTarget = player;
+                isFollowingEnemy = false;
+            }
+            else
+            {
+                // If an enemy is detected within the follow distance, follow it
+                if (distanceToEnemy <= followDistance)
+                {
+                    currentTarget = nearestEnemy;
+                    isFollowingEnemy = true;
+                }
+                else
+                {
+                    // If the enemy is outside the follow distance, return to following the player
+                    currentTarget = player;
+                    isFollowingEnemy = false;
+                }
+            }
         }
         else
         {
+            // If no enemy is detected, follow the player
             currentTarget = player;
             isFollowingEnemy = false;
         }
 
-        // If the current target is the player and the distance is less than or equal to the follow distance
-        if (currentTarget == player && distanceToPlayer <= followDistance)
+        // If the current target is the player or an enemy within the follow distance, continue following
+        if (currentTarget != null)
         {
-            // If the character is within the stop distance from the player, stop moving
-            if (distanceToPlayer <= stopDistanceFromPlayer)
+            if (currentTarget == player && distanceToPlayer <= stopDistanceFromPlayer)
             {
+                // Stop moving if within stop distance from the player
                 animator.SetFloat("Speed", 0f);
             }
             else
             {
-                // Otherwise, continue following the player
-                FollowTarget(player);
+                MoveTowardsTarget(currentTarget);
                 animator.SetFloat("Speed", 1f); // Adjust speed as needed
             }
         }
-        else if (currentTarget != null)
-        {
-            // Continue following the enemy without stopping
-            FollowTarget(currentTarget);
-            animator.SetFloat("Speed", 1f); // Adjust speed as needed
-        }
     }
 
-    // Function to make ObjectX follow the target
-    void FollowTarget(Transform target)
+    // Function to move towards the target
+    void MoveTowardsTarget(Transform target)
     {
-        // Rotate towards the target
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
-        // Move ObjectX towards the target
         transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * 4f);
+    }
+
+    // Draw Gizmos in the editor
+    private void OnDrawGizmos()
+{
+    if (!Application.isPlaying) // Only draw Gizmos in the editor, not during runtime
+    {
+        // Draw Gizmos for follow distance (blue)
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, followDistance);
+
+        // Draw Gizmos for stop distance from player (green)
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, stopDistanceFromPlayer);
+
+        // Draw Gizmos for enemy detection distance (red)
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, enemyDetectionDistance);
+
+        // Draw Gizmos for max chase distance (yellow)
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, maxChaseDistance);
+    }
+}
+
+
+    // Draw gizmos for distances
+    private void DrawGizmos(float distance, Color color)
+    {
+        Gizmos.color = color;
+        Gizmos.DrawWireSphere(transform.position, distance);
     }
 }
