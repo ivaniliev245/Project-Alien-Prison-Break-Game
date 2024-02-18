@@ -8,6 +8,7 @@ public class GoodFellas : MonoBehaviour
     public float enemyDetectionDistance = 5f; // Distance to detect enemies
     public float maxChaseDistance = 10f; // Maximum distance to chase an enemy
     public LayerMask enemyLayer; // LayerMask for enemies
+    public float movementSpeed = 4f; // Adjustable moving speed
 
     private Transform currentTarget; // Current target to follow (player or enemy)
     private Animator animator; // Reference to the Animator component
@@ -97,37 +98,29 @@ public class GoodFellas : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
 
-        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * 4f);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * movementSpeed);
     }
 
     // Draw Gizmos in the editor
     private void OnDrawGizmos()
-{
-    if (!Application.isPlaying) // Only draw Gizmos in the editor, not during runtime
     {
-        // Draw Gizmos for follow distance (blue)
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, followDistance);
+        if (!Application.isPlaying) // Only draw Gizmos in the editor, not during runtime
+        {
+            // Draw Gizmos for follow distance (blue)
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, followDistance);
 
-        // Draw Gizmos for stop distance from player (green)
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, stopDistanceFromPlayer);
+            // Draw Gizmos for stop distance from player (green)
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, stopDistanceFromPlayer);
 
-        // Draw Gizmos for enemy detection distance (red)
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyDetectionDistance);
+            // Draw Gizmos for enemy detection distance (red)
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, enemyDetectionDistance);
 
-        // Draw Gizmos for max chase distance (yellow)
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, maxChaseDistance);
-    }
-}
-
-
-    // Draw gizmos for distances
-    private void DrawGizmos(float distance, Color color)
-    {
-        Gizmos.color = color;
-        Gizmos.DrawWireSphere(transform.position, distance);
+            // Draw Gizmos for max chase distance (yellow)
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, maxChaseDistance);
+        }
     }
 }
