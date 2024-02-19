@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 7007267703745036843}
   - component: {fileID: 3271014122039358775}
   - component: {fileID: 8673537161701639714}
+  - component: {fileID: 688800355332471546}
   m_Layer: 0
   m_Name: Waterinside_for_lod0
   m_TagString: Attackhands
@@ -809,4 +810,25 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &688800355332471546
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173900055978046569}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.45
   m_Center: {x: 0, y: 0, z: 0}
