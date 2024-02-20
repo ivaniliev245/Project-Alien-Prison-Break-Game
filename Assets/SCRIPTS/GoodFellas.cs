@@ -13,6 +13,7 @@ public class GoodFellas : MonoBehaviour
     private Transform currentTarget; // Current target to follow (player or enemy)
     private Animator animator; // Reference to the Animator component
     private bool isFollowingEnemy; // Flag to indicate if currently following an enemy
+    private bool isAttacking; // Flag to indicate if currently attacking
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class GoodFellas : MonoBehaviour
 
         // Initialize flags
         isFollowingEnemy = false;
+        isAttacking = false;
     }
 
     void Update()
@@ -81,7 +83,7 @@ public class GoodFellas : MonoBehaviour
             if (currentTarget == player && distanceToPlayer <= stopDistanceFromPlayer)
             {
                 // Stop moving if within stop distance from the player
-                animator.SetFloat("Speed", 0f);
+                animator.SetFloat("Speed", 0.1f);
             }
             else
             {
@@ -89,6 +91,9 @@ public class GoodFellas : MonoBehaviour
                 animator.SetFloat("Speed", 1f); // Adjust speed as needed
             }
         }
+
+        // Update the animator parameter for attacking
+        animator.SetBool("Attack", isAttacking);
     }
 
     // Function to move towards the target
@@ -121,6 +126,28 @@ public class GoodFellas : MonoBehaviour
             // Draw Gizmos for max chase distance (yellow)
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, maxChaseDistance);
+        }
+    }
+
+    // Method to handle trigger enter events
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the collider belongs to an enemy
+        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        {
+            // Set attacking flag to true when colliding with an enemy
+            isAttacking = true;
+        }
+    }
+
+    // Method to handle trigger exit events
+    private void OnTriggerExit(Collider other)
+    {
+        // Check if the collider belongs to an enemy
+        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        {
+            // Set attacking flag to false when no longer colliding with an enemy
+            isAttacking = false;
         }
     }
 }
