@@ -32272,9 +32272,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1646687241}
-  - component: {fileID: 1646687243}
   - component: {fileID: 1646687244}
   - component: {fileID: 1646687245}
+  - component: {fileID: 1646687243}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -32312,7 +32312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 4294967295
   m_IgnoreTag: 
   m_TransparentLayers:
     serializedVersion: 2
