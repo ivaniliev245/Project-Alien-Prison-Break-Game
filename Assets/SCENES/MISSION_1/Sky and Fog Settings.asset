@@ -709,10 +709,10 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.442
+    m_Value: 0.28
   response:
     m_OverrideState: 0
     m_Value: 1
