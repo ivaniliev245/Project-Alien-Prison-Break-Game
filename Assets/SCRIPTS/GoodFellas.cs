@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class GoodFellas : MonoBehaviour
 {
-    public Transform player; // Reference to the player
-    public float followDistance = 5f; // Distance to follow the player
-    public float stopDistanceFromPlayer = 1f; // Distance to stop moving when following the player
-    public float enemyDetectionDistance = 5f; // Distance to detect enemies
-    public float maxChaseDistance = 10f; // Maximum distance to chase an enemy
-    public LayerMask enemyLayer; // LayerMask for enemies
-    public float movementSpeed = 4f; // Adjustable moving speed
+    public Transform player; 
+    public float followDistance = 5f; 
+    public float stopDistanceFromPlayer = 1f; 
+    public float enemyDetectionDistance = 5f; 
+    public float maxChaseDistance = 10f; 
+    public LayerMask enemyLayer; 
+    public float movementSpeed = 4f; 
+    public GameObject attackVFXPrefab; 
+    public GameObject fireVFXPrefab; 
+    public Transform dragonMouth; 
+    public float vfxDuration = 2f; // Duration of VFX before it's destroyed
 
-    private Transform currentTarget; // Current target to follow (player or enemy)
-    private Animator animator; // Reference to the Animator component
-    private bool isFollowingEnemy; // Flag to indicate if currently following an enemy
-    private bool isAttacking; // Flag to indicate if currently attacking
+    private Transform currentTarget; 
+    private Animator animator; 
+    private bool isFollowingEnemy; 
+    private bool isAttacking; 
+    private GameObject attackVFXInstance; 
 
     void Start()
     {
@@ -23,12 +28,16 @@ public class GoodFellas : MonoBehaviour
             rb.freezeRotation = true;
         }
 
-        // Get the Animator component attached to the child object
         animator = GetComponentInChildren<Animator>();
 
-        // Initialize flags
         isFollowingEnemy = false;
         isAttacking = false;
+
+        if (attackVFXPrefab != null && dragonMouth != null)
+        {
+            attackVFXInstance = Instantiate(attackVFXPrefab, dragonMouth.position, Quaternion.identity, dragonMouth);
+            attackVFXInstance.SetActive(false);
+        }
     }
 
     void Update()
@@ -47,16 +56,13 @@ public class GoodFellas : MonoBehaviour
         {
             float distanceToEnemy = Vector3.Distance(transform.position, nearestEnemy.position);
 
-            // Check if the distance to the enemy exceeds the maximum chase distance
             if (distanceToEnemy > maxChaseDistance)
             {
-                // Give up chasing the enemy and return to the player
                 currentTarget = player;
                 isFollowingEnemy = false;
             }
             else
             {
-                // If an enemy is detected within the follow distance, follow it
                 if (distanceToEnemy <= followDistance)
                 {
                     currentTarget = nearestEnemy;
@@ -64,7 +70,6 @@ public class GoodFellas : MonoBehaviour
                 }
                 else
                 {
-                    // If the enemy is outside the follow distance, return to following the player
                     currentTarget = player;
                     isFollowingEnemy = false;
                 }
@@ -72,31 +77,26 @@ public class GoodFellas : MonoBehaviour
         }
         else
         {
-            // If no enemy is detected, follow the player
             currentTarget = player;
             isFollowingEnemy = false;
         }
 
-        // If the current target is the player or an enemy within the follow distance, continue following
         if (currentTarget != null)
         {
             if (currentTarget == player && distanceToPlayer <= stopDistanceFromPlayer)
             {
-                // Stop moving if within stop distance from the player
                 animator.SetFloat("Speed", 0.1f);
             }
             else
             {
                 MoveTowardsTarget(currentTarget);
-                animator.SetFloat("Speed", 1f); // Adjust speed as needed
+                animator.SetFloat("Speed", 1f);
             }
         }
 
-        // Update the animator parameter for attacking
         animator.SetBool("Attack", isAttacking);
     }
 
-    // Function to move towards the target
     void MoveTowardsTarget(Transform target)
     {
         Vector3 directionToTarget = (target.position - transform.position).normalized;
@@ -106,48 +106,54 @@ public class GoodFellas : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * movementSpeed);
     }
 
-    // Draw Gizmos in the editor
+    private void OnTriggerEnter(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        {
+            isAttacking = true;
+
+            if (attackVFXInstance != null)
+            {
+                attackVFXInstance.SetActive(true);
+            }
+
+            if (fireVFXPrefab != null)
+            {
+                GameObject fireVFXInstance = Instantiate(fireVFXPrefab, other.transform.position, Quaternion.identity);
+                fireVFXInstance.transform.parent = other.transform; // Make the VFX a child of the enemy
+                Destroy(fireVFXInstance, vfxDuration); // Destroy the VFX after the specified duration
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
+        {
+            isAttacking = false;
+
+            if (attackVFXInstance != null)
+            {
+                attackVFXInstance.SetActive(false);
+            }
+        }
+    }
+
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying) // Only draw Gizmos in the editor, not during runtime
+        if (!Application.isPlaying)
         {
-            // Draw Gizmos for follow distance (blue)
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, followDistance);
 
-            // Draw Gizmos for stop distance from player (green)
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, stopDistanceFromPlayer);
 
-            // Draw Gizmos for enemy detection distance (red)
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, enemyDetectionDistance);
 
-            // Draw Gizmos for max chase distance (yellow)
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, maxChaseDistance);
-        }
-    }
-
-    // Method to handle trigger enter events
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if the collider belongs to an enemy
-        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
-        {
-            // Set attacking flag to true when colliding with an enemy
-            isAttacking = true;
-        }
-    }
-
-    // Method to handle trigger exit events
-    private void OnTriggerExit(Collider other)
-    {
-        // Check if the collider belongs to an enemy
-        if (((1 << other.gameObject.layer) & enemyLayer) != 0)
-        {
-            // Set attacking flag to false when no longer colliding with an enemy
-            isAttacking = false;
         }
     }
 }
