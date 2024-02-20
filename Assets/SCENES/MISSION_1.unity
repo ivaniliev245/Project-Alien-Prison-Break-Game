@@ -38878,7 +38878,7 @@ PrefabInstance:
     - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3473221208007383307, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
@@ -39053,7 +39053,7 @@ PrefabInstance:
     - target: {fileID: 6016556398005855357, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
       propertyPath: m_ObstacleAvoidanceType
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6709907040938936888, guid: efbe7bad654bc9940bd04f670053a7a0,
         type: 3}
@@ -44808,7 +44808,7 @@ PrefabInstance:
     - target: {fileID: 2130765672036883418, guid: 778053238b1845c41aedb2f6862b4a16,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.21
+      value: 12.72
       objectReference: {fileID: 0}
     - target: {fileID: 2130765672036883418, guid: 778053238b1845c41aedb2f6862b4a16,
         type: 3}
