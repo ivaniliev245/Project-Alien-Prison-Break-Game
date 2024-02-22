@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f235f38f61b627f4e841edb5f1356fdd,
         type: 3}
       propertyPath: m_Name
-      value: Mushroom1 (1)
+      value: Mushroom1
       objectReference: {fileID: 0}
     - target: {fileID: 5064578544286775295, guid: f235f38f61b627f4e841edb5f1356fdd,
         type: 3}
@@ -119,8 +119,8 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: -0.27318096, y: 3.8367157, z: -0.08725023}
   m_Size: 13.057135
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
   - screenRelativeHeight: 0.47009507
