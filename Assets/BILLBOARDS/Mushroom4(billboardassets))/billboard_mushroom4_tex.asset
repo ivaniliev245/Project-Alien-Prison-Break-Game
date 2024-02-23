@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce58035a221cef4e9f89ce0e83ee118, type: 3}
   m_Name: billboard_mushroom4_tex
   m_EditorClassIdentifier: 
-  rendererScale: {x: 0.39851704, y: 2.511733, z: 1}
+  rendererScale: {x: 2.86, y: 7, z: 1}
   uvCoordinates:
   - bottomLeft: {x: 0, y: 0}
     bottomRight: {x: 0.026381562, y: 0}
