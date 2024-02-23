@@ -135,7 +135,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 0}
   update: 1
   render: 1
-  atlas: {fileID: 11400000, guid: 37c6a82af0892f748b17e5bed03c5ec3, type: 2}
+  atlas: {fileID: 11400000, guid: 743ba0e257e6c974b9e27e0874d781cd, type: 2}
   localScale: {x: 1, y: 1, z: 1}
 --- !u!1 &2516238984742660279
 GameObject:
