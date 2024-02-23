@@ -31271,7 +31271,7 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 1
     FocusDistance: 10
-    m_SensorSize: {x: 1, y: 1}
+    m_SensorSize: {x: 36, y: 24}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -76846,15 +76846,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 609761932}
     m_Modifications:
-    - target: {fileID: 2627423530779683402, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
+    - target: {fileID: 1090924744154425234, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2816102679083003530, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
+    - target: {fileID: 2627423530779683402, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2816102679083003530, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3139700317131075253, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
@@ -76864,17 +76869,17 @@ PrefabInstance:
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36
+      value: 152.62212
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.2
+      value: -2.4423904
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -33.3
+      value: -14.74147
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
@@ -76914,7 +76919,7 @@ PrefabInstance:
     - target: {fileID: 7895619295409620689, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
