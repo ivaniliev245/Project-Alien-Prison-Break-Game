@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/SCENES/MainMenu.unity
     guid: 4943a13b4c968c548b68c14d9b72bb81
   - enabled: 1
+    path: Assets/SCENES/INTROS/Intro_AlienCrash_OUTERSPACE.unity
+    guid: 39613a1a2e937684f8db867b7babbb45
+  - enabled: 1
     path: Assets/SCENES/MISSION_1.unity
     guid: 56e5efae8932c9e44821e005bfe5a658
   m_configObjects: {}
