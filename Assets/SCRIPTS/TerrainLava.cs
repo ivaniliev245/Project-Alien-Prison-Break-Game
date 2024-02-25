@@ -32,8 +32,6 @@ public class TerrainLava : MonoBehaviour
                 if (vfxPrefab != null && vfxSpawnPoint != null)
                 {
                     currentFirstVfx = Instantiate(vfxPrefab, vfxSpawnPoint.position, Quaternion.identity);
-                    // Remove the first VFX after onFireDuration
-                    StartCoroutine(RemoveVfxAfterDelay(currentFirstVfx, onFireDuration));
                 }
                 // Spawn second visual effects if player is on fire
                 if (secondVfxPrefab != null && vfxSpawnPoint != null)
@@ -41,10 +39,17 @@ public class TerrainLava : MonoBehaviour
                     currentSecondVfx = Instantiate(secondVfxPrefab, vfxSpawnPoint.position, Quaternion.identity);
                     // Set the parent of the second VFX to the vfxSpawnPoint to follow its position
                     currentSecondVfx.transform.parent = vfxSpawnPoint;
-                    // Remove the second VFX after onFireDuration
-                    StartCoroutine(RemoveVfxAfterDelay(currentSecondVfx, onFireDuration));
                 }
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && isPlayerOnFire)
+        {
+            // Apply fire damage if player is in contact with lava and on fire
+            playerController.TakeDamage(fireDamagePerInterval);
         }
     }
 
@@ -57,6 +62,16 @@ public class TerrainLava : MonoBehaviour
             damageCoroutine = null;
             isPlayerOnFire = false; // Reset the flag when player exits lava
             playerController = null; // Reset playerController reference
+            
+            // Optionally, remove visual effects here
+            if (currentFirstVfx != null)
+            {
+                Destroy(currentFirstVfx);
+            }
+            if (currentSecondVfx != null)
+            {
+                Destroy(currentSecondVfx);
+            }
         }
     }
 
@@ -64,19 +79,7 @@ public class TerrainLava : MonoBehaviour
     {
         while (true)
         {
-            // Apply fire damage if player is on fire
-            if (isPlayerOnFire && playerController != null)
-            {
-                playerController.TakeDamage(fireDamagePerInterval);
-            }
             yield return new WaitForSeconds(damageInterval);
         }
-    }
-
-    private IEnumerator RemoveVfxAfterDelay(GameObject vfxObject, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        // Remove the VFX after the specified delay
-        Destroy(vfxObject);
     }
 }
