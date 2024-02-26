@@ -187,15 +187,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3990520361987445137}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff43095b5f1d2c64cb1ccc17527671a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
-  destroyDelay: 4
-  animationDelay: 5
-  acidAttackAnimation: {fileID: 5435968941827915639}
+  destroyDelay: 5
 --- !u!135 &5687666994775492802
 SphereCollider:
   m_ObjectHideFlags: 0

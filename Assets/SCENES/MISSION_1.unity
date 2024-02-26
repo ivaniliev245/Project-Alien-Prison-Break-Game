@@ -654,7 +654,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 34961925}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Patrol_Point (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9853,9 +9853,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 546804091}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ENEMY BLOCK PICCOLO
-  m_TagString: Untagged
+  m_TagString: piccolo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10898,7 +10898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 612101848}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Patrol_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22335,7 +22335,7 @@ GameObject:
   - component: {fileID: 1246802702}
   - component: {fileID: 1246802703}
   - component: {fileID: 1246802705}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Patrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34241,7 +34241,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.007
+  m_Radius: 0.015
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1883896064
 MonoBehaviour:
@@ -34255,9 +34255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc3fa6d11857ab4d97ddf3d25fffbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  destroyDelay: 5
-  kickbackForce: 100
+  damageAmount: 25
+  destroyDelay: 1
+  kickbackForce: 1
 --- !u!114 &1883896065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35302,7 +35302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1937804504}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Patrol_Point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40053,7 +40053,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.007
+  m_Radius: 0.015
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2132768268
 MonoBehaviour:
@@ -40067,9 +40067,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc3fa6d11857ab4d97ddf3d25fffbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 10
-  destroyDelay: 5
-  kickbackForce: 100
+  damageAmount: 25
+  destroyDelay: 1
+  kickbackForce: 20
 --- !u!135 &2132768269
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -57808,6 +57808,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: projectile_prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 3438981042502225688, guid: 27deabd5a8540bd4d938b692789f3ee9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8557465091590754737, guid: 27deabd5a8540bd4d938b692789f3ee9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -60898,6 +60903,9 @@ MonoBehaviour:
   gameOverScreen: {fileID: 1834946669}
   gameOverDelay: 2
   deathSplashLocation: {fileID: 1552190997}
+  fallDamageHeightThreshold: 5
+  fallDamageMultiplier: 1.5
+  baseFallDamage: 25
 --- !u!1001 &5313596179261774556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73767,7 +73775,7 @@ GameObject:
   - component: {fileID: 2661372316500311777}
   m_Layer: 3
   m_Name: DAMAGE COLLIDER AND Death_And_hit_Particles
-  m_TagString: Untagged
+  m_TagString: piccolo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -86,6 +86,14 @@ public class PlatformerCharaterController : MonoBehaviour
 
     public Transform deathSplashLocation;
 
+    [Header("Fall Damage")]
+    
+    public float fallDamageHeightThreshold = 10f; // Adjust as needed
+    public float fallDamageMultiplier = 1f; // Adjust as needed
+    public int baseFallDamage = 10; // Adjust as needed
+
+    private float fallStartHeight;
+    
     void Start()
     {
         Cursor.visible = false;
@@ -187,6 +195,7 @@ public class PlatformerCharaterController : MonoBehaviour
 
         }
 
+        CheckFallDamage();
         PerformJump();
         UpdateRotation();
         UpdateGroundedState();
@@ -445,5 +454,47 @@ public void SetVelocity(Vector3 newVelocity)
 
 public void SetCurrentHealth(int health) { currentHealth = health; }
 
+
+void CheckFallDamage()
+    {
+        // Check if the player is falling
+        if (!characterController.isGrounded && velocity.y < 0)
+        {
+            if (fallStartHeight == 0)
+            {
+                // Record the starting height of the fall
+                fallStartHeight = transform.position.y;
+            }
+        }
+        else
+        {
+            if (fallStartHeight != 0)
+            {
+                // Calculate the distance fallen
+                float fallDistance = fallStartHeight - transform.position.y;
+
+                // Check if fall distance exceeds the threshold for taking fall damage
+                if (fallDistance > fallDamageHeightThreshold)
+                {
+                    // Calculate fall damage
+                    int damage = Mathf.RoundToInt(baseFallDamage + (fallDistance - fallDamageHeightThreshold) * fallDamageMultiplier);
+
+                    // Apply fall damage
+                    TakeDamage(damage);
+                }
+
+                // Reset fall start height
+                fallStartHeight = 0;
+            }
+        }
+    }
+
+
+
+
 public float GetCurrentHealth() { return currentHealth; }
+
+
+
 }
+
