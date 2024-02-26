@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3659995153115176982}
   - component: {fileID: 8924682559891268397}
+  - component: {fileID: 1415477513482111732}
   m_Layer: 0
-  m_Name: Projectile_Hoverbot
+  m_Name: Projectile_PICCOLO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,13 +58,37 @@ MonoBehaviour:
   HittableLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  Speed: 50
-  GravityDownAcceleration: 0
+  Speed: 30
+  GravityDownAcceleration: 0.1
   TrajectoryCorrectionDistance: 5
   InheritWeaponVelocity: 1
   Damage: 10
+  DamageInt: 10
   AreaOfDamage: {fileID: 0}
   RadiusColor: {r: 0, g: 1, b: 1, a: 1}
+--- !u!136 &1415477513482111732
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659995153115176983}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.12
+  m_Height: 1.51
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.59}
 --- !u!1 &5564024855854763701
 GameObject:
   m_ObjectHideFlags: 0

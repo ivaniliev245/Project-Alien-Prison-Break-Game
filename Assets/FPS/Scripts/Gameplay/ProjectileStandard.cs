@@ -6,6 +6,10 @@ namespace Unity.FPS.Gameplay
 {
     public class ProjectileStandard : ProjectileBase
     {
+        [Header("General")] [Tooltip("Reference to the player controller")]
+        private PlatformerCharaterController playerController;
+        
+        
         [Header("General")] [Tooltip("Radius of this projectile's collision detection")]
         public float Radius = 0.01f;
 
@@ -17,11 +21,7 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("LifeTime of the projectile")]
         public float MaxLifeTime = 5f;
-
-        [Tooltip("VFX prefab to spawn upon impact")]
         public GameObject ImpactVfx;
-
-        [Tooltip("LifeTime of the VFX before being destroyed")]
         public float ImpactVfxLifetime = 5f;
 
         [Tooltip("Offset along the hit normal where the VFX will be spawned")]
@@ -48,6 +48,7 @@ namespace Unity.FPS.Gameplay
 
         [Header("Damage")] [Tooltip("Damage of the projectile")]
         public float Damage = 40f;
+        public int DamageInt = 10;
 
         [Tooltip("Area of damage. Keep empty if you don<t want area damage")]
         public DamageArea AreaOfDamage;
@@ -259,11 +260,25 @@ namespace Unity.FPS.Gameplay
             // Self Destruct
             Destroy(this.gameObject);
         }
-
+ 
+            private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                playerController = other.GetComponent<PlatformerCharaterController>();
+                // Apply fire damage if player is in contact with lava and on fire
+                playerController.TakeDamage(DamageInt);
+            }
+        }
+          
         void OnDrawGizmosSelected()
         {
             Gizmos.color = RadiusColor;
             Gizmos.DrawSphere(transform.position, Radius);
         }
+   
+   
+   
+   
     }
 }
