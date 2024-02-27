@@ -61495,8 +61495,7 @@ MonoBehaviour:
   fallDamageMultiplier: 1.5
   baseFallDamage: 25
   maxSlopeAngle: 45
-  slideSpeed: 5
-  slideForce: 10
+  slideSpeed: -10
 --- !u!1001 &5313596179261774556
 PrefabInstance:
   m_ObjectHideFlags: 0
