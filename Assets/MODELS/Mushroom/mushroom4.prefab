@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 6663132972087153431}
   - component: {fileID: 5916800080735486219}
   - component: {fileID: 7339122987055338126}
+  - component: {fileID: 8073674381791304488}
   m_Layer: 0
   m_Name: Retopo_Cylinder
   m_TagString: Untagged
@@ -404,3 +405,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8073674381791304488
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106063473101986108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 853745997579328131, guid: 902ebb32ed936ea44b3ad70335edd2a8, type: 3}
