@@ -30358,7 +30358,7 @@ Transform:
   m_GameObject: {fileID: 1646687240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2399979, z: -10}
+  m_LocalPosition: {x: 0, y: 1.2399998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47287,7 +47287,7 @@ Transform:
   m_GameObject: {fileID: 4209164365815798333}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1153, y: 35, z: 215}
+  m_LocalPosition: {x: -1010.3, y: 10.1, z: 234.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61494,7 +61494,7 @@ MonoBehaviour:
   fallDamageHeightThreshold: 5
   fallDamageMultiplier: 1.5
   baseFallDamage: 25
-  maxSlopeAngle: 60
+  maxSlopeAngle: 45
   slideSpeed: 5
   slideForce: 10
 --- !u!1001 &5313596179261774556
@@ -75358,17 +75358,17 @@ PrefabInstance:
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -42.57788
+      value: 100.122116
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.957607
+      value: -0.94239044
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.141464
+      value: -1.6414642
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}

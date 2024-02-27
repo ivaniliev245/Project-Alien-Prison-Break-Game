@@ -99,7 +99,7 @@ public class PlatformerCharaterController : MonoBehaviour
      public float maxSlopeAngle = 45f;
      public float slideSpeed = 5f;
 
-     public float slideForce = 10f; // Define your adjustable slide force here
+    
 
     void Start()
     {
@@ -526,36 +526,38 @@ void CalculateAndPrintSlopeAngle()
         }
     }
 
-
 void SlideDownSlope()
 {
     RaycastHit hit;
     if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
     {
-        Vector3 slideDirection = Vector3.Cross(hit.normal, Vector3.down);
         float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-
         Debug.Log("Slope Angle: " + slopeAngle);
-        Debug.DrawRay(hit.point, hit.normal, Color.red, 1f); // Draw a debug ray to visualize the slope normal
+        Debug.DrawRay(hit.point, hit.normal, Color.red, 1f); // Debug visualization
 
-        // Calculate the amount of slide based on the slope angle
-        float slideAmount = Mathf.Lerp(0f, slideSpeed, Mathf.Clamp01(slopeAngle / maxSlopeAngle));
+        // Check if the slope angle is too steep
+        if (slopeAngle > maxSlopeAngle)
+        {
+            // Calculate the slide direction aligned with gravity
+            Vector3 gravityDirection = Physics.gravity.normalized;
+            Vector3 slideDirection = Vector3.ProjectOnPlane(-gravityDirection, hit.normal).normalized;
 
-        Debug.Log("Slide Amount: " + slideAmount);
-        Debug.DrawRay(hit.point, slideDirection * slideAmount, Color.blue, 1f); // Draw a debug ray to visualize the slide direction
+            // Calculate the amount of slide based on the slope angle
+            float slideAmount = Mathf.Lerp(0f, slideSpeed, Mathf.Clamp01((slopeAngle - maxSlopeAngle) / (90 - maxSlopeAngle))); // Adjusted to start sliding when slope exceeds maxSlopeAngle
+            Debug.Log("Slide Amount: " + slideAmount);
+            Debug.DrawRay(hit.point, slideDirection * slideAmount, Color.blue, 1f); // Debug visualization
 
-        // Calculate the slide movement
-        Vector3 slideMovement = slideDirection * slideAmount * Time.deltaTime;
+            // Calculate the slide movement
+            Vector3 slideMovement = slideDirection * slideAmount * Time.deltaTime;
 
-        // Calculate new position along the slope
-        Vector3 newPosition = transform.position + slideMovement;
+            // Calculate new position along the slope
+            Vector3 newPosition = transform.position + slideMovement;
 
-        // Set the character's position directly
-        transform.position = newPosition;
+            // Set the character's position directly
+            transform.position = newPosition;
+        }
     }
 }
-
-
 
 
 
@@ -565,7 +567,7 @@ bool IsSlopeTooSteep()
     if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
     {
         float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-        return slopeAngle > maxSlopeAngle; // maxSlopeAngle is your adjustable value
+        return slopeAngle > maxSlopeAngle; // Return true if slope angle is too steep
     }
     return false;
 }
