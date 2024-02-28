@@ -1,11 +1,13 @@
 using UnityEngine;
-using System.Collections; // Add this line to include the System.Collections namespace
+using System.Collections;
 
 public class FistColliderScript : MonoBehaviour
 {
     public int damageAmount = 10;
     public float destroyDelay = 5.0f;
-    public float kickbackForce = 100f; // Adjust as needed
+    public float kickbackForce = 100f;
+    public GameObject hitVFXPrefab; // Reference to the VFX prefab
+    public float vfxDuration = 2.0f; // Duration for which the VFX sticks to the enemy
 
     private bool hasHit = false;
 
@@ -26,6 +28,13 @@ public class FistColliderScript : MonoBehaviour
 
                     hasHit = true;
                     StartCoroutine(ResetHitStatus());
+
+                    // Instantiate hit VFX at the collision point
+                    GameObject hitVFX = Instantiate(hitVFXPrefab, other.transform.position, Quaternion.identity);
+                    // Make the VFX stick to the enemy
+                    hitVFX.transform.parent = other.transform;
+                    // Remove the VFX after vfxDuration seconds
+                    Destroy(hitVFX, vfxDuration);
                 }
             }
             else if (other.CompareTag("piccolo"))
@@ -34,11 +43,14 @@ public class FistColliderScript : MonoBehaviour
 
                 hasHit = true;
                 StartCoroutine(ResetHitStatus());
+
+                // Instantiate hit VFX at the collision point
+                GameObject hitVFX = Instantiate(hitVFXPrefab, other.transform.position, Quaternion.identity);
+                // Make the VFX stick to Piccolo
+                hitVFX.transform.parent = other.transform;
+                // Remove the VFX after vfxDuration seconds
+                Destroy(hitVFX, vfxDuration);
             }
-              // else
-                // {
-                //     Debug.Log("Collider triggered but no valid target found.");
-                // }
         }
     }
 

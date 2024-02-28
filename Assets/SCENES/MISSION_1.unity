@@ -10004,7 +10004,7 @@ GameObject:
   m_Layer: 3
   m_Name: ENEMY BLOCK PICCOLO
   m_TagString: piccolo
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -34789,9 +34789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc3fa6d11857ab4d97ddf3d25fffbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 25
+  damageAmount: 10
   destroyDelay: 1
-  kickbackForce: 1
+  kickbackForce: 100
+  hitVFXPrefab: {fileID: 3813070141950834986, guid: b869e133c00d91548ab22d9451760e32,
+    type: 3}
+  vfxDuration: 2
 --- !u!114 &1883896065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40655,9 +40658,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc3fa6d11857ab4d97ddf3d25fffbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 25
+  damageAmount: 10
   destroyDelay: 1
-  kickbackForce: 20
+  kickbackForce: 100
+  hitVFXPrefab: {fileID: 3813070141950834986, guid: b869e133c00d91548ab22d9451760e32,
+    type: 3}
+  vfxDuration: 2
 --- !u!135 &2132768269
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -42463,12 +42469,12 @@ PrefabInstance:
     - target: {fileID: 2243101857651603374, guid: 778053238b1845c41aedb2f6862b4a16,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 2243101857651603374, guid: 778053238b1845c41aedb2f6862b4a16,
         type: 3}
       propertyPath: m_Lens.m_SensorSize.y
-      value: 1
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 2544459492704296427, guid: 778053238b1845c41aedb2f6862b4a16,
         type: 3}
@@ -55152,7 +55158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3810323381369911837}
   - component: {fileID: 5319286457493037617}
-  - component: {fileID: 8607091553750400757}
   - component: {fileID: 5837996652607724781}
   - component: {fileID: 7992678818287000404}
   - component: {fileID: 8545963024158967698}
@@ -55160,6 +55165,7 @@ GameObject:
   - component: {fileID: 8607091553750400758}
   - component: {fileID: 8607091553750400759}
   - component: {fileID: 8607091553750400760}
+  - component: {fileID: 8607091553750400761}
   m_Layer: 3
   m_Name: piccolo
   m_TagString: piccolo
@@ -74656,32 +74662,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5470615508965709033}
   m_Mesh: {fileID: -8675882175916505016, guid: 42ecd5a0cdaf85c469e91b3731366568, type: 3}
---- !u!143 &8607091553750400757
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810323381369911825}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.09
-  m_Radius: 0.26
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!65 &8607091553750400758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74701,8 +74681,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.39537922, y: 0.9, z: 0.33795226}
-  m_Center: {x: 0.084442526, y: 0.28021538, z: 0.1083223}
+  m_Size: {x: 0.39537922, y: 1.02, z: 0.33795226}
+  m_Center: {x: 0, y: 0.49, z: 0}
 --- !u!114 &8607091553750400759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74740,6 +74720,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.3247759, z: 1}
   m_Center: {x: 0, y: 0.16238743, z: 0}
+--- !u!54 &8607091553750400761
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810323381369911825}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &8630766926998461048
 Transform:
   m_ObjectHideFlags: 0
