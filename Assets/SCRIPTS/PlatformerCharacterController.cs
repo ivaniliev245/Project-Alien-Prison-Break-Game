@@ -246,19 +246,20 @@ rotationSpeed);
 }
 }
 }
-void ToggleCrouch()
-{
-    if (!isCrouching)
+    void ToggleCrouch()
     {
-        isCrouching = true;
-
-        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
-
-        // Start crouching animation with cross-fade
-        if (hasAnimator)
+        if (!isCrouching)
         {
-            animator.CrossFade("Crouch", transitionDuration);
-        }
+            isCrouching = true;
+
+            float transitionDuration = 0.2f;
+
+            // Set the "crouchNoWalk" parameter to true
+            if (animator != null)
+            {
+                animator.SetBool("crouchNoWalk", true);
+            }
+
 
         oldHeight = characterController.height;
         oldCenter = characterController.center;
@@ -270,19 +271,20 @@ void ToggleCrouch()
     }
 }
 
-void ToggleCrouchUp()
-{
-    if (isCrouching)
+
+ void ToggleCrouchUp()
     {
-        isCrouching = false;
-
-        float transitionDuration = 0.2f; // Adjust this value as needed for the cross-fade duration
-
-        // Start uncrouching animation with cross-fade
-        if (hasAnimator)
+        if (isCrouching)
         {
-            animator.CrossFade("Crouch", transitionDuration);
-        }
+            isCrouching = false;
+
+            float transitionDuration = 0.2f;
+
+            // Set the "crouchNoWalk" parameter to false
+            if (animator != null)
+            {
+                animator.SetBool("crouchNoWalk", false);
+            }
 
         characterController.center = oldCenter;
         characterController.height = oldHeight;
@@ -558,9 +560,6 @@ void SlideDownSlope()
         }
     }
 }
-
-
-
 bool IsSlopeTooSteep()
 {
     RaycastHit hit;
