@@ -8,7 +8,7 @@ public class ObjectFader : MonoBehaviour
     public float fadeSpeed, fadeAmount;
     float originalOpacity;
 
-    public MeshRenderer renderer;
+    public new MeshRenderer renderer;
     Material Mat;
     public bool DoFade = false;
 
