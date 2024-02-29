@@ -8,6 +8,8 @@ public class FistColliderScript : MonoBehaviour
     public float kickbackForce = 100f;
     public GameObject hitVFXPrefab; // Reference to the VFX prefab
     public float vfxDuration = 2.0f; // Duration for which the VFX sticks to the enemy
+    public float minScale = 0.5f; // Minimum scale for the VFX
+    public float maxScale = 1.5f; // Maximum scale for the VFX
 
     private bool hasHit = false;
 
@@ -31,6 +33,9 @@ public class FistColliderScript : MonoBehaviour
 
                     // Instantiate hit VFX at the collision point
                     GameObject hitVFX = Instantiate(hitVFXPrefab, other.transform.position, Quaternion.identity);
+                    // Randomize the scale of the VFX
+                    float randomScale = Random.Range(minScale, maxScale);
+                    hitVFX.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
                     // Make the VFX stick to the enemy
                     hitVFX.transform.parent = other.transform;
                     // Remove the VFX after vfxDuration seconds
@@ -46,6 +51,9 @@ public class FistColliderScript : MonoBehaviour
 
                 // Instantiate hit VFX at the collision point
                 GameObject hitVFX = Instantiate(hitVFXPrefab, other.transform.position, Quaternion.identity);
+                // Randomize the scale of the VFX
+                float randomScale = Random.Range(minScale, maxScale);
+                hitVFX.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
                 // Make the VFX stick to Piccolo
                 hitVFX.transform.parent = other.transform;
                 // Remove the VFX after vfxDuration seconds
