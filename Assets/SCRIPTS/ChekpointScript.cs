@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
 
 public class CheckpointScript : MonoBehaviour
 {
@@ -9,16 +8,21 @@ public class CheckpointScript : MonoBehaviour
     public Color startColor = Color.blue; // Initial emission color
     public Color endColor = Color.red; // Target emission color
     public GameObject checkpointPrefab; // Assignable prefab containing the emission material
+    public AudioClip detectionSound; // Sound to play when player is detected
+    public float vfxDuration = 2f; // Duration of the VFX effect
+    public GameObject vfxPrefab; // Prefab of the VFX GameObject to be instantiated
+    public Transform vfxSpawnPoint; // Assignable transform representing the spawn point for VFX
 
     private Renderer rend; // Renderer component of the object
     private Renderer childRenderer; // Renderer component of the child object with the emission material
     private MaterialPropertyBlock propertyBlock; // Material Property Block to modify material properties
-
+    private AudioSource audioSource; // AudioSource component to play sound
     private bool playerDetected = false; // Flag to track if player is detected
 
     void Start()
     {
         rend = GetComponent<Renderer>(); // Get the renderer component of the main object
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
         if (checkpointPrefab != null)
         {
             childRenderer = checkpointPrefab.GetComponentInChildren<Renderer>(); // Get the renderer component of the child object with the emission material
@@ -56,6 +60,19 @@ public class CheckpointScript : MonoBehaviour
                     SetEmissionColor(endColor);
                     playerDetected = true;
                     Debug.Log("Player detected. Emission color changed.");
+
+                    // Play detection sound
+                    if (audioSource != null && detectionSound != null)
+                    {
+                        audioSource.PlayOneShot(detectionSound);
+                    }
+
+                    // Spawn VFX
+                    if (vfxPrefab != null && vfxSpawnPoint != null)
+                    {
+                        GameObject vfxInstance = Instantiate(vfxPrefab, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
+                        Destroy(vfxInstance, vfxDuration);
+                    }
                 }
                 return; // Exit the loop if player is found
             }
