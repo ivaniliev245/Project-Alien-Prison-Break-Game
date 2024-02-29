@@ -34794,7 +34794,7 @@ MonoBehaviour:
   kickbackForce: 100
   hitVFXPrefab: {fileID: 3813070141950834986, guid: b869e133c00d91548ab22d9451760e32,
     type: 3}
-  vfxDuration: 2
+  vfxDuration: 5
 --- !u!114 &1883896065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40663,7 +40663,7 @@ MonoBehaviour:
   kickbackForce: 100
   hitVFXPrefab: {fileID: 3813070141950834986, guid: b869e133c00d91548ab22d9451760e32,
     type: 3}
-  vfxDuration: 2
+  vfxDuration: 5
 --- !u!135 &2132768269
 SphereCollider:
   m_ObjectHideFlags: 0
