@@ -34749,8 +34749,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883896060}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4893534, y: 0.65728664, z: 0.47848466, w: 0.31553137}
-  m_LocalPosition: {x: -0.51776123, y: -0.5131521, z: 0.024307251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 21.306208, y: 21.306208, z: 21.30622}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34775,7 +34775,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.015
+  m_Radius: 0.011
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1883896064
 MonoBehaviour:
@@ -34795,8 +34795,6 @@ MonoBehaviour:
   hitVFXPrefab: {fileID: 3813070141950834986, guid: b869e133c00d91548ab22d9451760e32,
     type: 3}
   vfxDuration: 0.8
-  minScale: 0.5
-  maxScale: 1.5
 --- !u!114 &1883896065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40606,8 +40604,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132768264}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4893534, y: 0.65728664, z: 0.47848466, w: 0.31553137}
-  m_LocalPosition: {x: -0.51776123, y: -0.5131521, z: 0.024307251}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 21.306208, y: 21.306208, z: 21.30622}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40646,7 +40644,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.015
+  m_Radius: 0.011
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2132768268
 MonoBehaviour:
@@ -40666,8 +40664,6 @@ MonoBehaviour:
   hitVFXPrefab: {fileID: 3813070141950834986, guid: b869e133c00d91548ab22d9451760e32,
     type: 3}
   vfxDuration: 0.8
-  minScale: 0.5
-  maxScale: 1.5
 --- !u!135 &2132768269
 SphereCollider:
   m_ObjectHideFlags: 0
