@@ -1,31 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class CheckpointScript : MonoBehaviour
 {
-    public float detectionRange = 5f; // Adjustable range to detect player
-    public Color startColor = Color.blue; // Initial emission color
-    public Color endColor = Color.red; // Target emission color
-    public GameObject checkpointPrefab; // Assignable prefab containing the emission material
-    public AudioClip detectionSound; // Sound to play when player is detected
-    public float vfxDuration = 2f; // Duration of the VFX effect
-    public GameObject vfxPrefab; // Prefab of the VFX GameObject to be instantiated
-    public Transform vfxSpawnPoint; // Assignable transform representing the spawn point for VFX
+    public float detectionRange = 5f;
+    public Color startColor = Color.blue;
+    public Color endColor = Color.red;
+    public GameObject checkpointPrefab;
+    public AudioClip detectionSound;
+    public float vfxDuration = 2f;
+    public GameObject vfxPrefab;
+    public Transform vfxSpawnPoint;
+    public List<Light> lightComponents; // List of assignable HDRP Light components
 
-    private Renderer rend; // Renderer component of the object
-    private Renderer childRenderer; // Renderer component of the child object with the emission material
-    private MaterialPropertyBlock propertyBlock; // Material Property Block to modify material properties
-    private AudioSource audioSource; // AudioSource component to play sound
-    private bool playerDetected = false; // Flag to track if player is detected
+    private Renderer rend;
+    private Renderer childRenderer;
+    private MaterialPropertyBlock propertyBlock;
+    private AudioSource audioSource;
+    private bool playerDetected = false;
 
     void Start()
     {
-        rend = GetComponent<Renderer>(); // Get the renderer component of the main object
-        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
+        rend = GetComponent<Renderer>();
+        audioSource = GetComponent<AudioSource>();
         if (checkpointPrefab != null)
         {
-            childRenderer = checkpointPrefab.GetComponentInChildren<Renderer>(); // Get the renderer component of the child object with the emission material
+            childRenderer = checkpointPrefab.GetComponentInChildren<Renderer>();
 
             if (childRenderer == null)
             {
@@ -38,7 +40,7 @@ public class CheckpointScript : MonoBehaviour
             Debug.LogWarning("Checkpoint prefab not assigned!");
         }
 
-        propertyBlock = new MaterialPropertyBlock(); // Create a new Material Property Block
+        propertyBlock = new MaterialPropertyBlock();
 
         // Set the initial emission color
         SetEmissionColor(startColor);
@@ -48,47 +50,48 @@ public class CheckpointScript : MonoBehaviour
 
     void Update()
     {
-        // Check if player is within the detection range
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRange);
         foreach (Collider col in colliders)
         {
             if (col.CompareTag("Player"))
             {
-                // Player is within range, switch emission color if not already detected
                 if (!playerDetected)
                 {
                     SetEmissionColor(endColor);
                     playerDetected = true;
                     Debug.Log("Player detected. Emission color changed.");
 
-                    // Play detection sound
                     if (audioSource != null && detectionSound != null)
                     {
                         audioSource.PlayOneShot(detectionSound);
                     }
 
-                    // Spawn VFX
                     if (vfxPrefab != null && vfxSpawnPoint != null)
                     {
                         GameObject vfxInstance = Instantiate(vfxPrefab, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
                         Destroy(vfxInstance, vfxDuration);
                     }
                 }
-                return; // Exit the loop if player is found
+                return;
             }
         }
-
-        // Player is not within range, do nothing
     }
 
-    // Set emission color for the material
     private void SetEmissionColor(Color color)
     {
         propertyBlock.SetColor("_EmissiveColor", color);
         childRenderer.SetPropertyBlock(propertyBlock);
+
+        foreach (Light lightComponent in lightComponents)
+        {
+            if (lightComponent != null)
+            {
+                // Change the HDRP light's color directly
+                lightComponent.color = color;
+            }
+        }
     }
 
-    // Draw gizmo to visualize detection range
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: 9900b5a09a232e34fb95a9aa3aff1848
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 9801397f829a1ed42984340315cbf362, type: 3}
+  iesMetaData:
+    FileFormatVersion: LM-63-2002
+    IESPhotometricType: Type C
+    IESMaximumIntensity: 28000
+    IESMaximumIntensityUnit: Lumens
+    Manufacturer: COOPER LIGHTING - STREETWORKS
+    LuminaireCatalogNumber: ATM-25-S-XX-4S
+    LuminaireDescription: MEDIUM ARCHITECTURAL AREA LUMINAIRE - TYPE IV DISTRIBUTION
+    LampCatalogNumber: 
+    LampDescription: 250 WATT HPS CLEAR E-18
+    PrefabLightType: 0
+    SpotAngle: 120
+    iesSize: 128
+    ApplyLightAttenuation: 1
+    UseIESMaximumIntensity: 1
+    CookieCompression: 2
+    LightAimAxisRotation: -90
