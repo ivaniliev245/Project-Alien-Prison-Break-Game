@@ -38623,7 +38623,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025880942}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8993f87dc810e34478b289620e33106a, type: 3}
@@ -56401,7 +56401,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243469522734499658, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 0280aed66af72014baf7145cfa98e68a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.75
   m_Pitch: 1
@@ -63078,7 +63078,7 @@ MonoBehaviour:
   SwapToNextWeapon: 0
   DelayAfterWeaponSwap: 0
   FlashOnHitDuration: 0.2
-  DamageTick: {fileID: 8300000, guid: a7fae22399a6e1d448dc0dd2210f1dac, type: 3}
+  DamageTick: {fileID: 0}
   DeathVfx: {fileID: 3899219112650467129, guid: 6a8bd0d0398c3bd4ba8afe53d0e05792,
     type: 3}
   DeathVfxSpawnPoint: {fileID: 3050201222663567232}
@@ -72439,8 +72439,8 @@ MonoBehaviour:
   AttackStopDistanceRatio: 0.2
   RandomHitSparks: []
   OnDetectVfx: []
-  OnDetectSfx: {fileID: 8300000, guid: 80054ac76a09a5248b109eff0e458a5a, type: 3}
-  MovementSound: {fileID: 8300000, guid: 0280aed66af72014baf7145cfa98e68a, type: 3}
+  OnDetectSfx: {fileID: 0}
+  MovementSound: {fileID: 0}
   PitchDistortionMovementSpeed:
     Min: 1
     Max: 1.5
@@ -75364,37 +75364,37 @@ PrefabInstance:
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100.122116
+      value: 152.6721
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.94239044
+      value: -1.4623909
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6414642
+      value: 7.248535
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9980781
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.026223695
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.055755988
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.0066118697
       objectReference: {fileID: 0}
     - target: {fileID: 6784238597400308568, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
@@ -75414,12 +75414,12 @@ PrefabInstance:
     - target: {fileID: 7855976737748312299, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: field of view
-      value: 40
+      value: 82.145485
       objectReference: {fileID: 0}
     - target: {fileID: 7855976737748312299, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
       propertyPath: m_FocalLength
-      value: 32.96973
+      value: 13.769076
       objectReference: {fileID: 0}
     - target: {fileID: 7895619295409620689, guid: 3ad18da38eae2204d8ebf110e3dfdca9,
         type: 3}
