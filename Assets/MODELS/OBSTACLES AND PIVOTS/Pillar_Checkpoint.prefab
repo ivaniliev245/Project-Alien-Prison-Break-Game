@@ -44,7 +44,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.64371246, g: 0.8980392, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.0627451, b: 0, a: 1}
   m_Intensity: 69.166565
   m_Range: 5.16
   m_SpotAngle: 30
@@ -272,9 +272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 1
-  startColor: {r: 0.3019608, g: 0.09803922, b: 0, a: 0.3529412}
+  startColor: {r: 0.4392157, g: 0.09803922, b: 0, a: 0.3529412}
   endColor: {r: 0.36862746, g: 1, b: 0.10980393, a: 1}
-  checkpointPrefab: {fileID: 0}
+  checkpointPrefab: {fileID: 5049908475926230305}
+  emissionObject: {fileID: 5049908475926230305}
   detectionSound: {fileID: 8300000, guid: 2fe649085bd2c2a48b4f0eb7d9048ec8, type: 3}
   vfxDuration: 150
   vfxPrefab: {fileID: 2772945506840418036, guid: 5c3eaef581671654f84baa4818e11a33,
@@ -726,7 +727,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.64371246, g: 0.8980392, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.059297055, b: 0, a: 1}
   m_Intensity: 126.05893
   m_Range: 19.7
   m_SpotAngle: 30
