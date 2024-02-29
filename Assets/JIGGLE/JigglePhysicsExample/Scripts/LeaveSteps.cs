@@ -16,6 +16,8 @@ public class LeaveSteps : MonoBehaviour
     private List<GameObject> leftSteps = new List<GameObject>(); // List to hold instantiated left steps
     private List<GameObject> rightSteps = new List<GameObject>(); // List to hold instantiated right steps
     private Vector3 lastStepPosition; // Position of the last step
+
+    public float speedThreshold = 0.2f;
     
     private void Start()
     {
@@ -24,28 +26,28 @@ public class LeaveSteps : MonoBehaviour
     }
 
 
-    private void Update()
+private void Update()
+{
+    // Move the character (you can replace this with your character movement logic)
+    float horizontalInput = Input.GetAxis("Horizontal");
+    float verticalInput = Input.GetAxis("Vertical");
+
+    Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+    float speed = movement.magnitude;
+
+    transform.Translate(movement * Time.deltaTime);
+
+    // Check if it's time to leave a step based on distance traveled and minimum speed threshold
+    if (speed > speedThreshold) // Adjust this threshold as needed
     {
-        // Move the character (you can replace this with your character movement logic)
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-        float speed = movement.magnitude;
-
-        transform.Translate(movement * Time.deltaTime);
-
-        // Check if it's time to leave a step based on distance traveled
-        if (speed > 0)
+        float distance = speed * stepDistanceMultiplier * Time.deltaTime;
+        if (Vector3.Distance(transform.position, lastStepPosition) >= distance)
         {
-            float distance = speed * stepDistanceMultiplier * Time.deltaTime;
-            if (Vector3.Distance(transform.position, lastStepPosition) >= distance)
-            {
-                CreateStep();
-                lastStepPosition = transform.position;
-            }
+            CreateStep();
+            lastStepPosition = transform.position;
         }
     }
+}
 
     private void CreateStep()
     {

@@ -37,26 +37,28 @@ public class FistColliderScript : MonoBehaviour
                     Destroy(hitVFX, vfxDuration);
                 }
             }
-            else if (other.CompareTag("piccolo"))
-            {
-                other.GetComponent<PiccoloHealthBar>().TakeDamage((float)damageAmount);
+                else if (other.CompareTag("piccolo"))
+                {
+                    PiccoloHealthBar piccoloHealth = other.GetComponent<PiccoloHealthBar>();
+                    if (piccoloHealth != null)
+                    {
+                        piccoloHealth.TakeDamage((float)damageAmount);
+                        // Instantiate hit VFX at the collision point
+                        GameObject hitVFX = Instantiate(hitVFXPrefab, other.transform.position, Quaternion.identity);
+                        if (hitVFX != null)
+                        {
+                            // Make the VFX stick to Piccolo
+                            hitVFX.transform.parent = other.transform;
+                            // Remove the VFX after vfxDuration seconds
+                            Destroy(hitVFX, vfxDuration);
+                        }
+                    }
+                }
 
-                hasHit = true;
-                StartCoroutine(ResetHitStatus());
-
-                // Instantiate hit VFX at the collision point
-                GameObject hitVFX = Instantiate(hitVFXPrefab, other.transform.position, Quaternion.identity);
-                // Make the VFX stick to Piccolo
-                hitVFX.transform.parent = other.transform;
-                // Remove the VFX after vfxDuration seconds
-                Destroy(hitVFX, vfxDuration);
-            }
-        }
-    }
 
     IEnumerator ResetHitStatus()
     {
         yield return new WaitForSeconds(destroyDelay);
         hasHit = false;
     }
-}
+}}}
