@@ -216,7 +216,7 @@ public class KeypadDoorController : MonoBehaviour
             // Activate the keypad
             isKeypadActive = true;
             // Optionally, switch to the keypad camera
-            mainCamera.Priority = 0;
+            mainCamera.Priority = 1;
             keypadCamera.Priority = 10;
 
             Debug.Log("Keypad activated. Use the mouse to enter the code.");
@@ -227,7 +227,7 @@ public class KeypadDoorController : MonoBehaviour
             isKeypadActive = false;
             // Switch back to the main camera
             mainCamera.Priority = 10;
-            keypadCamera.Priority = 0;
+            keypadCamera.Priority = 1;
 
             // Lock and hide the cursor when deactivating the keypad
             Cursor.lockState = CursorLockMode.Locked;
