@@ -28,6 +28,10 @@ public class AcidPoolScript : MonoBehaviour
             other.GetComponent<PiccoloHealthBar>().TakeDamage(damageAmount);
             hasCollided = true;
         }
+        if (hasCollided)
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator DestroyAfterDelay()
