@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.014764706, g: 0.013145411, b: 0.011967989, a: 1}
+  m_IndirectSpecularColor: {r: 0.014765175, g: 0.013145367, b: 0.011968339, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeSceneChange: 8
-  sceneToLoad: MISSION_1
+  sceneToLoad: Intro_Alien_shipp is falling
 --- !u!4 &601631586
 Transform:
   m_ObjectHideFlags: 0
