@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class RockDamage : MonoBehaviour
+public class HealthPick : MonoBehaviour
 {
-    public int damage = 10; // Amount of damage the rock deals
-    private PlatformerCharaterController playerController;
-    public GameObject player;
+ public int damage = 10; // Amount of damage the rock deals
+ private PlatformerCharaterController playerController;
+ public GameObject player;
 
     void OnTriggerEnter(Collider other)
     {
@@ -17,8 +19,9 @@ public class RockDamage : MonoBehaviour
             {
                //damageCoroutine = StartCoroutine(DealDamageOverTime());
                playerController.TakeDamage(damage);
+               //Destroy(gameObject);
             }
         }
     }
-
 }
+

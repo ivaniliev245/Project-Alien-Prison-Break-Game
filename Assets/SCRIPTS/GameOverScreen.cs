@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
+ public GameObject Health;
     public void Setup()
     {
         gameObject.SetActive(true);
+        Health.SetActive(false);
     }
 
     public void RespawnButton()
