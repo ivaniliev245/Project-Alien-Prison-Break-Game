@@ -9,8 +9,16 @@ public class SceneChanger : MonoBehaviour
     private float timer = 0f;
     private bool sceneChangeAllowed = false;
 
+    void start()
+    {    
+         Cursor.visible = false;
+        // Lock the cursor to the center of the screen
+        // Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Update()
     {
+        Cursor.visible = false;
         if (!sceneChangeAllowed)
         {
             timer += Time.deltaTime;

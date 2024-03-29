@@ -3,18 +3,22 @@ using UnityEngine;
 public class RockDamage : MonoBehaviour
 {
     public int damage = 10; // Amount of damage the rock deals
+    private PlatformerCharaterController playerController;
+    public GameObject player;
 
-    private void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        // Check if the collision is with the player
-        PlatformerCharaterController playerController = collision.gameObject.GetComponent<PlatformerCharaterController>();
-        if (playerController != null)
+        // Check if the object that entered the trigger is the one to move along with the platform
+        if (other.gameObject == player)
         {
-            // Deal damage to the player
-            playerController.TakeDamage(damage);
-
-            // Destroy the rock after it hits the player
-            Destroy(gameObject);
+           
+            playerController = other.GetComponent<PlatformerCharaterController>();
+            if (playerController != null)
+            {
+               //damageCoroutine = StartCoroutine(DealDamageOverTime());
+               playerController.TakeDamage(80);
+            }
         }
     }
+
 }
