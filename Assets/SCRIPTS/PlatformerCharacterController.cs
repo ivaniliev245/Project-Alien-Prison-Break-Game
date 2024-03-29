@@ -241,11 +241,10 @@ public class PlatformerCharaterController : MonoBehaviour
                 Quaternion newRotation = Quaternion.Euler(newEulerAngles);
 
                 // Rotate the child object
-                childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * 
-rotationSpeed);
-}
-}
-}
+                childObject.rotation = Quaternion.Slerp(childObject.rotation, newRotation, Time.deltaTime * rotationSpeed);
+            }
+        }
+    }
     void ToggleCrouch()
     {
         if (!isCrouching)
@@ -438,7 +437,7 @@ void UpdateGroundedState()
 
             if (currentHealth <= 0)
             {
-                Die( objectToDestroy);
+                Die(objectToDestroy);
             }
         }
     }
@@ -460,11 +459,13 @@ void UpdateGroundedState()
 
 private void GameOverSetup()
 {
-    // Show game over screen or perform other game over actions
-    gameOverScreen.Setup();
+        // Show game over screen or perform other game over actions
+        gameOverScreen.Setup();
 
-    // Additional actions, such as stopping movement or disabling collisions, can be added here
-}
+        //free mouse
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
 
 public void SetVelocity(Vector3 newVelocity)
