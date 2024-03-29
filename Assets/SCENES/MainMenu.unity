@@ -643,6 +643,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2529023569379001846, guid: 2512335db2e409445b3952a2e3dbef5d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5f201503b42ca6b448aacf86abf62083,
+        type: 3}
     - target: {fileID: 4960882929471575877, guid: 2512335db2e409445b3952a2e3dbef5d,
         type: 3}
       propertyPath: m_Pivot.x
