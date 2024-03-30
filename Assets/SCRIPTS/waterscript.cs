@@ -75,17 +75,6 @@ public class waterscript : MonoBehaviour
         // Collect health
         CollectHealth();
     }
-    public void CollectWater(float amount)
-    {
-        this.currentHealth = currentHealth;
-        currentHealth += amount;
-        if (currentHealth > maxWater)
-        {
-            currentHealth = maxWater;
-        }
-
-        Updatewaterbar(currentHealth);
-    }
 
     private void CollectHealth()
     {

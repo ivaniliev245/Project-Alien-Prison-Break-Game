@@ -16,7 +16,7 @@ public class RockDamage : MonoBehaviour
             if (playerController != null)
             {
                //damageCoroutine = StartCoroutine(DealDamageOverTime());
-               playerController.TakeDamage(damage);
+               playerController.TakeDamage(80);
             }
         }
     }
