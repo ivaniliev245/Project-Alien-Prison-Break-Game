@@ -5,6 +5,7 @@ public class WeldingRobot : MonoBehaviour
     public Transform[] waypoints; // Waypoints to define the path of the robot
     public float speed = 2f; // Speed of the robot
     public float stoppingDistance = 0.1f; // Distance at which the robot stops at a waypoint
+    public float rotationSpeed = 5f; // Speed of rotation
     public Animator animator; // Animator for the welding animation
     public GameObject weldingVFX; // VFX effect for welding
 
@@ -17,7 +18,15 @@ public class WeldingRobot : MonoBehaviour
         if (!isWelding && waypoints.Length > 0)
         {
             Vector3 targetPosition = waypoints[currentWaypointIndex].position;
+            Vector3 moveDirection = (targetPosition - transform.position).normalized;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+            // Rotate the robot towards the movement direction
+            if (moveDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
 
             // Check if the robot has reached the waypoint
             if (Vector3.Distance(transform.position, targetPosition) <= stoppingDistance)
