@@ -8,24 +8,25 @@ public class PlayerShoot : MonoBehaviour
     public GameObject bulletPrefab; // Assign the bullet prefab in the Unity Editor
     public float bulletSpeed = 6f;
     public float currentwater = 1f;
+    public float shootCooldown = 1f; // Adjustable delay between shots
+    private bool canShoot = true;
 
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && canShoot)
         {
-         if (currentwater>0)
+            if (currentwater > 0)
             {
-             StartCoroutine(Shoot());
+                StartCoroutine(Shoot());
 
                 // Reduce current health in waterscript by 2
                 waterscript script = GetComponent<waterscript>();
                 if (script != null && script.currentHealth > 0)
                 {
-                script.Updatewaterbar(script.currentHealth - 2f);
+                    script.Updatewaterbar(script.currentHealth - 2f);
                 }
             }
         }
-
         else if (currentwater <= 0)
         {
             // Do Nothing
@@ -34,24 +35,21 @@ public class PlayerShoot : MonoBehaviour
 
     public void Updatewater(float currentwater)
     {
-       // Debug.Log(currentwater);
-        if (currentwater<0)
+        // Debug.Log(currentwater);
+        if (currentwater < 0)
         {
             this.currentwater = 0f;
         }
-         else
+        else
         {
             this.currentwater = currentwater;
         }
-        
     }
 
     IEnumerator Shoot()
     {
-
-       
-        // Make the player look at the enemy
-       // transform.LookAt(enemy);
+        // Set canShoot to false to start the cooldown
+        canShoot = false;
 
         // Wait for a short moment (you can adjust this duration)
         yield return new WaitForSeconds(0.1f);
@@ -61,12 +59,12 @@ public class PlayerShoot : MonoBehaviour
         bullet.transform.LookAt(enemy);
 
         // Add force or velocity to the bullet to make it move towards the enemy
-       bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletSpeed, ForceMode.Impulse);
 
-        // You can customize the bullet movement based on your game requirements
+        // Start the cooldown timer
+        yield return new WaitForSeconds(shootCooldown);
 
-        // Destroy the bullet after a certain time to avoid clutter
-       // Destroy(bullet, 20f);
-       
+        // Allow shooting again after the cooldown
+        canShoot = true;
     }
 }

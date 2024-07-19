@@ -21,14 +21,14 @@ namespace WinterboltGames.BillboardGenerator.Runtime
 		{
 			get
 			{
-				if (_instance == null) _instance = FindObjectOfType<BillboardTarget>();
+				if (_instance == null) _instance = FindAnyObjectByType<BillboardTarget>();
 
 				return _instance.targetTransform;
 			}
 
 			set
 			{
-				if (_instance == null) _instance = FindObjectOfType<BillboardTarget>();
+				if (_instance == null) _instance = FindAnyObjectByType<BillboardTarget>();
 
 				_instance.targetTransform = value;
 			}

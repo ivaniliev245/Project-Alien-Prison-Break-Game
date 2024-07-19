@@ -535,7 +535,7 @@ void SlideDownSlope()
     if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
     {
         float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-        Debug.Log("Slope Angle: " + slopeAngle);
+        //Debug.Log("Slope Angle: " + slopeAngle);
         Debug.DrawRay(hit.point, hit.normal, Color.red, 1f); // Debug visualization
 
         // Check if the slope angle is too steep
@@ -547,7 +547,7 @@ void SlideDownSlope()
 
             // Calculate the amount of slide based on the slope angle
             float slideAmount = Mathf.Lerp(0f, slideSpeed, Mathf.Clamp01((slopeAngle - maxSlopeAngle) / (90 - maxSlopeAngle))); // Adjusted to start sliding when slope exceeds maxSlopeAngle
-            Debug.Log("Slide Amount: " + slideAmount);
+           // Debug.Log("Slide Amount: " + slideAmount);
             Debug.DrawRay(hit.point, slideDirection * slideAmount, Color.blue, 1f); // Debug visualization
 
             // Calculate the slide movement
