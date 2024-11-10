@@ -23,7 +23,7 @@ public class BulletShooting : MonoBehaviour
     public bool explodeOnTouch = true;
 
     int collisions;
-    PhysicMaterial physics_mat;
+    PhysicsMaterial physics_mat;
 
     private void Start()
     {
@@ -85,10 +85,10 @@ public class BulletShooting : MonoBehaviour
     private void Setup()
     {
         //Create a new Physic material
-        physics_mat = new PhysicMaterial();
+        physics_mat = new PhysicsMaterial();
         physics_mat.bounciness = bounciness;
-        physics_mat.frictionCombine = PhysicMaterialCombine.Minimum;
-        physics_mat.bounceCombine = PhysicMaterialCombine.Maximum;
+        physics_mat.frictionCombine = PhysicsMaterialCombine.Minimum;
+        physics_mat.bounceCombine = PhysicsMaterialCombine.Maximum;
 
         //Assign material to collider
         GetComponent<CapsuleCollider>().material = physics_mat;
