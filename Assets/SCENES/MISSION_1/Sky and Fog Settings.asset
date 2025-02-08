@@ -46,15 +46,18 @@ MonoBehaviour:
   type:
     m_OverrideState: 1
     m_Value: 1
-  atmosphericScattering:
+  sphericalMode:
     m_OverrideState: 0
     m_Value: 1
-  renderingMode:
+  seaLevel:
     m_OverrideState: 0
     m_Value: 0
-  material:
+  planetaryRadius:
     m_OverrideState: 0
-    m_Value: {fileID: 0}
+    m_Value: 6378100
+  planetCenterPosition:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: -6378100, z: 0}
   airDensityR:
     m_OverrideState: 0
     m_Value: 0.04534
@@ -66,7 +69,7 @@ MonoBehaviour:
     m_Value: 0.23264056
   airTint:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.9, g: 0.9, b: 1, a: 1}
   airMaximumAltitude:
     m_OverrideState: 0
     m_Value: 55261.973
@@ -82,15 +85,9 @@ MonoBehaviour:
   aerosolAnisotropy:
     m_OverrideState: 0
     m_Value: 0
-  ozoneDensityDimmer:
+  numberOfBounces:
     m_OverrideState: 0
-    m_Value: 1
-  ozoneMinimumAltitude:
-    m_OverrideState: 0
-    m_Value: 20000
-  ozoneLayerWidth:
-    m_OverrideState: 0
-    m_Value: 20000
+    m_Value: 3
   groundTint:
     m_OverrideState: 0
     m_Value: {r: 0.4, g: 0.25, b: 0.15, a: 1}
@@ -133,16 +130,10 @@ MonoBehaviour:
   horizonZenithShift:
     m_OverrideState: 0
     m_Value: 0
-  m_SkyVersion: 2
+  m_SkyVersion: 1
   m_ObsoleteEarthPreset:
     m_OverrideState: 0
     m_Value: 1
-  planetaryRadius:
-    m_OverrideState: 0
-    m_Value: 6378100
-  planetCenterPosition:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: -6378100, z: 0}
 --- !u!114 &-8923482726324561454
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -283,9 +274,9 @@ MonoBehaviour:
   m_DenoiserRadius:
     m_OverrideState: 0
     m_Value: 8
-  m_DenoiserAntiFlickeringStrength:
+  m_AffectSmoothSurfaces:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 0
   mode:
     m_OverrideState: 0
     m_Value: 2
@@ -414,12 +405,6 @@ MonoBehaviour:
   tilingParameters:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 0, w: 0}
-  seedMode:
-    m_OverrideState: 0
-    m_Value: 0
-  customSeed:
-    m_OverrideState: 0
-    m_Value: 0
 --- !u!114 &-5560234172387128944
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -570,11 +555,6 @@ MonoBehaviour:
   rayMiss:
     m_OverrideState: 0
     m_Value: 3
-  adaptiveProbeVolumesLayerMask:
-    m_OverrideState: 0
-    m_Value:
-      serializedVersion: 0
-      m_Bits: 1
   depthBufferThickness:
     m_OverrideState: 0
     m_Value: 0.166
@@ -704,15 +684,9 @@ MonoBehaviour:
   m_PhysicallyBased:
     m_OverrideState: 1
     m_Value: 0
-  m_AdaptiveSamplingWeight:
-    m_OverrideState: 0
-    m_Value: 0.75
   m_LimitManualRangeNearBlur:
     m_OverrideState: 1
     m_Value: 0
-  coCStabilization:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!114 &-1753173141849509423
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -822,18 +796,6 @@ MonoBehaviour:
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 1
-  planetRadius:
-    m_OverrideState: 0
-    m_Value: 6378.1
-  renderingSpace:
-    m_OverrideState: 0
-    m_Value: 1
-  centerMode:
-    m_OverrideState: 0
-    m_Value: 0
-  planetCenter:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: -6378.1, z: 0}
   windOrientation:
     m_OverrideState: 1
     m_Value: 0
@@ -843,7 +805,6 @@ MonoBehaviour:
   fogType:
     m_OverrideState: 1
     m_Value: 0
-  m_Version: 1
 --- !u!114 &2065078176203099362
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1138,9 +1099,6 @@ MonoBehaviour:
   sliceDistributionUniformity:
     m_OverrideState: 0
     m_Value: 0.75
-  multipleScatteringIntensity:
-    m_OverrideState: 0
-    m_Value: 0
   m_FogControlMode:
     m_OverrideState: 0
     m_Value: 0
