@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cc897cf8675041a751163b51f97dd, type: 3}
   m_Name: HDRenderPipelineGlobalSettings
   m_EditorClassIdentifier: 
+  m_Settings:
+    m_SettingsList: []
+    m_RuntimeSettings: []
   m_DefaultVolumeProfile: {fileID: 11400000, guid: 20946ef955b3aae4a97a3d811abfe998,
     type: 2}
   m_LookDevVolumeProfile: {fileID: 11400000, guid: 4594f4a3fb14247e192bcca6dc23c8ed,
     type: 2}
-  m_RenderingPathDefaultCameraFrameSettings:
+  m_ObsoleteRenderingPathDefaultCameraFrameSettings:
     bitDatas:
       data1: 73324160532610893
       data2: 13799031439032811544
@@ -32,7 +35,7 @@ MonoBehaviour:
     sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
-  m_RenderingPathDefaultBakedOrCustomReflectionFrameSettings:
+  m_ObsoleteRenderingPathDefaultBakedOrCustomReflectionFrameSettings:
     bitDatas:
       data1: 135310754214733
       data2: 4539628428684460056
@@ -48,7 +51,7 @@ MonoBehaviour:
     sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
-  m_RenderingPathDefaultRealtimeReflectionFrameSettings:
+  m_ObsoleteRenderingPathDefaultRealtimeReflectionFrameSettings:
     bitDatas:
       data1: 139923391782733
       data2: 13763000465807638544
@@ -64,6 +67,56 @@ MonoBehaviour:
     sssCustomDownsampleSteps: 0
     msaaMode: 1
     materialQuality: 0
+  m_RenderingPath:
+    m_Version: 0
+    m_Camera:
+      bitDatas:
+        data1: 73324160532610893
+        data2: 13799031439032811544
+      lodBias: 1
+      lodBiasMode: 0
+      lodBiasQualityLevel: 0
+      maximumLODLevel: 0
+      maximumLODLevelMode: 0
+      maximumLODLevelQualityLevel: 0
+      sssQualityMode: 0
+      sssQualityLevel: 0
+      sssCustomSampleBudget: 20
+      sssCustomDownsampleSteps: 0
+      msaaMode: 1
+      materialQuality: 0
+    m_CustomOrBakedReflection:
+      bitDatas:
+        data1: 135310754214733
+        data2: 4539628428684460056
+      lodBias: 1
+      lodBiasMode: 0
+      lodBiasQualityLevel: 0
+      maximumLODLevel: 0
+      maximumLODLevelMode: 0
+      maximumLODLevelQualityLevel: 0
+      sssQualityMode: 0
+      sssQualityLevel: 0
+      sssCustomSampleBudget: 20
+      sssCustomDownsampleSteps: 0
+      msaaMode: 1
+      materialQuality: 0
+    m_RealtimeReflection:
+      bitDatas:
+        data1: 139923391782733
+        data2: 13763000465807638544
+      lodBias: 1
+      lodBiasMode: 0
+      lodBiasQualityLevel: 0
+      maximumLODLevel: 0
+      maximumLODLevelMode: 0
+      maximumLODLevelQualityLevel: 0
+      sssQualityMode: 0
+      sssQualityLevel: 0
+      sssCustomSampleBudget: 20
+      sssCustomDownsampleSteps: 0
+      msaaMode: 1
+      materialQuality: 0
   m_RenderPipelineResources: {fileID: 11400000, guid: 3ce144cff5783da45aa5d4fdc2da14b7,
     type: 2}
   m_RenderPipelineRayTracingResources: {fileID: 11400000, guid: ba6e7f30e5cffc249a8bf7ee5756c196,
@@ -118,49 +171,45 @@ MonoBehaviour:
   useDLSSCustomProjectId: 0
   supportProbeVolumes: 0
   autoRegisterDiffusionProfiles: 0
+  analyticDerivativeEmulation: 0
+  analyticDerivativeDebugOutput: 0
   apvScenesData:
     m_ObsoleteSerializedBakingSets: []
-    serializedBounds:
-    - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
-      bounds:
-        m_Center: {x: -40.5, y: 40.5, z: 283.5}
-        m_Extent: {x: 526.5, y: 121.5, z: 526.5}
-    - sceneGUID: 39613a1a2e937684f8db867b7babbb45
-      bounds:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 81, y: 81, z: 81}
-    - sceneGUID: 7d91fa704a89ff44bbe592c904edd4cc
-      bounds:
-        m_Center: {x: -121.5, y: -40.5, z: 526.5}
-        m_Extent: {x: 526.5, y: 202.5, z: 526.5}
-    - sceneGUID: 56e5efae8932c9e44821e005bfe5a658
-      bounds:
-        m_Center: {x: 810, y: 202.5, z: -162}
-        m_Extent: {x: 1539, y: 202.5, z: 1053}
-    - sceneGUID: 22248b10c7138c546a9647c1d8513345
-      bounds:
-        m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 81, y: 81, z: 81}
-    serializedHasVolumes:
-    - sceneGUID: 9af8b2003cbfedd48ba4b2edc596c1aa
-      hasProbeVolumes: 1
-    - sceneGUID: 39613a1a2e937684f8db867b7babbb45
-      hasProbeVolumes: 0
-    - sceneGUID: 7d91fa704a89ff44bbe592c904edd4cc
-      hasProbeVolumes: 1
-    - sceneGUID: 56e5efae8932c9e44821e005bfe5a658
-      hasProbeVolumes: 0
-    - sceneGUID: 22248b10c7138c546a9647c1d8513345
-      hasProbeVolumes: 1
+    sceneToBakingSet:
+      m_Keys:
+      - 9af8b2003cbfedd48ba4b2edc596c1aa
+      - 22248b10c7138c546a9647c1d8513345
+      - 7d91fa704a89ff44bbe592c904edd4cc
+      - 39613a1a2e937684f8db867b7babbb45
+      - 56e5efae8932c9e44821e005bfe5a658
+      m_Values:
+      - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
+      - {fileID: 11400000, guid: 75d34884950a33b40afe10d011e03de5, type: 2}
+      - {fileID: 11400000, guid: 67441d4b4d6d87d47af90f58c388d768, type: 2}
+      - {fileID: 11400000, guid: 8511143fda34f0f47b4978cf727a66ba, type: 2}
+      - {fileID: 11400000, guid: a92820dd87efb7646a51a3b8bd6f6f71, type: 2}
     bakingSets:
     - {fileID: 11400000, guid: f8c2fd28c235e3b46a8e4606cd2da19c, type: 2}
     - {fileID: 11400000, guid: 75d34884950a33b40afe10d011e03de5, type: 2}
     - {fileID: 11400000, guid: 67441d4b4d6d87d47af90f58c388d768, type: 2}
     - {fileID: 11400000, guid: 8511143fda34f0f47b4978cf727a66ba, type: 2}
     - {fileID: 11400000, guid: a92820dd87efb7646a51a3b8bd6f6f71, type: 2}
-    m_LightingScenario: Default
-  m_Version: 8
+    sceneBounds:
+      m_Keys: []
+      m_Values: []
+    hasProbeVolumes:
+      m_Keys: []
+      m_Values: 
+  m_Version: 10
+  m_ShaderStrippingSetting:
+    m_Version: 0
+    m_ExportShaderVariants: 1
+    m_ShaderVariantLogLevel: 0
+    m_StripRuntimeDebugShaders: 1
   m_ShaderVariantLogLevel: 0
   m_SupportRuntimeDebugDisplay: 0
   m_ExportShaderVariants: 1
   m_StripDebugVariants: 1
+  references:
+    version: 2
+    RefIds: []
