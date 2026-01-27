@@ -35,6 +35,7 @@ Material:
     - _AlphaDstBlend: 0
     - _BlendMode: 0
     - _DstBlend: 0
+    - _DstBlend2: 0
     - _StencilRefDepth: 8
     - _StencilRefGBuffer: 10
     - _StencilRefMV: 40
@@ -45,6 +46,7 @@ Material:
     - _BaseColor: {r: 0.4056604, g: 0.36509436, b: 0.36509436, a: 1}
     - _Color: {r: 0.40566036, g: 0.36509433, b: 0.36509433, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &2609890899657401035
 MonoBehaviour:
   m_ObjectHideFlags: 11
